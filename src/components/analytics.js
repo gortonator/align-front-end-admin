@@ -21,12 +21,14 @@ class AdminAnalytics extends Component {
 
         //top 10 employers
         this.toggleTop10Employers = this.toggleTop10Employers.bind(this);
+        this.getTop10EmployersChart= this.getTop10EmployersChart.bind(this);
 
        //Common
         this.createTableContent=this.createTableContent.bind(this);
         this.getAnalyticsCallback=this.getAnalyticsCallback.bind(this);
         this.onCompanyChange=this.onCompanyChange.bind(this);
         this.getYears=this.getYears.bind(this);
+        this.getCampusOptions=this.getCampusOptions.bind(this);
         this.onYearChange=this.onYearChange.bind(this);
 
         this.state = {
@@ -76,6 +78,22 @@ class AdminAnalytics extends Component {
                 </thead>
                 <tbody>
                 {listOfStudent}
+                </tbody>
+            </table>);
+        }
+        if(this.props.analytics && this.state.chartSelected=="top-employers"){
+            const listOfCompanies= this.props.analytics.employers.map((company)=>{
+                return <tr key={company.name}><td>{company.name}</td><td>{company.students}</td></tr>
+            });
+            return (<table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th className="text-align-center">Company Name</th>
+                    <th className="text-align-center">Students Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                {listOfCompanies}
                 </tbody>
             </table>);
         }
@@ -144,6 +162,21 @@ class AdminAnalytics extends Component {
         }
     }
 
+    getTop10EmployersChart(){
+        if (this.state.campus == "" || this.state.year=="") {
+            this.setState({validationError: true}, function(){
+
+            });
+        }
+        else {
+            this.setState({validationError: false, isApiCalled: true,chartSelected:"top-employers"}, function(){
+                const chartRequest={url:"top-employers",body: {campus:this.state.campus,year:this.state.year}};
+                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+            });
+
+        }
+    }
+
 
 
 
@@ -154,18 +187,33 @@ class AdminAnalytics extends Component {
     getAnalyticsCallback(chartType){
         if(chartType=="gender-ratio") {
             this.setState({initialLoadChart: "",initialLoadTable:""});
-        }else if(chartType=="company"){
+        }
+        if(chartType=="company"){
             this.setState({initialLoadChart: "hidden-xs-up",initialLoadTable:""},function(){
+            });
+        }
+        if(chartType=="top-employers"){
+            this.setState({initialLoadChart: "",initialLoadTable:""},function(){
             });
         }
     }
 
     getYears(years){
-            const list = years.map((year)=> {
-                return <option key={year.label} value={year.value}>{year.label}</option>
-            })
-        return list;
-}
+          const list = years.map((year)=> {
+              return <option key={year.label} value={year.value}>{year.label}</option>
+          })
+      return list;
+    }
+
+    getCampusOptions(options){
+          const list = options.map((option)=> {
+              return <div key={option.label} className="radio">
+                  <label><input type="radio" name="optradio" value={option.value}
+                                onChange={ e => this.onCampusChange(e.target.value)}/>{option.label}</label>
+              </div>
+          })
+      return list;
+    }
 
     onCompanyChange(company){
         this.setState({company});
@@ -173,6 +221,10 @@ class AdminAnalytics extends Component {
 
     onYearChange(year){
         this.setState({year});
+    }
+
+    randomColorGenerator(){
+      return Math.floor((Math.random() * 100)+(Math.random() * 100)+(Math.random() * 50) + 1);
     }
 
     showChart(data){
@@ -220,13 +272,42 @@ class AdminAnalytics extends Component {
                 }
             }
 
-            if(this.props.analytics && this.state.chartSelected=="company"){
-
-                var studentList=this.props.analytics.students;
-
+            if(this.props.analytics && this.state.chartSelected=="top-employers"){
+              var listOfCompanies=this.props.analytics.employers;
+              var labelsList=[];
+              var backgroundColorList=[];
+              var dataList=[];
+              for(var i=0;i<listOfCompanies.length;i++){
+                var r=this.randomColorGenerator();
+                var g=this.randomColorGenerator();
+                var b=this.randomColorGenerator();
+                labelsList.push(listOfCompanies[i].name);
+                backgroundColorList.push("rgba("+r+","+g+","+b+",0.9)");
+                dataList.push(listOfCompanies[i].students);
+              }
+              var ctx = document.getElementById("myChart");
+              if(ctx){
+                new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                      labels: labelsList,
+                      datasets: [
+                        {
+                          label: "Top Employers",
+                          backgroundColor: backgroundColorList,
+                          data: dataList
+                        }
+                      ]
+                    },
+                    options: {
+                      title: {
+                        display: true,
+                        text: 'Top Employers'
+                      }
+                    }
+                });
+              }
             }
-
-
         }
     }
     render () {
@@ -236,6 +317,12 @@ class AdminAnalytics extends Component {
             {label:"2016",value:"2016"},
             {label:"2015",value:"2015"},
             {label:"2014",value:"2014"}];
+        const campusOptions=[
+                              {label:"All Campus",value:"all_campus"},
+                              {label:"Boston",value:"boston"},
+                              {label:"Charlotte",value:"charlotte"},
+                              {label:"Silicon Valley",value:"silicon_valley"},
+                              {label:"Seattle",value:"seattle"}];
 
         if(this.props.analytics && this.state.isApiCalled){
             this.showChart(this.props.analytics);
@@ -250,22 +337,7 @@ class AdminAnalytics extends Component {
                               <div>
                                   <label>Choose Campus:</label>
                               </div>
-                              <div className="radio">
-                                  <label><input type="radio" name="optradio" value="boston"
-                                                onChange={ e => this.onCampusChange(e.target.value)}/>Boston</label>
-                              </div>
-                              <div className="radio">
-                                  <label><input type="radio" name="optradio" value="seattle"
-                                                onChange={ e => this.onCampusChange(e.target.value)}/>Seattle</label>
-                              </div>
-                              <div className="radio">
-                                  <label><input type="radio" name="optradio" value="silicon_valley"
-                                                onChange={ e => this.onCampusChange(e.target.value)}/>Silicon Valley</label>
-                              </div>
-                              <div className="radio">
-                                  <label><input type="radio" name="optradio" value="charlotte"
-                                                onChange={ e => this.onCampusChange(e.target.value)}/>Charlotte</label>
-                              </div>
+                              {this.getCampusOptions(campusOptions)}
                           <button type="Submit" onClick={this.getGenderRatioChart}>Submit</button>
                       </div>
 
@@ -274,22 +346,7 @@ class AdminAnalytics extends Component {
                         <div>
                             <label>Choose Campus:</label>
                         </div>
-                        <div className="radio">
-                            <label><input type="radio" name="optradio" value="boston"
-                                          onChange={ e => this.onCampusChange(e.target.value)}/>Boston</label>
-                        </div>
-                        <div className="radio">
-                            <label><input type="radio" name="optradio" value="seattle"
-                                          onChange={ e => this.onCampusChange(e.target.value)}/>Seattle</label>
-                        </div>
-                        <div className="radio">
-                            <label><input type="radio" name="optradio" value="silicon_valley"
-                                          onChange={ e => this.onCampusChange(e.target.value)}/>Silicon Valley</label>
-                        </div>
-                        <div className="radio">
-                            <label><input type="radio" name="optradio" value="charlotte"
-                                          onChange={ e => this.onCampusChange(e.target.value)}/>Charlotte</label>
-                        </div>
+                        {this.getCampusOptions(campusOptions)}
                         <hr />
                         <div>
                         <label>Enter Company Name</label>
@@ -308,18 +365,28 @@ class AdminAnalytics extends Component {
 
                       <div className="analytics-query col-sm-12" onClick={this.toggleTop10Employers}>Top 10 Employers</div>
                       <div className={"analytics-options col-sm-12 "+this.state.top10EmployersFlag}>
-                          Best employers
+                        <div>
+                            <label>Choose Campus:</label>
+                        </div>
+                        {this.getCampusOptions(campusOptions)}
+                        <hr />
+                        <div className="form-group">
+                            <label>Select Year</label>
+                            <select className="form-control custom-select" type="text" onChange={ e => this.onYearChange(e.target.value)}>
+                                {this.getYears(degreeYearOptions)}
+                            </select>
+                        </div>
+                          <button type="Submit" onClick={this.getTop10EmployersChart}>Submit</button>
                       </div>
                 </div>
                 <div className="analytics-charts">
-
                     <div>
                         <div className={this.state.initialLoadChart!="" && this.state.initialLoadTable!=""?"":"hidden-xs-up"}>
                            Please select an option to begin
                         </div>
                         <div className={"analytics-body text-align-center col-sm-12 hidden-xs-down "}>
                             <div>
-                                <div className={"chart-container "+this.state.initialLoadChart} style={{display: "inline-block", position: "relative", height:"300px", width:"400px"}}>
+                                <div className={"chart-container "+this.state.initialLoadChart} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>
                                     <canvas id="myChart"></canvas>
                                 </div>
                             </div>
