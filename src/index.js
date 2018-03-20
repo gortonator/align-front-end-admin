@@ -12,7 +12,6 @@ import Footer from './components/footer';
 import StudentProfile from './components/student_profile';
 import Navbar from './components/left_navbar';
 import Analytics from './components/analytics';
-import GenderRatio from './components/gender-ratio';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -26,7 +25,6 @@ ReactDOM.render(
         <Header />
         <Route path='/' component={Navbar} />
         <Switch>
-          <Route path="/analytics/gender-ratio" component={GenderRatio} />
           <Route path='/analytics' component={Analytics} />
           <Route path='/profile/:id' component={StudentProfile} />
           <Route path='/' component={AdminHome} />

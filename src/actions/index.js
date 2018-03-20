@@ -6,7 +6,6 @@ const API_KEY = '?key=STUDENT12345';
 export const SEARCH_STUDENT="search_student";
 export const FETCH_STUDENT="fetch_student";
 export const SELECT_PAGE="select_page";
-export const OPEN_ANALYTICS="open_analytics";
 export const GET_ANALYTICS="get_analytics";
 
 export function searchStudent(filters){
@@ -34,17 +33,11 @@ export function selectPage(page){
   };
 }
 
-export function openAnalytics(){
-  return {
-    type:OPEN_ANALYTICS,
-    payload:true
-  }
-}
 
-export function getAnalytics(chartRequest){
-    console.log(chartRequest);
-    const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
-
+export function getAnalytics(chartRequest, callback){
+    const request = axios.get(`${ROOT_URL}/posts${API_KEY}`).then(()=>{
+        callback();
+    });
     return {
       type: GET_ANALYTICS,
       payload: request
