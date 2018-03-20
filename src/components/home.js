@@ -65,7 +65,7 @@ class AdminHome extends Component {
                         {label:"Online",value:"online"},
                         {label:"Hybrid",value:"hybrid"},
                         {label:"Classroom",value:"classroom"}];
-    const degreeYearOptions=[{label:"Select campus",value:""},
+    const degreeYearOptions=[{label:"Select Year",value:""},
                           {label:"2018",value:"2018"},
                           {label:"2017",value:"2017"},
                           {label:"2016",value:"2016"},

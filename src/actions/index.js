@@ -35,8 +35,9 @@ export function selectPage(page){
 
 
 export function getAnalytics(chartRequest, callback){
+    console.log(chartRequest);
     const request = axios.get(`${ROOT_URL}/posts${API_KEY}`).then(()=>{
-        callback();
+        callback(chartRequest.url);
     });
     return {
       type: GET_ANALYTICS,
