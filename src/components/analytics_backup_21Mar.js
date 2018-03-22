@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { getAnalytics } from '../actions';
 import Chart from 'chart.js';
-import AnalyticsFilter from './analytics_filter';
 
 
 class AdminAnalytics extends Component {
@@ -205,6 +204,10 @@ class AdminAnalytics extends Component {
 
         }
     }
+
+
+
+
     onCampusChange(campus){
         this.setState({campus:campus, isApiCalled: false});
     }
@@ -376,23 +379,55 @@ class AdminAnalytics extends Component {
       return (
         <div>
             <div className="analytics-body col-sm-12">
-              <AnalyticsFilter
-                toggleGenderRatio={this.toggleGenderRatio}
-                genderRatioFlag={this.state.genderRatioFlag}
-                campusOptions={campusOptions}
-                getCampusOptions={this.getCampusOptions}
-                getGenderRatioChart={this.getGenderRatioChart}
-                toggleCompany={this.toggleCompany}
-                companyFlag={this.state.companyFlag}
-                onCompanyChange={this.onCompanyChange}
-                onYearChange={this.onYearChange}
-                getYears={this.getYears}
-                degreeYearOptions={degreeYearOptions}
-                getCompanyChart={this.getCompanyChart}
-                toggleTop10Employers={this.toggleTop10Employers}
-                top10EmployersFlag={this.state.top10EmployersFlag}
-                getTop10EmployersChart={this.getTop10EmployersChart}
-                />
+                <div className="analytics-filter">
+                      <div className="analytics-query-header text-align-center large-font col-sm-12" >Queries</div>
+                      <div className="analytics-query col-sm-12" onClick={this.toggleGenderRatio}>Gender Ratio</div>
+                      <div className={this.state.genderRatioFlag+" analytics-options col-sm-12"}>
+                              <div>
+                                  <label>Choose Campus:</label>
+                              </div>
+                              {this.getCampusOptions(campusOptions)}
+                          <button type="Submit" onClick={this.getGenderRatioChart}>Submit</button>
+                      </div>
+
+                    <div className="analytics-query col-sm-12" onClick={this.toggleCompany}>Filter students by company</div>
+                    <div className={this.state.companyFlag+" analytics-options col-sm-12"}>
+                        <div>
+                            <label>Choose Campus:</label>
+                        </div>
+                        {this.getCampusOptions(campusOptions)}
+                        <hr />
+                        <div>
+                        <label>Enter Company Name</label>
+                        <input type="text" placeholder="Company Name" onChange={ e => this.onCompanyChange(e.target.value)}/>
+                        </div>
+                        <hr />
+                        <div className="form-group">
+                            <label>Select Year</label>
+                            <select className="form-control custom-select" type="text" onChange={ e => this.onYearChange(e.target.value)}>
+                                {this.getYears(degreeYearOptions)}
+                            </select>
+                        </div>
+                        <button type="Submit" onClick={this.getCompanyChart}>Submit</button>
+                    </div>
+
+
+                      <div className="analytics-query col-sm-12" onClick={this.toggleTop10Employers}>Top 10 Employers</div>
+                      <div className={"analytics-options col-sm-12 "+this.state.top10EmployersFlag}>
+                        <div>
+                            <label>Choose Campus:</label>
+                        </div>
+                        {this.getCampusOptions(campusOptions)}
+                        <hr />
+                        <div className="form-group">
+                            <label>Select Year</label>
+                            <select className="form-control custom-select" type="text" onChange={ e => this.onYearChange(e.target.value)}>
+                                {this.getYears(degreeYearOptions)}
+                            </select>
+                        </div>
+                          <button type="Submit" onClick={this.getTop10EmployersChart}>Submit</button>
+                      </div>
+                </div>
                 <div className="analytics-charts">
                     <div>
                         <div className={this.state.initialLoadChart!="" && this.state.initialLoadTable!=""?"initial-load text-align-center larger-font":"hidden-xs-up"}>

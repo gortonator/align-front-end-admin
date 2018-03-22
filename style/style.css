@@ -166,6 +166,17 @@
   margin-bottom:20px;
 }
 
+.analytics-query-header{
+  font-weight: bold;
+  color: white;
+  background-color: gray;
+}
+
+.initial-load{
+  font-weight: bold;
+  color: gray;
+}
+
 .analytics-filter{
   float:left;
   width: 30%;
