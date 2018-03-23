@@ -1,4 +1,4 @@
-import { GET_ANALYTICS, SORT_ANALYTICS } from '../actions';
+import { GET_ANALYTICS } from '../actions';
 
 export default function (state=null,action ){
     switch (action.type) {
@@ -38,9 +38,6 @@ export default function (state=null,action ){
 
         // console.log(action.payload);
         // return action.payload;
-        case SORT_ANALYTICS:{
-          // console.log(action);
-          return action.payload;}
         default:
             return state;
     }

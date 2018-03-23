@@ -7,7 +7,6 @@ export const SEARCH_STUDENT="search_student";
 export const FETCH_STUDENT="fetch_student";
 export const SELECT_PAGE="select_page";
 export const GET_ANALYTICS="get_analytics";
-export const SORT_ANALYTICS="sort_analytics";
 
 export function searchStudent(filters){
     const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
@@ -43,13 +42,5 @@ export function getAnalytics(chartRequest, callback){
     return {
       type: GET_ANALYTICS,
       payload: request
-    };
-}
-
-export function sortAnalytics(data){
-    console.log(data);
-    return {
-      type: SORT_ANALYTICS,
-      payload: data
     };
 }
