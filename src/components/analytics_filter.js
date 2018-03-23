@@ -31,23 +31,23 @@ export default function (props){
             </div>
             <button type="Submit" onClick={props.getCompanyChart}>Submit</button>
         </div>
-
-
-          <div className="analytics-query col-sm-12" onClick={props.toggleTop10Employers}>Top 10 Employers</div>
-          <div className={"analytics-options col-sm-12 "+props.top10EmployersFlag}>
-            <div>
-                <label>Choose Campus:</label>
-            </div>
-            {props.getCampusOptions(props.campusOptions)}
-            <hr />
-            <div className="form-group">
-                <label>Select Year</label>
-                <select className="form-control custom-select" type="text" onChange={ e => props.onYearChange(e.target.value)}>
-                    {props.getYears(props.degreeYearOptions)}
-                </select>
-            </div>
-              <button type="Submit" onClick={props.getTop10EmployersChart}>Submit</button>
+        <div className="analytics-query col-sm-12" onClick={props.toggleTop10Employers}>Top 10 Employers</div>
+        <div className={"analytics-options col-sm-12 "+props.top10EmployersFlag}>
+          <div>
+              <label>Choose Campus:</label>
           </div>
+          {props.getCampusOptions(props.campusOptions)}
+          <hr />
+          <div className="form-group">
+              <label>Select Year</label>
+              <select className="form-control custom-select" type="text" onChange={ e => props.onYearChange(e.target.value)}>
+                  {props.getYears(props.degreeYearOptions)}
+              </select>
+          </div>
+            <button type="Submit" onClick={props.getTop10EmployersChart}>Submit</button>
+        </div>
+
+
 
   </div>);
 }

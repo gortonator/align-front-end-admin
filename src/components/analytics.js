@@ -55,18 +55,17 @@ class AdminAnalytics extends Component {
         }
 
         sortTable(header){
-            // console.log(list,header);
             if(this.props.analytics){
               if(this.state.chartSelected=="gender-ratio"){
                 var list={};
-                list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(header,this.state.orderBy));
+                list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(this.state.orderBy,header));
                 this.setState({isApiCalled:true,sortBy:header},()=>{
                   this.props.sortAnalytics(list);
                 });
               }
               if(this.state.chartSelected=="top-employers"){
                 var list={};
-                list.employers=this.props.analytics.employers.sort(this.compareValues(header,this.state.orderBy));
+                list.employers=this.props.analytics.employers.sort(this.compareValues(this.state.orderBy,header));
                 this.setState({isApiCalled:true,sortBy:header},()=>{
                   this.props.sortAnalytics(list);
                 });
@@ -79,14 +78,14 @@ class AdminAnalytics extends Component {
           if(this.props.analytics){
             if(this.state.chartSelected=="gender-ratio"){
               var list={};
-              list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(this.state.sortBy,order));
+              list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(order,this.state.sortBy));
               this.setState({isApiCalled:true,orderBy:order},()=>{
                 this.props.sortAnalytics(list);
               });
             }
             if(this.state.chartSelected=="top-employers"){
               var list={};
-              list.employers=this.props.analytics.employers.sort(this.compareValues(this.state.sortBy,order));
+              list.employers=this.props.analytics.employers.sort(this.compareValues(order,this.state.sortBy));
               this.setState({isApiCalled:true,orderBy:order},()=>{
                 this.props.sortAnalytics(list);
               });
@@ -95,7 +94,6 @@ class AdminAnalytics extends Component {
         }
 
         createSortFunction(sortOptions){
-          // console.log(sortOptions,this.state.chartSelected);
           if(this.props.analytics && this.state.chartSelected){
             var sortOptionsFields=sortOptions[this.state.chartSelected].map((head)=>{
               return <option key={head.value} value={head.value}>{head.label}</option>
@@ -103,14 +101,14 @@ class AdminAnalytics extends Component {
             return <div className="row text-align-center">
               <div className="col-sm-2"></div>
               <div className="col-sm-4">
-                <select className="form-control custom-select" type="text" value={this.state.sortBy} onChange={ e => this.sortTable(e.target.value)}>
-                  <option key="default" value="">Sort By</option>
+                <select className="form-control custom-select" type="text" value={this.state.orderBy} onChange={ e => this.orderTable(e.target.value)}>
+                  <option key="default" value="">Order By</option>
                   {sortOptionsFields}
                 </select>
               </div>
               <div className="col-sm-4">
-                <select className="form-control custom-select" type="text" value={this.state.orderBy} onChange={ e => this.orderTable(e.target.value)}>
-                    <option key="default" value="">Order By</option>
+                <select className="form-control custom-select" type="text" value={this.state.sortBy} onChange={ e => this.sortTable(e.target.value)}>
+                    <option key="default" value="">Sort By</option>
                     <option key="asc" value="asc">Asc</option>
                     <option key="desc" value="desc">Desc</option>
                 </select>
@@ -146,9 +144,9 @@ class AdminAnalytics extends Component {
           };
         }
 
-    createTableContent(sortOptions){
+    createTableContent(headerOptions){
         if(this.props.analytics && this.state.chartSelected ){
-            return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected} chartHeaders={sortOptions[this.state.chartSelected]}/>;
+            return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected} chartHeaders={headerOptions[this.state.chartSelected]}/>;
         }
     }
 
@@ -279,7 +277,6 @@ class AdminAnalytics extends Component {
     showChart(data){
         if(data){
             if(data){
-              console.log(data,this.state.chartSelected);
               if(this.state.chartSelected=="gender-ratio"){
                 // var yearlyratioList=[
                 //     {"year":"2018","male":400,"female":500},
@@ -298,7 +295,9 @@ class AdminAnalytics extends Component {
                       dataFemale.push(yearlyratioList[i].female);
                   }
                   var ctxContainer = document.getElementById("myChartContainer");
-                  ctxContainer.innerHTML='<canvas id="myChart"></canvas>';
+                  ctxContainer.innerHTML='<div className={"chart-container '+this.state.initialLoadChart+'"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>'+
+                          '<canvas id="myChart"></canvas>'+
+                      '</div>';
                   var ctx = document.getElementById("myChart");
                   if(ctx){
                       var myChart = new Chart(ctx, {
@@ -357,7 +356,9 @@ class AdminAnalytics extends Component {
                   dataList.push(listOfCompanies[i].students);
                 }
                 var ctxContainer = document.getElementById("myChartContainer");
-                ctxContainer.innerHTML='<canvas id="myChart"></canvas>';
+                ctxContainer.innerHTML='<div className={"chart-container '+this.state.initialLoadChart+'"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>'+
+                        '<canvas id="myChart"></canvas>'+
+                    '</div>';
                 var ctx = document.getElementById("myChart");
                 if(ctx){
                   var myChart = new Chart(ctx, {
@@ -379,7 +380,9 @@ class AdminAnalytics extends Component {
                         }
                       }
                   });
+
                 }
+                // setTimeout(function() { ctxContainer.style.width="601px"; }.bind(this), 100);
               }
             }
         }
@@ -397,8 +400,15 @@ class AdminAnalytics extends Component {
                             {label:"Silicon Valley",value:"silicon_valley"},
                             {label:"Seattle",value:"seattle"}];
         const sortOptions={"gender-ratio":[{label:"Year",value:"year"},
-                            {label:"Male",value:"male"},
-                            {label:"Female",value:"female"}],
+                                          {label:"Male",value:"male"},
+                                          {label:"Female",value:"female"}],
+                          "company":[{label:"NUID",value:"nuid"},
+                                      {label:"Student Name",value:"name"}],
+                        "top-employers":[{label:"Company Name",value:"name"},
+                                            {label:"Students Count",value:"students"}]};
+        const headerOptions={"gender-ratio":[{label:"Year",value:"year"},
+                                          {label:"Male",value:"male"},
+                                          {label:"Female",value:"female"}],
                           "company":[{label:"NUID",value:"nuid"},
                                       {label:"Student Name",value:"name"}],
                         "top-employers":[{label:"Company Name",value:"name"},
@@ -437,14 +447,17 @@ class AdminAnalytics extends Component {
                         </div>
                         <div className={"analytics-body text-align-center col-sm-12 hidden-xs-down "}>
                             <div>
-                                <div id="myChartContainer" className={"chart-container "+this.state.initialLoadChart} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>
+                              <div id="myChartContainer">
+                                <div id="actualChartContainer" className={"chart-container "+this.state.initialLoadChart} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>
                                     <canvas id="myChart"></canvas>
                                 </div>
+                              </div>
                             </div>
                             <div className={this.state.initialLoadTable}>
+                                <br />
                                 {this.createSortFunction(sortOptions)}
                                 <br />
-                                {this.createTableContent(sortOptions)}
+                                {this.createTableContent(headerOptions)}
                             </div>
                         </div>
                     </div>
