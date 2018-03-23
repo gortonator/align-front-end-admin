@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { getAnalytics } from '../actions';
+import { getAnalytics, sortAnalytics } from '../actions';
 import Chart from 'chart.js';
 import AnalyticsFilter from './analytics_filter';
+import AnalyticsTable from './analytics_table';
 
 
 class AdminAnalytics extends Component {
@@ -25,12 +26,15 @@ class AdminAnalytics extends Component {
         this.getTop10EmployersChart= this.getTop10EmployersChart.bind(this);
 
        //Common
+       this.createSortFunction=this.createSortFunction.bind(this);
         this.createTableContent=this.createTableContent.bind(this);
         this.getAnalyticsCallback=this.getAnalyticsCallback.bind(this);
         this.onCompanyChange=this.onCompanyChange.bind(this);
         this.getYears=this.getYears.bind(this);
         this.getCampusOptions=this.getCampusOptions.bind(this);
         this.onYearChange=this.onYearChange.bind(this);
+        this.compareValues=this.compareValues.bind(this);
+        this.sortTable=this.sortTable.bind(this);
 
         this.state = {
             top10EmployersFlag:"hidden-xs-up",
@@ -43,88 +47,79 @@ class AdminAnalytics extends Component {
             initialLoadChart:"hidden-xs-up",
             initialLoadTable:"hidden-xs-up",
             chartSelected: "",
-            companyFlag: "hidden-xs-up"
+            companyFlag: "hidden-xs-up",
+            sortBy:"",
+            orderBy:""
+          };
+        }
+
+        sortTable(header){
+            // console.log(list,header);
+            if(this.props.analytics){
+              var list={};
+              list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(header));
+              // console.log(list);
+              // this.props.sortAnalytics(list);
+              this.setState({isApiCalled:true},()=>{
+                this.props.sortAnalytics(list);
+              });
+            }
+
+        }
+
+        createSortFunction(){
+          if(this.props.analytics){
+            return <div className="row text-align-center">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-4">
+                Sort By:
+                <select className="form-control custom-select" type="text" onChange={ e => this.sortTable(e.target.value)}>
+                    <option key="year" value="year">Year</option>
+                    <option key="male" value="male">Male</option>
+                    <option key="female" value="female">Female</option>
+                </select>
+              </div>
+              <div className="col-sm-4">
+                Order By:
+                <select className="form-control custom-select" type="text" onChange={ e => props.onYearChange(e.target.value)}>
+                    <option key="asc" value="asc">Asc</option>
+                    <option key="desc" value="desc">Desc</option>
+                </select>
+              </div>
+              <div className="col-sm-2"></div>
+            </div>;
+          }
+        }
+
+
+        compareValues(key, order='asc') {
+          return function(a, b) {
+            if(!a.hasOwnProperty(key) ||
+               !b.hasOwnProperty(key)) {
+          	  return 0;
+            }
+
+            const varA = (typeof a[key] === 'string') ?
+              a[key].toUpperCase() : a[key];
+            const varB = (typeof b[key] === 'string') ?
+              b[key].toUpperCase() : b[key];
+
+            let comparison = 0;
+            if (varA > varB) {
+              comparison = 1;
+            } else if (varA < varB) {
+              comparison = -1;
+            }
+            return (
+              (order == 'desc') ?
+              (comparison * -1) : comparison
+            );
           };
         }
 
     createTableContent(){
-        if(this.props.analytics && this.state.chartSelected=="gender-ratio"){
-            const yearsList=[
-                {"year":"2018","male":400,"female":500},
-                {"year":"2017","male":500,"female":400},
-                {"year":"2016","male":200,"female":300},
-                {"year":"2015","male":600,"female":500}
-            ];
-            const listOfYears= yearsList.map((year)=>{
-            // const listOfYears= this.props.analytics.yearlyratio.map((year)=>{
-                return <tr key={year.year}><td>{year.year}</td><td>{year.male}</td><td>{year.female}</td></tr>
-            });
-            return (<table className="table table-bordered">
-                <thead>
-                <tr>
-                    <th className="text-align-center">Year</th>
-                    <th className="text-align-center">Male</th>
-                    <th className="text-align-center">Female</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {listOfYears}
-                </tbody>
-            </table>);
-        }
-        if(this.props.analytics && this.state.chartSelected=="company"){
-          const studlist=[{
-              "name":"student A",
-              "nuid":"0012345"
-          },{
-              "name":"student B",
-              "nuid":"0012346"
-          },{
-              "name":"student C",
-              "nuid":"0012347"
-          }];
-            const listOfStudent= studlist.map((student)=>{
-            // const listOfStudent= this.props.analytics.students.map((student)=>{
-                return <tr key={student.nuid}><td>{student.nuid}</td><td>{student.name}</td></tr>
-            });
-            return (<table className="table table-bordered">
-                <thead>
-                <tr>
-                    <th className="text-align-center">Nuid</th>
-                    <th className="text-align-center">Student Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                {listOfStudent}
-                </tbody>
-            </table>);
-        }
-        if(this.props.analytics && this.state.chartSelected=="top-employers"){
-            const listOfCompanies=[
-              {"name":"Amazon","students":"90"},
-              {"name":"Apple","students":"80"},
-              {"name":"IBM","students":"95"},
-              {"name":"Facebook","students":"85"},
-              {"name":"MathWorks","students":"75"},
-              {"name":"Google","students":"45"},
-              {"name":"HubSpot","students":"55"},
-              {"name":"NYL","students":"110"},
-              {"name":"Palantir","students":"60"},
-              {"name":"Fidelity","students":"70"}].map((company)=>{
-            // const listOfCompanies= this.props.analytics.employers.map((company)=>{
-                return <tr key={company.name}><td>{company.name}</td><td>{company.students}</td></tr>
-            });
-            return (<table className="table table-bordered">
-                <thead>
-                <tr>
-                    <th className="text-align-center">Company Name</th>
-                    <th className="text-align-center">Students Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                {listOfCompanies}
-                </tbody>
-            </table>);
+        if(this.props.analytics){
+            return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected} />;
         }
     }
 
@@ -254,104 +249,107 @@ class AdminAnalytics extends Component {
 
     showChart(data){
         if(data){
-            if(this.props.analytics && this.state.chartSelected=="gender-ratio"){
-              var yearlyratioList=[
-                  {"year":"2018","male":400,"female":500},
-                  {"year":"2017","male":500,"female":400},
-                  {"year":"2016","male":200,"female":300},
-                  {"year":"2015","male":600,"female":500}
-              ]
-                var dataLabels=[];
-                var dataMale=[];
-                var dataFemale=[];
-                // var yearlyratioList=data.yearlyratio;
-                for(var i=0;i<yearlyratioList.length;i++){
-                    dataLabels.push(yearlyratioList[i].year);
-                    dataMale.push(yearlyratioList[i].male);
-                    dataFemale.push(yearlyratioList[i].female);
+            if(data){
+              if(this.state.chartSelected=="gender-ratio"){
+                // var yearlyratioList=[
+                //     {"year":"2018","male":400,"female":500},
+                //     {"year":"2017","male":500,"female":400},
+                //     {"year":"2016","male":200,"female":300},
+                //     {"year":"2015","male":600,"female":500},
+                //     {"year":"2014","male":800,"female":1000}
+                // ]
+                  var dataLabels=[];
+                  var dataMale=[];
+                  var dataFemale=[];
+                  var yearlyratioList=data.yearlyratio;
+                  for(var i=0;i<yearlyratioList.length;i++){
+                      dataLabels.push(yearlyratioList[i].year);
+                      dataMale.push(yearlyratioList[i].male);
+                      dataFemale.push(yearlyratioList[i].female);
+                  }
+                  var ctxContainer = document.getElementById("myChartContainer");
+                  ctxContainer.innerHTML='<canvas id="myChart"></canvas>';
+                  var ctx = document.getElementById("myChart");
+                  if(ctx){
+                      var myChart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                              labels: dataLabels,
+                              datasets: [ {
+                                  label: "Boys",
+                                  backgroundColor: "#3e95cd",
+                                  data: dataMale
+                              }, {
+                                  label: "Girls",
+                                  backgroundColor: "#8e5ea2",
+                                  data: dataFemale
+                              }]
+                          },
+                          options: {
+                              title: {
+                                  display: true,
+                                  text: 'Gender count per year'
+                              },
+                              scales: {
+                                  yAxes: [{
+                                      ticks: {
+                                          beginAtZero:true
+                                      }
+                                  }]
+                              }
+                          }
+                      });
+                  }
+              }
+
+              if(this.state.chartSelected=="top-employers"){
+                var listOfCompanies=[
+                  {"name":"Amazon","students":"90"},
+                  {"name":"Apple","students":"80"},
+                  {"name":"IBM","students":"95"},
+                  {"name":"Facebook","students":"85"},
+                  {"name":"MathWorks","students":"75"},
+                  {"name":"Google","students":"45"},
+                  {"name":"HubSpot","students":"55"},
+                  {"name":"NYL","students":"110"},
+                  {"name":"Palantir","students":"60"},
+                  {"name":"Fidelity","students":"70"}];
+                // var listOfCompanies=props.analytics.employers;
+                var labelsList=[];
+                var backgroundColorList=[];
+                var dataList=[];
+                for(var i=0;i<listOfCompanies.length;i++){
+                  var r=this.randomColorGenerator();
+                  var g=this.randomColorGenerator();
+                  var b=this.randomColorGenerator();
+                  labelsList.push(listOfCompanies[i].name);
+                  backgroundColorList.push("rgba("+r+","+g+","+b+",0.9)");
+                  dataList.push(listOfCompanies[i].students);
                 }
                 var ctxContainer = document.getElementById("myChartContainer");
                 ctxContainer.innerHTML='<canvas id="myChart"></canvas>';
                 var ctx = document.getElementById("myChart");
                 if(ctx){
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: dataLabels,
-                            datasets: [ {
-                                label: "Boys",
-                                backgroundColor: "#3e95cd",
-                                data: dataMale
-                            }, {
-                                label: "Girls",
-                                backgroundColor: "#8e5ea2",
-                                data: dataFemale
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: 'Gender count per year'
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
-                            }
+                  var myChart = new Chart(ctx, {
+                      type: 'polarArea',
+                      data: {
+                        labels: labelsList,
+                        datasets: [
+                          {
+                            label: "Top Employers",
+                            backgroundColor: backgroundColorList,
+                            data: dataList
+                          }
+                        ]
+                      },
+                      options: {
+                        title: {
+                          display: true,
+                          text: 'Top Employers'
                         }
-                    });
-                }
-            }
-
-            if(this.props.analytics && this.state.chartSelected=="top-employers"){
-              var listOfCompanies=[
-                {"name":"Amazon","students":"90"},
-                {"name":"Apple","students":"80"},
-                {"name":"IBM","students":"95"},
-                {"name":"Facebook","students":"85"},
-                {"name":"MathWorks","students":"75"},
-                {"name":"Google","students":"45"},
-                {"name":"HubSpot","students":"55"},
-                {"name":"NYL","students":"110"},
-                {"name":"Palantir","students":"60"},
-                {"name":"Fidelity","students":"70"}];
-              // var listOfCompanies=this.props.analytics.employers;
-              var labelsList=[];
-              var backgroundColorList=[];
-              var dataList=[];
-              for(var i=0;i<listOfCompanies.length;i++){
-                var r=this.randomColorGenerator();
-                var g=this.randomColorGenerator();
-                var b=this.randomColorGenerator();
-                labelsList.push(listOfCompanies[i].name);
-                backgroundColorList.push("rgba("+r+","+g+","+b+",0.9)");
-                dataList.push(listOfCompanies[i].students);
-              }
-              var ctxContainer = document.getElementById("myChartContainer");
-              ctxContainer.innerHTML='<canvas id="myChart"></canvas>';
-              var ctx = document.getElementById("myChart");
-              if(ctx){
-                var myChart = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                      labels: labelsList,
-                      datasets: [
-                        {
-                          label: "Top Employers",
-                          backgroundColor: backgroundColorList,
-                          data: dataList
-                        }
-                      ]
-                    },
-                    options: {
-                      title: {
-                        display: true,
-                        text: 'Top Employers'
                       }
-                    }
-                });
+                  });
+                }
               }
             }
         }
@@ -371,6 +369,7 @@ class AdminAnalytics extends Component {
                               {label:"Seattle",value:"seattle"}];
 
         if(this.props.analytics && this.state.isApiCalled){
+            // console.log(this.state.chartSelected);
             this.showChart(this.props.analytics);
         }
       return (
@@ -406,6 +405,8 @@ class AdminAnalytics extends Component {
                                 </div>
                             </div>
                             <div className={this.state.initialLoadTable}>
+                                {this.createSortFunction()}
+                                <br />
                                 {this.createTableContent()}
                             </div>
                         </div>
@@ -423,4 +424,4 @@ function mapStateToProps(state){
 
 
 
-export default connect(mapStateToProps, {getAnalytics} )(AdminAnalytics);
+export default connect(mapStateToProps, {getAnalytics,sortAnalytics} )(AdminAnalytics);
