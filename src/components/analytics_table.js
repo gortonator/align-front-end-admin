@@ -15,7 +15,9 @@ export default function (props){
       //   return <option key={header} value={header}>{header}</option
       // });
       // listOfRows= yearsList.map((year)=>{
-
+      const chartHeaders=props.chartHeaders.map((head)=>{
+        return <th key={head.value} className="text-align-center">{head.label}</th>;
+      });
       const listOfYears= props.analytics.yearlyratio.map((year)=>{
           i=i+1;
           return <tr key={year.year}><td>{i}</td><td>{year.year}</td><td>{year.male}</td><td>{year.female}</td></tr>
@@ -25,9 +27,7 @@ export default function (props){
             <thead>
             <tr>
                 <th className="text-align-center">No.</th>
-                <th className="text-align-center">Year</th>
-                <th className="text-align-center">Male</th>
-                <th className="text-align-center">Female</th>
+                {chartHeaders}
             </tr>
             </thead>
             <tbody>
@@ -63,18 +63,18 @@ export default function (props){
       </table>);
   }
   if(props.analytics && props.chartSelected=="top-employers"){
-      const listOfCompanies=[
-        {"name":"Amazon","students":"90"},
-        {"name":"Apple","students":"80"},
-        {"name":"IBM","students":"95"},
-        {"name":"Facebook","students":"85"},
-        {"name":"MathWorks","students":"75"},
-        {"name":"Google","students":"45"},
-        {"name":"HubSpot","students":"55"},
-        {"name":"NYL","students":"110"},
-        {"name":"Palantir","students":"60"},
-        {"name":"Fidelity","students":"70"}].map((company)=>{
-      // const listOfCompanies= props.analytics.employers.map((company)=>{
+      // const listOfCompanies=[
+      //   {"name":"Amazon","students":90},
+      //   {"name":"Apple","students":80},
+      //   {"name":"IBM","students":95},
+      //   {"name":"Facebook","students":85},
+      //   {"name":"MathWorks","students":75},
+      //   {"name":"Google","students":45},
+      //   {"name":"HubSpot","students":55},
+      //   {"name":"NYL","students":110},
+      //   {"name":"Palantir","students":60},
+      //   {"name":"Fidelity","students":70}].map((company)=>{
+      const listOfCompanies= props.analytics.employers.map((company)=>{
           return <tr key={company.name}><td>{company.name}</td><td>{company.students}</td></tr>
       });
       return (<table className="table table-bordered">

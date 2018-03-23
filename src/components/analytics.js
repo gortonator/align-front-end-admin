@@ -35,6 +35,7 @@ class AdminAnalytics extends Component {
         this.onYearChange=this.onYearChange.bind(this);
         this.compareValues=this.compareValues.bind(this);
         this.sortTable=this.sortTable.bind(this);
+        this.orderTable=this.orderTable.bind(this);
 
         this.state = {
             top10EmployersFlag:"hidden-xs-up",
@@ -56,32 +57,60 @@ class AdminAnalytics extends Component {
         sortTable(header){
             // console.log(list,header);
             if(this.props.analytics){
-              var list={};
-              list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(header));
-              // console.log(list);
-              // this.props.sortAnalytics(list);
-              this.setState({isApiCalled:true},()=>{
-                this.props.sortAnalytics(list);
-              });
+              if(this.state.chartSelected=="gender-ratio"){
+                var list={};
+                list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(header,this.state.orderBy));
+                this.setState({isApiCalled:true,sortBy:header},()=>{
+                  this.props.sortAnalytics(list);
+                });
+              }
+              if(this.state.chartSelected=="top-employers"){
+                var list={};
+                list.employers=this.props.analytics.employers.sort(this.compareValues(header,this.state.orderBy));
+                this.setState({isApiCalled:true,sortBy:header},()=>{
+                  this.props.sortAnalytics(list);
+                });
+              }
             }
 
         }
 
-        createSortFunction(){
+        orderTable(order){
           if(this.props.analytics){
+            if(this.state.chartSelected=="gender-ratio"){
+              var list={};
+              list.yearlyratio=this.props.analytics.yearlyratio.sort(this.compareValues(this.state.sortBy,order));
+              this.setState({isApiCalled:true,orderBy:order},()=>{
+                this.props.sortAnalytics(list);
+              });
+            }
+            if(this.state.chartSelected=="top-employers"){
+              var list={};
+              list.employers=this.props.analytics.employers.sort(this.compareValues(this.state.sortBy,order));
+              this.setState({isApiCalled:true,orderBy:order},()=>{
+                this.props.sortAnalytics(list);
+              });
+            }
+          }
+        }
+
+        createSortFunction(sortOptions){
+          // console.log(sortOptions,this.state.chartSelected);
+          if(this.props.analytics && this.state.chartSelected){
+            var sortOptionsFields=sortOptions[this.state.chartSelected].map((head)=>{
+              return <option key={head.value} value={head.value}>{head.label}</option>
+            });
             return <div className="row text-align-center">
               <div className="col-sm-2"></div>
               <div className="col-sm-4">
-                Sort By:
-                <select className="form-control custom-select" type="text" onChange={ e => this.sortTable(e.target.value)}>
-                    <option key="year" value="year">Year</option>
-                    <option key="male" value="male">Male</option>
-                    <option key="female" value="female">Female</option>
+                <select className="form-control custom-select" type="text" value={this.state.sortBy} onChange={ e => this.sortTable(e.target.value)}>
+                  <option key="default" value="">Sort By</option>
+                  {sortOptionsFields}
                 </select>
               </div>
               <div className="col-sm-4">
-                Order By:
-                <select className="form-control custom-select" type="text" onChange={ e => props.onYearChange(e.target.value)}>
+                <select className="form-control custom-select" type="text" value={this.state.orderBy} onChange={ e => this.orderTable(e.target.value)}>
+                    <option key="default" value="">Order By</option>
                     <option key="asc" value="asc">Asc</option>
                     <option key="desc" value="desc">Desc</option>
                 </select>
@@ -117,9 +146,9 @@ class AdminAnalytics extends Component {
           };
         }
 
-    createTableContent(){
-        if(this.props.analytics){
-            return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected} />;
+    createTableContent(sortOptions){
+        if(this.props.analytics && this.state.chartSelected ){
+            return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected} chartHeaders={sortOptions[this.state.chartSelected]}/>;
         }
     }
 
@@ -250,6 +279,7 @@ class AdminAnalytics extends Component {
     showChart(data){
         if(data){
             if(data){
+              console.log(data,this.state.chartSelected);
               if(this.state.chartSelected=="gender-ratio"){
                 // var yearlyratioList=[
                 //     {"year":"2018","male":400,"female":500},
@@ -303,18 +333,18 @@ class AdminAnalytics extends Component {
               }
 
               if(this.state.chartSelected=="top-employers"){
-                var listOfCompanies=[
-                  {"name":"Amazon","students":"90"},
-                  {"name":"Apple","students":"80"},
-                  {"name":"IBM","students":"95"},
-                  {"name":"Facebook","students":"85"},
-                  {"name":"MathWorks","students":"75"},
-                  {"name":"Google","students":"45"},
-                  {"name":"HubSpot","students":"55"},
-                  {"name":"NYL","students":"110"},
-                  {"name":"Palantir","students":"60"},
-                  {"name":"Fidelity","students":"70"}];
-                // var listOfCompanies=props.analytics.employers;
+                // var listOfCompanies=[
+                //   {"name":"Amazon","students":90},
+                //   {"name":"Apple","students":80},
+                //   {"name":"IBM","students":95},
+                //   {"name":"Facebook","students":85},
+                //   {"name":"MathWorks","students":75},
+                //   {"name":"Google","students":45},
+                //   {"name":"HubSpot","students":55},
+                //   {"name":"NYL","students":110},
+                //   {"name":"Palantir","students":60},
+                //   {"name":"Fidelity","students":70}];
+                var listOfCompanies=this.props.analytics.employers;
                 var labelsList=[];
                 var backgroundColorList=[];
                 var dataList=[];
@@ -356,17 +386,24 @@ class AdminAnalytics extends Component {
     }
     render () {
         const degreeYearOptions=[{label:"Select Year",value:""},
-            {label:"2018",value:"2018"},
-            {label:"2017",value:"2017"},
-            {label:"2016",value:"2016"},
-            {label:"2015",value:"2015"},
-            {label:"2014",value:"2014"}];
-        const campusOptions=[
-                              {label:"All Campus",value:"all_campus"},
-                              {label:"Boston",value:"boston"},
-                              {label:"Charlotte",value:"charlotte"},
-                              {label:"Silicon Valley",value:"silicon_valley"},
-                              {label:"Seattle",value:"seattle"}];
+                                {label:"2018",value:"2018"},
+                                {label:"2017",value:"2017"},
+                                {label:"2016",value:"2016"},
+                                {label:"2015",value:"2015"},
+                                {label:"2014",value:"2014"}];
+        const campusOptions=[{label:"All Campus",value:"all_campus"},
+                            {label:"Boston",value:"boston"},
+                            {label:"Charlotte",value:"charlotte"},
+                            {label:"Silicon Valley",value:"silicon_valley"},
+                            {label:"Seattle",value:"seattle"}];
+        const sortOptions={"gender-ratio":[{label:"Year",value:"year"},
+                            {label:"Male",value:"male"},
+                            {label:"Female",value:"female"}],
+                          "company":[{label:"NUID",value:"nuid"},
+                                      {label:"Student Name",value:"name"}],
+                        "top-employers":[{label:"Company Name",value:"name"},
+                                            {label:"Students Count",value:"students"}]};
+
 
         if(this.props.analytics && this.state.isApiCalled){
             // console.log(this.state.chartSelected);
@@ -405,9 +442,9 @@ class AdminAnalytics extends Component {
                                 </div>
                             </div>
                             <div className={this.state.initialLoadTable}>
-                                {this.createSortFunction()}
+                                {this.createSortFunction(sortOptions)}
                                 <br />
-                                {this.createTableContent()}
+                                {this.createTableContent(sortOptions)}
                             </div>
                         </div>
                     </div>
