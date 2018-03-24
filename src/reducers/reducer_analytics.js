@@ -3,6 +3,8 @@ import { GET_ANALYTICS, SORT_ANALYTICS } from '../actions';
 export default function (state=null,action ){
     switch (action.type) {
         case GET_ANALYTICS:
+
+            //top 10 employers
             // return {"employers":[
             //   {"name":"Amazon","students":90},
             //   {"name":"Apple","students":80},
@@ -15,15 +17,108 @@ export default function (state=null,action ){
             //   {"name":"Palantir","students":60},
             //   {"name":"Fidelity","students":70}]};
 
+            //top 10 electives
+            // return {
+            //     "electives":
+            //         [
+            //             {"elective": "course Z", "students": 90},
+            //             {"elective": "course X", "students": 20},
+            //             {"elective": "course D", "students": 30},
+            //             {"elective": "course S", "students": 40},
+            //             {"elective": "course E", "students": 80},
+            //             {"elective": "course F", "students": 60},
+            //             {"elective": "course V", "students": 20},
+            //             {"elective": "course G", "students": 80},
+            //             {"elective": "course T", "students": 10},
+            //             {"elective": "course H", "students": 100}
+            //         ]
+            // };
 
-        return    {"yearlyratio":[
-            {"year":"2018","male":400,"female":500},
-            {"year":"2017","male":500,"female":400},
-            {"year":"2016","male":200,"female":300},
-            {"year":"2015","male":600,"female":500}
-        ]};
+
+            // undergrad institutions
+            return {
+                "institutionlist":[
+                    {
+                        "name"    :    "NEU",
+                        "count"    :    10
+                    },
+                    {
+                        "name"    :    "ABC",
+                        "count"    :    20
+                    },
+                    {
+                        "name"    :    "XYZ",
+                        "count"    :    110
+                    },
+                    {
+                        "name"    :    "PQR",
+                        "count"    :    40
+                    }
+                ]
+            };
+
+            // gender ratio
+        // return    {"yearlyratio":[
+        //     {"year":"2018","male":400,"female":500},
+        //     {"year":"2017","male":500,"female":400},
+        //     {"year":"2016","male":200,"female":300},
+        //     {"year":"2015","male":600,"female":500}
+        // ]};
 
 
+            // coop student
+            // return {"studentList":[
+            //         {
+            //             "name":    "Rohit",
+            //             "nuid":    "00123456",
+            //             "companies":    ["Apple","IBM"]
+            //         },
+            //         {
+            //             "name"    :    "Manu",
+            //             "nuid"        :    "00123457",
+            //             "companies"    :    ["Facebook","NYL"]
+            //         },
+            //         {
+            //             "name"    :    "Zhe",
+            //             "nuid"        :    "00123458",
+            //             "companies"    :    ["Google","Linkedin"]
+            //         },
+            //         {
+            //             "name"    :    "Ales",
+            //             "nuid"        :    "00123459",
+            //             "companies"    :    ["Delloit","Hubspot"]
+            //         }
+            //     ]
+            // };
+
+
+            // working
+            // return {"studentList":[
+            //         {
+            //             "name":    "Rohit",
+            //             "nuid":    "00123456",
+            //             "company":    "Apple"
+            //         },
+            //         {
+            //             "name"    :    "Manu",
+            //             "nuid"        :    "00123457",
+            //             "company"    :    "Facebook"
+            //         },
+            //         {
+            //             "name"    :    "Zhe",
+            //             "nuid"        :    "00123458",
+            //             "company"    :    "Google"
+            //         },
+            //         {
+            //             "name"    :    "Ales",
+            //             "nuid"        :    "00123459",
+            //             "company"    :    "Hubspot"
+            //         }
+            //     ]
+            // };
+
+
+        //company
         // return  {"students":[{
         //     "name":"student A",
         //     "nuid":"0012345"
