@@ -41,6 +41,10 @@ class AdminAnalytics extends Component {
         this.toggleUndergradInstitutions=this.toggleUndergradInstitutions.bind(this);
         this.getUndergradInstitutionsChart=this.getUndergradInstitutionsChart.bind(this);
 
+        //top Bachelors degree
+        this.toggleTop10BachelorsDegree = this.toggleTop10BachelorsDegree.bind(this);
+        this.getTop10BachelorsDegreeChart=this.getTop10BachelorsDegreeChart.bind(this);
+
         //Common
         this.createSortFunction = this.createSortFunction.bind(this);
         this.createTableContent = this.createTableContent.bind(this);
@@ -56,6 +60,7 @@ class AdminAnalytics extends Component {
         this.state = {
             top10EmployersFlag: "hidden-xs-up",
             top10ElectivesFlag: "hidden-xs-up",
+            top10BachelorsDegreeFlag: "hidden-xs-up",
             UndergradInstitutionsFlag: "hidden-xs-up",
             coopStudentsFlag: "hidden-xs-up",
             genderRatioFlag: "hidden-xs-up",
@@ -128,9 +133,14 @@ class AdminAnalytics extends Component {
                     this.props.sortAnalytics(list);
                 });
             }
-
+            if (this.state.chartSelected == "top-bachelor-degrees") {
+                var list = {};
+                list.degrees = this.props.analytics.degrees.sort(this.compareValues(this.state.orderBy, header));
+                this.setState({isApiCalled: true, sortBy: header}, () => {
+                    this.props.sortAnalytics(list);
+                });
+            }
         }
-
     }
 
     orderTable(order) {
@@ -180,6 +190,13 @@ class AdminAnalytics extends Component {
             if (this.state.chartSelected == "undergrad-institutions") {
                 var list = {};
                 list.institutionlist = this.props.analytics.institutionlist.sort(this.compareValues(order, this.state.sortBy));
+                this.setState({isApiCalled: true, orderBy: order}, () => {
+                    this.props.sortAnalytics(list);
+                });
+            }
+            if (this.state.chartSelected == "top-bachelor-degrees") {
+                var list = {};
+                list.degrees = this.props.analytics.degrees.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -250,6 +267,7 @@ class AdminAnalytics extends Component {
     collapseAllQueires() {
         this.setState({
             top10EmployersFlag: "hidden-xs-up",
+            top10BachelorsDegreeFlag: "hidden-xs-up",
             UndergradInstitutionsFlag: "hidden-xs-up",
             top10ElectivesFlag: "hidden-xs-up",
             coopStudentsFlag: "hidden-xs-up",
@@ -282,6 +300,14 @@ class AdminAnalytics extends Component {
             this.setState({top10EmployersFlag: ""});
         else
             this.setState({top10EmployersFlag: "hidden-xs-up"});
+    }
+
+    toggleTop10BachelorsDegree(){
+        this.collapseAllQueires();
+        if (this.state.top10BachelorsDegreeFlag == "hidden-xs-up")
+            this.setState({top10BachelorsDegreeFlag: ""});
+        else
+            this.setState({top10BachelorsDegreeFlag: "hidden-xs-up"});
     }
 
     toggleUndergradInstitutions(){
@@ -398,6 +424,21 @@ class AdminAnalytics extends Component {
         }
     }
 
+    getTop10BachelorsDegreeChart(){
+        if (this.state.campus == "" || this.state.year == "") {
+            this.setState({validationError: true}, function () {
+
+            });
+        }
+        else {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees"}, function () {
+                const chartRequest = {url: "top-bachelor-degrees", body: {campus: this.state.campus, year: this.state.year}};
+                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+            });
+
+        }
+    }
+
     getUndergradInstitutionsChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
@@ -457,6 +498,10 @@ class AdminAnalytics extends Component {
             });
         }
         if(chartType=="undergrad-institutions"){
+            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
+            });
+        }
+        if (chartType == "top-bachelor-degrees") {
             this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
             });
         }
@@ -619,6 +664,48 @@ class AdminAnalytics extends Component {
                     }
                 }
 
+                if (this.state.chartSelected == "top-bachelor-degrees") {
+                    var listOfDegrees = this.props.analytics.degrees;
+                    var labelsList = [];
+                    var backgroundColorList = [];
+                    var dataList = [];
+                    for (var i = 0; i < listOfDegrees.length; i++) {
+                        var r = this.randomColorGenerator();
+                        var g = this.randomColorGenerator();
+                        var b = this.randomColorGenerator();
+                        labelsList.push(listOfDegrees[i].degree);
+                        backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
+                        dataList.push(listOfDegrees[i].students);
+                    }
+                    var ctxContainer = document.getElementById("myChartContainer");
+                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
+                        '<canvas id="myChart"></canvas>' +
+                        '</div>';
+                    var ctx = document.getElementById("myChart");
+                    if (ctx) {
+                        var myChart = new Chart(ctx, {
+                            type: 'polarArea',
+                            data: {
+                                labels: labelsList,
+                                datasets: [
+                                    {
+                                        label: "Top Bachelors Degree",
+                                        backgroundColor: backgroundColorList,
+                                        data: dataList
+                                    }
+                                ]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'Top Bachelors Degree'
+                                }
+                            }
+                        });
+
+                    }
+                }
+
                 if (this.state.chartSelected == "undergrad-institutions") {
                     var listOfInstitutions = this.props.analytics.institutionlist;
                     var labelsList = [];
@@ -735,6 +822,8 @@ class AdminAnalytics extends Component {
             {label: "Students Count", value: "students"}],
             "undergrad-institutions": [{label: "Institution Name", value: "name"},
                 {label: "Students Count", value: "count"}],
+            "top-bachelor-degrees":[{label: "Degree Name", value: "degree"},
+                {label: "Students Count", value: "students"}]
         };
 
         const headerOptions = {
@@ -754,7 +843,9 @@ class AdminAnalytics extends Component {
             "top-electives": [{label: "Elective Name", value: "elective"},
                 {label: "Students Count", value: "students"}],
             "undergrad-institutions": [{label: "Institution Name", value: "name"},
-                {label: "Students Count", value: "count"}]
+                {label: "Students Count", value: "count"}],
+            "top-bachelor-degrees":[{label: "Degree Name", value: "degree"},
+                {label: "Students Count", value: "students"}]
         };
 
 
@@ -793,6 +884,10 @@ class AdminAnalytics extends Component {
                         UndergradInstitutionsFlag={this.state.UndergradInstitutionsFlag}
                         toggleUndergradInstitutions={this.toggleUndergradInstitutions}
                         getUndergradInstitutionsChart={this.getUndergradInstitutionsChart}
+                        top10BachelorsDegreeFlag={this.state.top10BachelorsDegreeFlag}
+                        toggleTop10BachelorsDegree={this.toggleTop10BachelorsDegree}
+                        getTop10BachelorsDegreeChart={this.getTop10BachelorsDegreeChart}
+
                     />
                     <div className="analytics-charts">
                         <div>

@@ -36,27 +36,43 @@ export default function (state=null,action ){
 
 
             // undergrad institutions
-            return {
-                "institutionlist":[
-                    {
-                        "name"    :    "NEU",
-                        "count"    :    10
-                    },
-                    {
-                        "name"    :    "ABC",
-                        "count"    :    20
-                    },
-                    {
-                        "name"    :    "XYZ",
-                        "count"    :    110
-                    },
-                    {
-                        "name"    :    "PQR",
-                        "count"    :    40
-                    }
-                ]
-            };
+            // return {
+            //     "institutionlist":[
+            //         {
+            //             "name"    :    "NEU",
+            //             "count"    :    10
+            //         },
+            //         {
+            //             "name"    :    "ABC",
+            //             "count"    :    20
+            //         },
+            //         {
+            //             "name"    :    "XYZ",
+            //             "count"    :    110
+            //         },
+            //         {
+            //             "name"    :    "PQR",
+            //             "count"    :    40
+            //         }
+            //     ]
+            // };
 
+
+            // top bachelors degree
+            return { "degrees":
+                    [
+                        {"degree":"Degree Z","students":70},
+                        {"degree":"Degree y","students":30},
+                        {"degree":"Degree 1","students":90},
+                        {"degree":"Degree as","students":40},
+                        {"degree":"Degree tr","students":60},
+                        {"degree":"Degree Zcv","students":20},
+                        {"degree":"Degree Z34","students":110},
+                        {"degree":"Degree Zds","students":80},
+                        {"degree":"Degree Z67","students":20},
+                        {"degree":"Degree Zdg","students":100}
+                    ]
+            };
             // gender ratio
         // return    {"yearlyratio":[
         //     {"year":"2018","male":400,"female":500},

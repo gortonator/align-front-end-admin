@@ -203,4 +203,32 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+
+    if (props.analytics && props.chartSelected == "top-bachelor-degrees") {
+        var i = 0;
+        const chartHeaders = props.chartHeaders.map((head) => {
+            return <th key={head.value} className="text-align-center">{head.label}</th>;
+        });
+        const DegreeList = props.analytics.degrees.map((degree) => {
+            i = i + 1;
+            var x = 0;
+            return <tr key={degree.degree}>
+                <td>{i}</td>
+                <td>{degree.degree}</td>
+                <td>{degree.students}</td>
+            </tr>
+        });
+        return (
+            <table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th className="text-align-center">No.</th>
+                    {chartHeaders}
+                </tr>
+                </thead>
+                <tbody>
+                {DegreeList}
+                </tbody>
+            </table>);
+    }
 }
