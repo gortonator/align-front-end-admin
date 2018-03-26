@@ -6,12 +6,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import reducers from './reducers';
 import promise from  'redux-promise';
 
+// import '../style/align-student.css';
+
 import AdminHome from './components/home';
 import Header from './components/header';
 import Footer from './components/footer';
 import StudentProfile from './components/student_profile';
 import Navbar from './components/left_navbar';
 import Analytics from './components/analytics';
+
+import StudentBrowser from './components/align-students/StudentBrowser';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -27,7 +31,7 @@ ReactDOM.render(
         <Switch>
           <Route path='/analytics' component={Analytics} />
           <Route path='/profile/:id' component={StudentProfile} />
-          <Route path='/' component={AdminHome} />
+          <Route path='/' component={StudentBrowser} />
         </Switch>
 
       </div>

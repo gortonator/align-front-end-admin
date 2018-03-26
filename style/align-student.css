@@ -1,0 +1,177 @@
+/*
+    The Heading
+*/
+
+.student-heading{
+    font-size: 32px;
+    margin-right: 18px;
+    float: left;
+}
+
+.student-search{
+    display: inline-block;
+    float: left;
+    padding: 4px 0;
+}
+
+.student-search-input{
+    font-size: 14px;
+    padding: 5px;
+    width: 100%;
+    /*border: solid rgba(255,0,0,.7) 2px;*/
+    border: solid #BBBBBB 2px;
+    border-right: none;
+}
+
+/*input.student-search-input::placeholder{*/
+    /*color: rgba(255,0,0,.7);*/
+/*}*/
+
+input.student-search-input:focus, button.student-search-button{
+    outline: none;
+}
+
+.student-auto-suggest-container{
+    width: 180px;
+    float: left;
+}
+
+.student-search-button{
+    /*border: solid rgba(255,0,0,.7) 2px;*/
+    border: solid #BBBBBB 2px;
+    border-left: none;
+    height: 34px;
+    width: 30px;
+    padding: 2px 0;
+    background-color: #FFFFFF;
+}
+
+/*
+    The table
+*/
+
+.student-table-head{
+    padding: 0 40px 10px;
+    border-bottom: solid #FBFBFB 4px;
+}
+
+.student-table-row{
+    padding: 10px 40px;
+    border-bottom: solid #FBFBFB 2px;
+}
+
+.student-table-cell{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.id-cell{
+    width: 20%;
+}
+
+.race-cell, .gender-cell{
+    width: 15%;
+}
+
+.name-cell, .major-cell{
+    width: 25%;
+}
+
+/*
+    The Filter Bar
+*/
+
+.filter-bar{
+    padding-top: 10px;
+}
+
+.filter-bar a{
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    padding: 4px 30px;
+    border-radius: 30px;
+}
+
+/*
+    The Edit Filter Modal
+*/
+
+.edit-student-filter-modal{
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    background-color: white;
+    /*display: none;*/
+    padding: 70px 30px 0;
+    border-left: 2px groove #FBFBFB;
+}
+
+.edit-student-filter-modal h3{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+a.clear-filter-link{
+    text-decoration: none;
+    color: rgba(255,0,0,.7);
+}
+
+a.edit-student-filter-modal-button{
+    font-size: 16px;
+    display: inline-block;
+    background-color: white;
+    color: rgba(255,0,0,.7);
+    border: 2px solid rgba(255,0,0,.7);
+    padding: 4px;
+    min-width: 180px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+
+a.edit-student-filter-modal-button:hover{
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    transition: ease .2s;
+}
+
+.edit-student-filter-modal-button-container{
+    text-align: center;
+    padding: 7px 0;
+}
+
+.campus-filter-container{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+a.campus-filter{
+    display: inline-block;
+    min-width: 130px;
+    padding: 4px 10px;
+    border: 2px solid rgba(255,0,0,.7);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+a.campus-filter-selected, a.campus-filter-selected:visited, a.campus-filter-selected:hover{
+    color: white;
+    background-color: rgba(255,0,0,.7);
+}
+
+
+
+a.campus-filter-unselected,a.campus-filter-unselected:visited,a.campus-filter-unselected:hover{
+    color: rgba(255,0,0,.7);
+    background-color: #FFFFFF;
+}
+
+
+
+
+
+
