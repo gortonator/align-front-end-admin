@@ -17,13 +17,10 @@ class AlignStudentTable extends React.Component{
                         {student.name}
                     </div>
                     <div className={"major-cell student-table-cell"}>
-                        {student.major}
+                        {student.undergrad_degree}
                     </div>
                     <div className={"race-cell student-table-cell"}>
-                        {student.race}
-                    </div>
-                    <div className={"gender-cell student-table-cell"}>
-                        {student.gender}
+                        {student.campus}
                     </div>
                 </div>)
         );
@@ -43,10 +40,7 @@ class AlignStudentTable extends React.Component{
                         Undergrad Major
                     </div>
                     <div className={"race-cell student-table-cell"}>
-                        Race
-                    </div>
-                    <div className={"gender-cell student-table-cell"}>
-                        Gender
+                        Campus
                     </div>
                 </div>
                 {this.mapStudentsToRows()}

@@ -21,25 +21,25 @@ const students = [
     {
         nuid: "1",
         name: "A",
-        gpa: "1",
+        undergrad_degree: "CS",
         campus: "Boston"
     },
     {
         nuid: "2",
         name: "C",
-        gpa: "4",
+        undergrad_degree: "CS",
         campus: "Silicon Valley"
     },
     {
         nuid: "3",
         name: "D",
-        gpa: "3",
+        undergrad_degree: "IS",
         campus: "Seattle"
     },
     {
         nuid: "4",
         name: "B",
-        gpa: "2",
+        undergrad_degree: "IS",
         campus: "Charlotte"
     }
 ];
