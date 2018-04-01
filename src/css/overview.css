@@ -1,0 +1,79 @@
+.overview-report{
+    padding-top: 50px;
+}
+
+.overview-report-item{
+    overflow: auto;
+    padding-bottom: 20px;
+}
+
+.overview-report-number-container,.overview-report-explanation-container{
+    display: inline-block;
+    float: left;
+}
+
+.overview-report-number-container{
+    width: 40%;
+    overflow: auto;
+    padding-right: 10px;
+}
+
+.overview-report-number{
+    display: inline-block;
+    float: right;
+    font-size: 60px;
+}
+
+.overview-report-explanation-container{
+    width: 60%;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.overview-report-issue{
+    color: gray;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.overview-report-explanation{
+    font-size: 16px;
+}
+
+.overview-deep-report-modal{
+    background-color: rgba(0,0,0,.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding-top: 100px;
+}
+
+.overview-deep-report{
+    width: 600px;
+    height: 500px;
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+    border-radius: 20px;
+    position: relative;
+}
+
+.overview-deep-report-modal-closer{
+    background-color: white;
+    color: rgba(0,0,0,.7);
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+a.overview-deep-report-modal-closer{
+    text-decoration: none;
+}
+
+a.overview-deep-report-modal-closer:hover{
+    color: rgba(0,0,0,.7);
+}

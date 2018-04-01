@@ -1,0 +1,40 @@
+.student-table{
+    margin: auto;
+    width: 600px;
+    border: #E1E1E1 solid 1px;
+}
+
+.student-table-row{
+    border-bottom: #EEEEEE solid 1px;
+    border-top: #ECECEC solid 1px;
+    font-size: 15px;
+}
+
+.student-table a:link{
+    text-decoration: none;
+}
+
+.student-table a:hover{
+    color: darkblue;
+}
+
+.student-table-row:hover{
+    filter: brightness(3);
+}
+
+.ReactVirtualized__Table__rowColumn{
+    padding-left: 4px;
+}
+
+.student-table-filter{
+    width: 150px;
+    float: left;
+    margin-right: 15px;
+}
+
+.student-table-filter-bar{
+    width: 600px;
+    margin: auto;
+    height: 50px;
+}
+

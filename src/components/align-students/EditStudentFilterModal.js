@@ -1,29 +1,9 @@
 import React from 'react';
-import {editStudentFilterModalStatus} from '../../actions/align-student-actions';
+import {editStudentFilterModalStatus} from '../../actions/align-students-actions';
 import TogglableFilter from './TogglableFIlter';
+import {initialState} from "../../reducers/align-students";
 
-const defaultStudentFilter = {
-    nameOrIdFilter: null,
-    campusFilter: [
-        {
-            name: "boston",
-            isSet: false
-        },
-        {
-            name: "charlotte",
-            isSet: false
-        },
-        {
-            name: "seattle",
-            isSet: false
-        },
-        {
-            name: "silicon valley",
-            isSet: false
-        }
-    ],
-    coopFilter: "All Coop"
-};
+const defaultStudentFilter = initialState.studentFilters;
 
 class EditStudentFilterModal extends React.Component {
     constructor(props){
@@ -125,3 +105,9 @@ class EditStudentFilterModal extends React.Component {
 }
 
 export default EditStudentFilterModal;
+
+function CampusFilter(props){
+
+}
+
+

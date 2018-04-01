@@ -1,11 +1,11 @@
 import EditStudentFilterModal from '../../components/align-students/EditStudentFilterModal';
 import {connect} from 'react-redux';
-import {closeEditStudentFilterModal} from '../../actions/align-student-actions';
+import {closeEditStudentFilterModal} from '../../actions/align-students-actions';
 
 function mapStateToProps(state){
     return {
-        studentFilters: state.students.studentFilters,
-        editStudentFilterModal: state.students.editStudentFilterModal
+        studentFilters: state.alignStudent.studentFilters,
+        editStudentFilterModal: state.alignStudent.editStudentFilterModal
     };
 }
 

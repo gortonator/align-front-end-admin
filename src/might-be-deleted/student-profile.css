@@ -1,0 +1,26 @@
+.profile-modal{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 3;
+    padding-top: 50px;
+}
+
+.student-profile-viewport{
+    background-color: white;
+    width: 600px;
+    height: 500px;
+    margin: auto;
+    position: relative;
+    /*animation: fadein 2s;*/
+}
+
+.student-modal-closer{
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    top: -16px;
+    right: -16px;
+}

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {getAnalytics, sortAnalytics} from '../actions';
-import Chart from 'chart.js';
+import {getAnalytics, sortAnalytics} from '../actions/index';
 import AnalyticsFilter from './analytics_filter';
 import AnalyticsTable from './analytics_table';
-
+import AnalyticsCharts from './analytics_charts';
 
 class AdminAnalytics extends Component {
 
@@ -532,263 +531,17 @@ class AdminAnalytics extends Component {
         this.setState({year});
     }
 
-    randomColorGenerator() {
-        return Math.floor((Math.random() * 100) + (Math.random() * 100) + (Math.random() * 50) + 1);
-    }
-
     showChart(data) {
         if (data) {
-            if (data) {
-                if (this.state.chartSelected == "gender-ratio") {
-                    var dataLabels = [];
-                    var dataMale = [];
-                    var dataFemale = [];
-                    var yearlyratioList = data.yearlyratio;
-                    for (var i = 0; i < yearlyratioList.length; i++) {
-                        var r=this.randomColorGenerator();
-                        var g=this.randomColorGenerator();
-                        var b=this.randomColorGenerator();
-                        var color1="rgba("+r+","+g+","+b+",1)";
-                        r=this.randomColorGenerator();
-                        g=this.randomColorGenerator();
-                        b=this.randomColorGenerator();
-                        var color2="rgba("+r+","+g+","+b+",0.9)";
-                        dataLabels.push(yearlyratioList[i].year);
-                        dataMale.push(yearlyratioList[i].male);
-                        dataFemale.push(yearlyratioList[i].female);
-                    }
-                    var ctxContainer = document.getElementById("myChartContainer");
-                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
-                        '<canvas id="myChart"></canvas>' +
-                        '</div>';
-                    var ctx = document.getElementById("myChart");
-                    if (ctx) {
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: dataLabels,
-                                datasets: [ {
-                                    label: "Boys",
-                                    backgroundColor: color1,
-                                    data: dataMale
-                                }, {
-                                    label: "Girls",
-                                    backgroundColor: color2,
-                                    data: dataFemale
-                                }]
-                            },
-                            options: {
-                                title: {
-                                    display: true,
-                                    text: 'Gender count per year'
-                                },
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero:true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                        // var myChart = new Chart(ctx, {
-                        //     type: 'bar',
-                        //     data: {
-                        //         labels: dataLabels,
-                        //         datasets: [{
-                        //             label: "Boys",
-                        //             backgroundColor: "#3e95cd",
-                        //             data: dataMale
-                        //         }, {
-                        //             label: "Girls",
-                        //             backgroundColor: "#8e5ea2",
-                        //             data: dataFemale
-                        //         }]
-                        //     },
-                        //     options: {
-                        //         title: {
-                        //             display: true,
-                        //             text: 'Gender count per year'
-                        //         },
-                        //         scales: {
-                        //             yAxes: [{
-                        //                 ticks: {
-                        //                     beginAtZero: true
-                        //                 }
-                        //             }]
-                        //         }
-                        //     }
-                        // });
-                    }
-                }
 
-                if (this.state.chartSelected == "top-employers") {
-                    var listOfCompanies = this.props.analytics.employers;
-                    var labelsList = [];
-                    var backgroundColorList = [];
-                    var dataList = [];
-                    for (var i = 0; i < listOfCompanies.length; i++) {
-                        var r = this.randomColorGenerator();
-                        var g = this.randomColorGenerator();
-                        var b = this.randomColorGenerator();
-                        labelsList.push(listOfCompanies[i].name);
-                        backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-                        dataList.push(listOfCompanies[i].students);
-                    }
-                    var ctxContainer = document.getElementById("myChartContainer");
-                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
-                        '<canvas id="myChart"></canvas>' +
-                        '</div>';
-                    var ctx = document.getElementById("myChart");
-                    if (ctx) {
-                        var myChart = new Chart(ctx, {
-                            type: 'polarArea',
-                            data: {
-                                labels: labelsList,
-                                datasets: [
-                                    {
-                                        label: "Top Employers",
-                                        backgroundColor: backgroundColorList,
-                                        data: dataList
-                                    }
-                                ]
-                            },
-                            options: {
-                                title: {
-                                    display: true,
-                                    text: 'Top Employers'
-                                }
-                            }
-                        });
-
-                    }
-                }
-
-                if (this.state.chartSelected == "top-bachelor-degrees") {
-                    var listOfDegrees = this.props.analytics.degrees;
-                    var labelsList = [];
-                    var backgroundColorList = [];
-                    var dataList = [];
-                    for (var i = 0; i < listOfDegrees.length; i++) {
-                        var r = this.randomColorGenerator();
-                        var g = this.randomColorGenerator();
-                        var b = this.randomColorGenerator();
-                        labelsList.push(listOfDegrees[i].degree);
-                        backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-                        dataList.push(listOfDegrees[i].students);
-                    }
-                    var ctxContainer = document.getElementById("myChartContainer");
-                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
-                        '<canvas id="myChart"></canvas>' +
-                        '</div>';
-                    var ctx = document.getElementById("myChart");
-                    if (ctx) {
-                        var myChart = new Chart(ctx, {
-                            type: 'polarArea',
-                            data: {
-                                labels: labelsList,
-                                datasets: [
-                                    {
-                                        label: "Top Bachelors Degree",
-                                        backgroundColor: backgroundColorList,
-                                        data: dataList
-                                    }
-                                ]
-                            },
-                            options: {
-                                title: {
-                                    display: true,
-                                    text: 'Top Bachelors Degree'
-                                }
-                            }
-                        });
-
-                    }
-                }
-
-                if (this.state.chartSelected == "undergrad-institutions") {
-                    var listOfInstitutions = this.props.analytics.institutionlist;
-                    var labelsList = [];
-                    var backgroundColorList = [];
-                    var dataList = [];
-                    for (var i = 0; i < listOfInstitutions.length; i++) {
-                        var r = this.randomColorGenerator();
-                        var g = this.randomColorGenerator();
-                        var b = this.randomColorGenerator();
-                        labelsList.push(listOfInstitutions[i].name);
-                        backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-                        dataList.push(listOfInstitutions[i].count);
-                    }
-                    var ctxContainer = document.getElementById("myChartContainer");
-                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
-                        '<canvas id="myChart"></canvas>' +
-                        '</div>';
-                    var ctx = document.getElementById("myChart");
-                    if (ctx) {
-                        var myChart = new Chart(ctx, {
-                            type: 'polarArea',
-                            data: {
-                                labels: labelsList,
-                                datasets: [
-                                    {
-                                        label: "Undergrad Institutions",
-                                        backgroundColor: backgroundColorList,
-                                        data: dataList
-                                    }
-                                ]
-                            },
-                            options: {
-                                title: {
-                                    display: true,
-                                    text: 'Undergrad Institutions'
-                                }
-                            }
-                        });
-
-                    }
-                }
-                if (this.state.chartSelected == "top-electives") {
-                    var listOfElectives = this.props.analytics.electives;
-                    var labelsList = [];
-                    var backgroundColorList = [];
-                    var dataList = [];
-                    for (var i = 0; i < listOfElectives.length; i++) {
-                        var r = this.randomColorGenerator();
-                        var g = this.randomColorGenerator();
-                        var b = this.randomColorGenerator();
-                        labelsList.push(listOfElectives[i].elective);
-                        backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-                        dataList.push(listOfElectives[i].students);
-                    }
-                    var ctxContainer = document.getElementById("myChartContainer");
-                    ctxContainer.innerHTML = '<div className={"chart-container ' + this.state.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
-                        '<canvas id="myChart"></canvas>' +
-                        '</div>';
-                    var ctx = document.getElementById("myChart");
-                    if (ctx) {
-                        var myChart = new Chart(ctx, {
-                            type: 'polarArea',
-                            data: {
-                                labels: labelsList,
-                                datasets: [
-                                    {
-                                        label: "Top Electives",
-                                        backgroundColor: backgroundColorList,
-                                        data: dataList
-                                    }
-                                ]
-                            },
-                            options: {
-                                title: {
-                                    display: true,
-                                    text: 'Top Electives'
-                                }
-                            }
-                        });
-
-                    }
-                }
-
+            if (this.state.chartSelected) {
+                var ctxContainer = document.getElementById("myChartContainer");
+                AnalyticsCharts({
+                    ctxContainer,
+                    chartSelected: this.state.chartSelected,
+                    data,
+                    initialLoadChart: this.state.initialLoadChart
+                });
             }
         }
     }
@@ -922,7 +675,7 @@ class AdminAnalytics extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 function mapStateToProps(state) {

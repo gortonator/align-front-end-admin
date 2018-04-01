@@ -1,0 +1,58 @@
+.al-student-auto-suggest-container{
+    width: 320px;
+    display: inline-block;
+}
+
+.al-student-suggestions-container{
+    width: 360px;
+    z-index: 2;
+    position: absolute;
+}
+
+.al-student-search-input{
+    font-size: medium;
+    padding: 10px 15px;
+    border-style: groove;
+    width: 100%;
+    border-right: none;
+    border-radius: 3px 0 0 3px;
+}
+
+.al-student-search-box{
+    margin: auto;
+    width: 360px;
+    margin-bottom: 100px;
+}
+
+.al-student-search-button{
+    width: 40px;
+    height: 46px;
+    background-color: transparent;
+    border-style: groove;
+    border-left: none;
+    float:right;
+    border-radius: 0 3px 3px 0;
+}
+
+input.al-student-search-input:focus, button.al-student-search-button:focus{
+    outline: none;
+}
+
+.al-student-suggestions-list{
+    list-style-type: none;
+    padding: 0;
+    padding-top: 5px;
+    border-style: groove;
+    border-top: none;
+    border-width: 2px;
+    margin-top: -5px;
+}
+
+.al-student-suggestion{
+    font-size: medium;
+    padding: 10px 15px;
+}
+
+
+
+
