@@ -8,22 +8,22 @@ class StudentTable extends React.Component{
 
     mapStudentsToRows(){
         return this.props.students.map(
-            student => (
-                <div className={"student-table-row"}>
+            (student,i) => (
+                <div className={"student-table-row"} key={i}>
                     <div className={"id-cell student-table-cell"}>
                         {student.nuid}
                     </div>
                     <div className={"name-cell student-table-cell"}>
                         {student.name}
                     </div>
-                    <div className={"major-cell student-table-cell"}>
-                        {student.major}
+                    <div className={"email-cell student-table-cell"}>
+                        {student.email}
                     </div>
-                    <div className={"race-cell student-table-cell"}>
-                        {student.race}
+                    <div className={"enrollment-status-cell student-table-cell"}>
+                        {student.enrollmentStatus}
                     </div>
-                    <div className={"gender-cell student-table-cell"}>
-                        {student.gender}
+                    <div className={"degree-year-cell student-table-cell"}>
+                        {student.degreeYear}
                     </div>
                 </div>)
         );
@@ -39,14 +39,14 @@ class StudentTable extends React.Component{
                     <div className={"name-cell student-table-cell"}>
                         Name
                     </div>
-                    <div className={"major-cell student-table-cell"}>
-                        Undergrad Major
+                    <div className={"email-cell student-table-cell"}>
+                        Email
                     </div>
-                    <div className={"race-cell student-table-cell"}>
-                        Race
+                    <div className={"enrollment-status-cell student-table-cell"}>
+                        Enrollment Status
                     </div>
-                    <div className={"gender-cell student-table-cell"}>
-                        Gender
+                    <div className={"degree-year-cell student-table-cell"}>
+                        Degree Year
                     </div>
                 </div>
                 {this.mapStudentsToRows()}

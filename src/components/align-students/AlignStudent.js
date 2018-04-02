@@ -6,7 +6,7 @@ import EditStudentFilterModalContainer from "../../containers/align-students/Edi
 
 export default (props) => {
     return (
-        <div style={theStyle}>
+        <div className={'align-student'}>
             <EditStudentFilterModalContainer/>
             <StudentHeadingContainer/>
             <StudentFilterBarContainer/>
@@ -15,11 +15,5 @@ export default (props) => {
         </div>
     );
 }
-
-const theStyle = {
-    "max-width": "1224px",
-    "margin": "auto",
-    "padding": "70px 50px"
-};
 
 // export default (props) => <h1>hello</h1>;

@@ -1,4 +1,12 @@
 /*
+    The Container of everything
+*/
+
+.align-student{
+    padding: 70px 50px;
+}
+
+/*
     The Heading
 */
 
@@ -51,12 +59,12 @@ input.student-search-input:focus, button.student-search-button{
 */
 
 .student-table-head{
-    padding: 0 40px 10px;
+    padding: 0 40px 5px;
     border-bottom: solid #FBFBFB 4px;
 }
 
 .student-table-row{
-    padding: 10px 40px;
+    padding: 5px 40px;
     border-bottom: solid #FBFBFB 2px;
 }
 
@@ -65,15 +73,15 @@ input.student-search-input:focus, button.student-search-button{
     font-size: 16px;
 }
 
-.id-cell{
+.id-cell,.enrollment-status-cell{
     width: 20%;
 }
 
-.race-cell, .gender-cell{
-    width: 15%;
+.degree-year-cell{
+    width: 10%;
 }
 
-.name-cell, .major-cell{
+.name-cell, .email-cell{
     width: 25%;
 }
 
@@ -104,12 +112,12 @@ input.student-search-input:focus, button.student-search-button{
     top: 0;
     z-index: 2;
     background-color: white;
-    /*display: none;*/
-    padding: 70px 30px 0;
+    padding: 40px 30px 0;
     border-left: 2px groove #FBFBFB;
+    overflow: scroll;
 }
 
-.edit-student-filter-modal h3{
+.edit-student-filter-heading{
     display: inline-block;
     margin-right: 15px;
 }
@@ -126,7 +134,7 @@ a.edit-student-filter-modal-button{
     color: rgba(255,0,0,.7);
     border: 2px solid rgba(255,0,0,.7);
     padding: 4px;
-    min-width: 180px;
+    min-width: 200px;
     border-radius: 30px;
     text-decoration: none;
 }
@@ -142,32 +150,44 @@ a.edit-student-filter-modal-button:hover{
     padding: 7px 0;
 }
 
-.campus-filter-container{
+.campus-option-container{
     display: inline-block;
     width: 50%;
     text-align: center;
 }
 
-a.campus-filter{
+a.campus-option,a.enrollment-status-option{
     display: inline-block;
     min-width: 130px;
-    padding: 4px 10px;
+    padding: 0 10px;
     border: 2px solid rgba(255,0,0,.7);
     border-radius: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-decoration: none;
 }
 
-a.campus-filter-selected, a.campus-filter-selected:visited, a.campus-filter-selected:hover{
+a.campus-option-selected,a.enrollment-status-option-selected{
     color: white;
     background-color: rgba(255,0,0,.7);
 }
 
-
-
-a.campus-filter-unselected,a.campus-filter-unselected:visited,a.campus-filter-unselected:hover{
+a.campus-option-unselected,a.enrollment-status-option-unselected{
     color: rgba(255,0,0,.7);
-    background-color: #FFFFFF;
+    background-color: white;
+}
+
+.enrollment-status-option-container{
+    display: inline;
+    margin: 0 5px;
+}
+
+a.enrollment-status-option{
+    min-width: auto;
+    padding: 0 20px;
+}
+
+.select-filter{
+    margin-bottom: 5px;
 }
 
 

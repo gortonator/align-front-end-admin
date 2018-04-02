@@ -1,54 +1,156 @@
 import * as actions from '../actions/align-students-actions';
 
+export const CAMPUS_NAMES = {
+    boston: 'boston',
+    charlotte: 'charlotte',
+    seattle: 'seattle',
+    siliconValley: 'siliconValley'
+};
+
+export const ENROLLMENT_STATUSES = {
+    fullTime: 'fullTime',
+    partTime: 'partTime',
+    inactive: 'inactive',
+    dropOut: 'dropOut'
+};
+
+const initialStudents = [
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    },
+    {
+        nuid: "1",
+        name: "A",
+        email: "123",
+        enrollmentStatus: "ft",
+        degreeYear: "2018"
+    }
+];
+
 export const initialState = {
-    students: [
-        {
-            nuid: "1",
-            name: "A",
-            gpa: "1",
-            campus: "Boston"
-        },
-        {
-            nuid: "2",
-            name: "C",
-            gpa: "4",
-            campus: "Silicon Valley"
-        },
-        {
-            nuid: "3",
-            name: "D",
-            gpa: "3",
-            campus: "Seattle"
-        },
-        {
-            nuid: "4",
-            name: "B",
-            gpa: "2",
-            campus: "Charlotte"
-        }
-    ],
+    students: initialStudents,
     editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED,
     studentFilters: {
-        nameOrIdFilter: null,
-        campusFilter: [
-            {
-                name: "boston",
-                isSet: false
-            },
-            {
-                name: "charlotte",
-                isSet: false
-            },
-            {
-                name: "seattle",
-                isSet: false
-            },
-            {
-                name: "silicon valley",
-                isSet: false
-            }
-        ],
-        coopFilter: "All Coop"
+        nameOrId: null,
+        campus: {
+            [CAMPUS_NAMES.boston] : false,
+            [CAMPUS_NAMES.charlotte] : false,
+            [CAMPUS_NAMES.seattle] : false,
+            [CAMPUS_NAMES.siliconValley] : false
+        },
+        enrollmentStatus: {
+            [ENROLLMENT_STATUSES.fullTime] : false,
+            [ENROLLMENT_STATUSES.partTime] : false,
+            [ENROLLMENT_STATUSES.inactive] : false,
+            [ENROLLMENT_STATUSES.dropOut] : false
+        },
+        coopFilter: "Any",
+        genderFilter: "Ant",
+        race: 'Any',
+        undergradMajor: 'Any',
+        isNuUndergrad: false
     },
     overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
 };
@@ -108,3 +210,4 @@ export default function adminApp(state=initialState,action){
             return state;
     }
 }
+
