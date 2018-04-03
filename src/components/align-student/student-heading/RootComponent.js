@@ -9,18 +9,10 @@ class AlignStudentHeading extends React.Component {
 
     render(){
         return (
-            <div>
-                <div style={{"overflow" : "auto"}}>
-                    <span className={"student-heading"}>Align Students</span>
-                    <StudentSearch students={students}/>
-                </div>
-                <div className={"filter-bar"}>
-                    <a href={""} onClick={this.props.onAddFilterButtonClick}>
-                        Add Filter
-                    </a>
-                </div>
+            <div style={{"overflow" : "auto"}}>
+                <span className={"student-heading"}>Align Students</span>
+                <StudentSearch students={students}/>
             </div>
-
         );
     }
 }

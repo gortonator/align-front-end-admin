@@ -31,10 +31,8 @@ class EditStudentFilterModal extends React.Component {
         this.handleGenderFilterChange = this.handleGenderFilterChange.bind(this);
         this.handleRaceFilterChange = this.handleRaceFilterChange.bind(this);
         this.handleUndergradMajorFilterChange = this.handleUndergradMajorFilterChange.bind(this);
-
         this.toggleNuUndergrad = this.toggleNuUndergrad.bind(this);
 
-        this.applyFilters = this.applyFilters.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.clearAllFilters = this.clearAllFilters.bind(this);
     }
@@ -116,11 +114,6 @@ class EditStudentFilterModal extends React.Component {
         );
     }
 
-    applyFilters(e){
-        e.preventDefault();
-        this.props.onApplyButtonClick(this.state);
-    }
-
     closeModal(e){
         e.preventDefault();
         this.setState(JSON.parse(JSON.stringify(this.props.studentFilters)));
@@ -162,7 +155,7 @@ class EditStudentFilterModal extends React.Component {
                 <MiscellaneousFilters onNuUndergradToggle={this.toggleNuUndergrad}
                                       nuUndergradChecker={this.state.nuUndergrad}/>
 
-                <EditStudentFilterApplyButton onClick={this.applyFilters}/>
+                <EditStudentFilterApplyButton/>
 
             </div>
         );
