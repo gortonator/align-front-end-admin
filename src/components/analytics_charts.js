@@ -11,7 +11,7 @@ export default function (props) {
       var dataLabels = [];
       var dataMale = [];
       var dataFemale = [];
-      var yearlyratioList = props.data.yearlyratio;
+      var yearlyratioList = props.data;
       for (var i = 0; i < yearlyratioList.length; i++) {
           var r=randomColorGenerator();
           var g=randomColorGenerator();
@@ -21,7 +21,7 @@ export default function (props) {
           g=randomColorGenerator();
           b=randomColorGenerator();
           var color2="rgba("+r+","+g+","+b+",0.9)";
-          dataLabels.push(yearlyratioList[i].year);
+          dataLabels.push(yearlyratioList[i].entryYear);
           dataMale.push(yearlyratioList[i].male);
           dataFemale.push(yearlyratioList[i].female);
       }
@@ -61,7 +61,7 @@ export default function (props) {
       }
   }
   if (props.chartSelected == "top-employers") {
-      var listOfCompanies = props.data.employers;
+      var listOfCompanies = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -69,9 +69,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfCompanies[i].name);
+          labelsList.push(listOfCompanies[i].companyName);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfCompanies[i].students);
+          dataList.push(listOfCompanies[i].totalStudents);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
@@ -102,7 +102,7 @@ export default function (props) {
   }
 
   if (props.chartSelected == "top-bachelor-degrees") {
-      var listOfDegrees = props.data.degrees;
+      var listOfDegrees = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -143,7 +143,7 @@ export default function (props) {
   }
 
   if (props.chartSelected == "undergrad-institutions") {
-      var listOfInstitutions = props.data.institutionlist;
+      var listOfInstitutions = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -151,9 +151,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfInstitutions[i].name);
+          labelsList.push(listOfInstitutions[i].institutionName);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfInstitutions[i].count);
+          dataList.push(listOfInstitutions[i].totalStudents);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
@@ -183,7 +183,7 @@ export default function (props) {
       }
   }
   if (props.chartSelected == "top-electives") {
-      var listOfElectives = props.data.electives;
+      var listOfElectives = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -191,9 +191,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfElectives[i].elective);
+          labelsList.push(listOfElectives[i].courseName);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfElectives[i].students);
+          dataList.push(listOfElectives[i].totalStudents);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
@@ -221,6 +221,16 @@ export default function (props) {
           });
 
       }
+  }
+
+  if (props.chartSelected == "working") {
+      props.ctxContainer.innerHTML = '<div></div>';
+  }
+  if (props.chartSelected == "coop-students") {
+      props.ctxContainer.innerHTML = '<div></div>';
+  }
+  if (props.chartSelected == "company") {
+      props.ctxContainer.innerHTML = '<div></div>';
   }
 
   // console.log(props)

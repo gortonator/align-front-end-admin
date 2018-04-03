@@ -47,7 +47,7 @@ class AdminAnalytics extends Component {
         //Common
         this.createSortFunction = this.createSortFunction.bind(this);
         this.createTableContent = this.createTableContent.bind(this);
-        this.getAnalyticsCallback = this.getAnalyticsCallback.bind(this);
+        // this.getAnalyticsCallback = this.getAnalyticsCallback.bind(this);
         this.onCompanyChange = this.onCompanyChange.bind(this);
         this.getYears = this.getYears.bind(this);
         this.getCampusOptions = this.getCampusOptions.bind(this);
@@ -82,21 +82,21 @@ class AdminAnalytics extends Component {
         if (this.props.analytics) {
             if (this.state.chartSelected == "gender-ratio") {
                 var list = {};
-                list.yearlyratio = this.props.analytics.yearlyratio.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-employers") {
                 var list = {};
-                list.employers = this.props.analytics.employers.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "coop-students") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -104,7 +104,7 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "company") {
                 var list = {};
-                list.students = this.props.analytics.students.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -112,7 +112,7 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "working") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -120,21 +120,21 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "top-electives") {
                 var list = {};
-                list.electives = this.props.analytics.electives.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "undergrad-institutions") {
                 var list = {};
-                list.institutionlist = this.props.analytics.institutionlist.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-bachelor-degrees") {
                 var list = {};
-                list.degrees = this.props.analytics.degrees.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -146,56 +146,56 @@ class AdminAnalytics extends Component {
         if (this.props.analytics) {
             if (this.state.chartSelected == "gender-ratio") {
                 var list = {};
-                list.yearlyratio = this.props.analytics.yearlyratio.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-employers") {
                 var list = {};
-                list.employers = this.props.analytics.employers.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "coop-students") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "company") {
                 var list = {};
-                list.students = this.props.analytics.students.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "working") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-electives") {
                 var list = {};
-                list.electives = this.props.analytics.electives.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "undergrad-institutions") {
                 var list = {};
-                list.institutionlist = this.props.analytics.institutionlist.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-bachelor-degrees") {
                 var list = {};
-                list.degrees = this.props.analytics.degrees.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -349,9 +349,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio"}, function () {
-                const chartRequest = {url: "gender-ratio", body: this.state.campus};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio",initialLoadChart: "",initialLoadTable: ""}, function () {
+                const chartRequest = {url: "gender-ratio", body: {campus:this.state.campus}};
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -364,12 +364,12 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "company"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "company",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {
                     url: "company",
                     body: {campus: this.state.campus, year: this.state.year, company: this.state.company}
                 };
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -382,12 +382,13 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "working"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "working",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {
                     url: "working",
                     body: {campus: this.state.campus, year: this.state.year}
                 };
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                // this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -400,9 +401,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "coop-students", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -415,9 +416,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-employers", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -430,9 +431,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-bachelor-degrees", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -445,9 +446,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "undergrad-institutions", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -460,9 +461,9 @@ class AdminAnalytics extends Component {
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-electives", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.getAnalytics(chartRequest);
             });
 
         }
@@ -472,39 +473,39 @@ class AdminAnalytics extends Component {
         this.setState({campus: campus, isApiCalled: false});
     }
 
-    getAnalyticsCallback(chartType) {
-        if (chartType == "gender-ratio") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""});
-        }
-        if (chartType == "company") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "top-employers") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "coop-students") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "working") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if(chartType=="top-electives"){
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if(chartType=="undergrad-institutions"){
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "top-bachelor-degrees") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-    }
+    // getAnalyticsCallback(chartType) {
+    //     if (chartType.indexOf("gender-ratio")) {
+    //         this.setState({initialLoadChart: "", initialLoadTable: ""});
+    //     }
+    //     if (chartType.indexOf("company")) {
+    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if (chartType.indexOf("top-employers")) {
+    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if (chartType.indexOf("coop-students")) {
+    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if (chartType.indexOf("working")) {
+    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if(chartType.indexOf("top-electives")){
+    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if(chartType.indexOf("undergrad-institutions")){
+    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    //     if (chartType.indexOf("top-bachelor-degrees")) {
+    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
+    //         });
+    //     }
+    // }
 
     getYears(years) {
         const list = years.map((year) => {
@@ -601,11 +602,16 @@ class AdminAnalytics extends Component {
                 {label: "Students Count", value: "students"}]
         };
 
+        // if (this.props.analytics){
+        //   console.log("callvack",this.props.analytics.request.responseURL)
+        //     this.getAnalyticsCallback(this.props.analytics.request.responseURL);
+        // }
 
         if (this.props.analytics && this.state.isApiCalled) {
             // console.log(this.state.chartSelected);
             this.showChart(this.props.analytics);
         }
+        console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
         return (
             <div>
                 <div className="analytics-body col-sm-12">

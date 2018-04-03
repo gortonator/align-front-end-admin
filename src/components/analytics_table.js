@@ -7,11 +7,12 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const listOfYears = props.analytics.yearlyratio.map((year) => {
+        // console.log(props.analytics);
+        const listOfYears = props.analytics.map((year) => {
             i = i + 1;
-            return <tr key={year.year}>
+            return <tr key={year.entryYear}>
                 <td>{i}</td>
-                <td>{year.year}</td>
+                <td>{year.entryYear}</td>
                 <td>{year.male}</td>
                 <td>{year.female}</td>
             </tr>
@@ -34,7 +35,7 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const listOfStudents = props.analytics.students.map((student) => {
+        const listOfStudents = props.analytics.map((student) => {
             i = i + 1;
             return <tr key={student.nuid}>
                 <td>{i}</td>
@@ -61,12 +62,12 @@ export default function (props) {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
 
-        const listOfCompanies = props.analytics.employers.map((company) => {
+        const listOfCompanies = props.analytics.map((company) => {
             i = i + 1;
             return <tr key={company.name}>
                 <td>{i}</td>
-                <td>{company.name}</td>
-                <td>{company.students}</td>
+                <td>{company.companyName}</td>
+                <td>{company.totalStudents}</td>
             </tr>
         });
         return (<table className="table table-bordered">
@@ -87,21 +88,19 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const studentsList = props.analytics.studentList.map((student) => {
+        const studentsList = props.analytics.map((student) => {
             i = i + 1;
             var x = 0;
-            return <tr key={student.nuid}>
+            return <tr key={student.neuId}>
                 <td>{i}</td>
-                <td>{student.nuid}</td>
-                <td>{student.name}</td>
-                <td>{student.companies
-                    .map((company) => {
+                <td>{student.neuId}</td>
+                <td>{student.firstName+" "+student.lastName}</td>
+                <td>{student.companies.map((company) => {
                         if (x > 0)
                             return "," + company;
                         x = x + 1;
                         return company;
                     })}
-
                 </td>
             </tr>
         });
@@ -124,14 +123,14 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const studentsList = props.analytics.studentList.map((student) => {
+        const studentsList = props.analytics.map((student) => {
             i = i + 1;
             var x = 0;
-            return <tr key={student.nuid}>
+            return <tr key={i}>
                 <td>{i}</td>
-                <td>{student.nuid}</td>
-                <td>{student.name}</td>
-                <td>{student.company}</td>
+                <td>{student.neuId}</td>
+                <td>{student.firstName+" "+student.lastName}</td>
+                <td>{student.companies?student.companies[0]:""}</td>
             </tr>
         });
         return (
@@ -153,13 +152,13 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const electivesList = props.analytics.electives.map((elective) => {
+        const electivesList = props.analytics.map((elective) => {
             i = i + 1;
             var x = 0;
-            return <tr key={elective.elective}>
+            return <tr key={elective.courseName}>
                 <td>{i}</td>
-                <td>{elective.elective}</td>
-                <td>{elective.students}</td>
+                <td>{elective.courseName}</td>
+                <td>{elective.totalStudents}</td>
             </tr>
         });
         return (
@@ -181,13 +180,13 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const institutionList = props.analytics.institutionlist.map((institution) => {
+        const institutionList = props.analytics.map((institution) => {
             i = i + 1;
             var x = 0;
-            return <tr key={institution.name}>
+            return <tr key={institution.institutionName}>
                 <td>{i}</td>
-                <td>{institution.name}</td>
-                <td>{institution.count}</td>
+                <td>{institution.institutionName}</td>
+                <td>{institution.totalStudents}</td>
             </tr>
         });
         return (
@@ -209,7 +208,7 @@ export default function (props) {
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const DegreeList = props.analytics.degrees.map((degree) => {
+        const DegreeList = props.analytics.map((degree) => {
             i = i + 1;
             var x = 0;
             return <tr key={degree.degree}>

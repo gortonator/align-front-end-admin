@@ -59,20 +59,20 @@ export default function (state=null,action ){
 
 
             // top bachelors degree
-            return { "degrees":
-                    [
-                        {"degree":"Degree Z","students":70},
-                        {"degree":"Degree y","students":30},
-                        {"degree":"Degree 1","students":90},
-                        {"degree":"Degree as","students":40},
-                        {"degree":"Degree tr","students":60},
-                        {"degree":"Degree Zcv","students":20},
-                        {"degree":"Degree Z34","students":110},
-                        {"degree":"Degree Zds","students":80},
-                        {"degree":"Degree Z67","students":20},
-                        {"degree":"Degree Zdg","students":100}
-                    ]
-            };
+            // return { "degrees":
+            //         [
+            //             {"degree":"Degree Z","students":70},
+            //             {"degree":"Degree y","students":30},
+            //             {"degree":"Degree 1","students":90},
+            //             {"degree":"Degree as","students":40},
+            //             {"degree":"Degree tr","students":60},
+            //             {"degree":"Degree Zcv","students":20},
+            //             {"degree":"Degree Z34","students":110},
+            //             {"degree":"Degree Zds","students":80},
+            //             {"degree":"Degree Z67","students":20},
+            //             {"degree":"Degree Zdg","students":100}
+            //         ]
+            // };
             // gender ratio
         // return    {"yearlyratio":[
         //     {"year":"2018","male":400,"female":500},
@@ -147,8 +147,8 @@ export default function (state=null,action ){
         // }]};
 
 
-        // console.log(action.payload);
-        // return action.payload;
+        console.log(action);
+        return action.payload.data;
         case SORT_ANALYTICS:{
           // console.log(action);
           return action.payload;}
