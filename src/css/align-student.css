@@ -147,7 +147,30 @@ a.edit-student-filter-modal-button:hover{
 
 .edit-student-filter-modal-button-container{
     text-align: center;
-    padding: 7px 0;
+    padding: 15px 0;
+}
+
+a.edit-student-filter-modal-close-button{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+}
+
+.edit-student-filter-modal-close-button-hover{
+    fill: rgba(255,0,0,.7);
+    stroke: rgba(255,0,0,.7);
+    stroke-width: 10px;
+    transition: ease .3s;
+}
+
+.edit-student-filter-modal-close-button-normal{
+    fill: transparent;
+    stroke: rgba(255,0,0,.7);
+    stroke-width: 10px;
 }
 
 .campus-option-container{
@@ -156,7 +179,9 @@ a.edit-student-filter-modal-button:hover{
     text-align: center;
 }
 
-a.campus-option,a.enrollment-status-option{
+a.campus-option,
+a.enrollment-status-option,
+a.nu-undergrad-option{
     display: inline-block;
     min-width: 130px;
     padding: 0 10px;
@@ -166,27 +191,33 @@ a.campus-option,a.enrollment-status-option{
     text-decoration: none;
 }
 
-a.campus-option-selected,a.enrollment-status-option-selected{
+a.campus-option-selected,
+a.enrollment-status-option-selected,
+a.nu-undergrad-option-selected{
     color: white;
     background-color: rgba(255,0,0,.7);
 }
 
-a.campus-option-unselected,a.enrollment-status-option-unselected{
+a.campus-option-unselected,
+a.enrollment-status-option-unselected,
+a.nu-undergrad-option-unselected{
     color: rgba(255,0,0,.7);
     background-color: white;
 }
 
-.enrollment-status-option-container{
+.enrollment-status-option-container,
+.nu-undergrad-option-container{
     display: inline;
     margin: 0 5px;
 }
 
-a.enrollment-status-option{
+a.enrollment-status-option,
+a.nu-undergrad-option{
     min-width: auto;
     padding: 0 20px;
 }
 
-.select-filter{
+.student-filter{
     margin-bottom: 5px;
 }
 

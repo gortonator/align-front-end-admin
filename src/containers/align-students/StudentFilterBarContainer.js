@@ -1,4 +1,4 @@
-import StudentFilterBar from '../../components/align-students/StudentFilterBar';
+import StudentFilterBar from '../../components/align-student/StudentFilterBar';
 import {connect} from 'react-redux';
 import {openEditStudentFilterModal} from "../../actions/align-students-actions";
 

@@ -7,31 +7,31 @@ export default props => (
         <div>Enrollment Status</div>
         <TogglableOption containerStyle={'enrollment-status-option-container'}
                          filterStyle={'enrollment-status-option' + ' ' +
-                         (props.isEnrollmentStatusChosen(ENROLLMENT_STATUSES.fullTime) ?
+                         (props.optionChecker(ENROLLMENT_STATUSES.fullTime) ?
                              'enrollment-status-option-selected' :
                              'enrollment-status-option-unselected')}
-                         onToggle={props.toggleEnrollmentStatusFilterOption(ENROLLMENT_STATUSES.fullTime)}
+                         onToggle={props.onOptionToggle(ENROLLMENT_STATUSES.fullTime)}
                          name={'Full Time'}/>
         <TogglableOption containerStyle={'enrollment-status-option-container'}
                          filterStyle={'enrollment-status-option' + ' ' +
-                         (props.isEnrollmentStatusChosen(ENROLLMENT_STATUSES.partTime) ?
+                         (props.optionChecker(ENROLLMENT_STATUSES.partTime) ?
                              'enrollment-status-option-selected' :
                              'enrollment-status-option-unselected')}
-                         onToggle={props.toggleEnrollmentStatusFilterOption(ENROLLMENT_STATUSES.partTime)}
+                         onToggle={props.onOptionToggle(ENROLLMENT_STATUSES.partTime)}
                          name={'Part Time'}/>
         <TogglableOption containerStyle={'enrollment-status-option-container'}
                          filterStyle={'enrollment-status-option' + ' ' +
-                         (props.isEnrollmentStatusChosen(ENROLLMENT_STATUSES.inactive) ?
+                         (props.optionChecker(ENROLLMENT_STATUSES.inactive) ?
                              'enrollment-status-option-selected' :
                              'enrollment-status-option-unselected')}
-                         onToggle={props.toggleEnrollmentStatusFilterOption(ENROLLMENT_STATUSES.inactive)}
+                         onToggle={props.onOptionToggle(ENROLLMENT_STATUSES.inactive)}
                          name={'Inactvie(Graduated)'}/>
         <TogglableOption containerStyle={'enrollment-status-option-container'}
                          filterStyle={'enrollment-status-option' + ' ' +
-                         (props.isEnrollmentStatusChosen(ENROLLMENT_STATUSES.dropOut) ?
+                         (props.optionChecker(ENROLLMENT_STATUSES.dropOut) ?
                              'enrollment-status-option-selected' :
                              'enrollment-status-option-unselected')}
-                         onToggle={props.toggleEnrollmentStatusFilterOption(ENROLLMENT_STATUSES.dropOut)}
+                         onToggle={props.onOptionToggle(ENROLLMENT_STATUSES.dropOut)}
                          name={'Drop out'}/>
     </div>
 );

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import SearchBox from '../components/align-students/StudentSearch';
+import SearchBox from '../components/align-student/student-heading/StudentSearch';
 import {setNameOrIdFilter} from "../actions/align-students-actions";
 
 const mapStateToProps = state => {

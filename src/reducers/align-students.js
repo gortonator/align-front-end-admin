@@ -14,6 +14,12 @@ export const ENROLLMENT_STATUSES = {
     dropOut: 'dropOut'
 };
 
+export const GENDER_OPTION_VALUE = {
+    any: 'Any',
+    male: 'Male',
+    female: 'Female'
+};
+
 const initialStudents = [
     {
         nuid: "1",
@@ -146,11 +152,11 @@ export const initialState = {
             [ENROLLMENT_STATUSES.inactive] : false,
             [ENROLLMENT_STATUSES.dropOut] : false
         },
-        coopFilter: "Any",
-        genderFilter: "Ant",
-        race: 'Any',
-        undergradMajor: 'Any',
-        isNuUndergrad: false
+        coop: '',
+        gender: GENDER_OPTION_VALUE.any,
+        race: '',
+        undergradMajor: '',
+        nuUndergrad: false
     },
     overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
 };

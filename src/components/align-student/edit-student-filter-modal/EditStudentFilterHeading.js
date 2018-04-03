@@ -5,7 +5,7 @@ export default props => (
         <h3 className={"edit-student-filter-heading"}>Edit Filters</h3>
         <a href={""}
            className={"clear-filter-link"}
-           onClick={props.clearAllFilters}>
+           onClick={props.onClearFilterClick}>
             Clear all filters
         </a>
     </div>

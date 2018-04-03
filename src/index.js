@@ -21,7 +21,7 @@ import Header from './components/header';
 import Navbar from './components/left_navbar';
 import Analytics from './components/analytics';
 
-import AlignStudent from './components/align-students/AlignStudent';
+import AlignStudent from './components/align-student/RootComponent';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
