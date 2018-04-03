@@ -1,6 +1,6 @@
-import Overview from '../../components/overview/Overview';
+import Overview from '../../react/overview/Overview';
 import {connect} from 'react-redux';
-import {showNuUndergradProportion,showAlignAlumniJobs,showAlignCoops} from "../../actions/align-students-actions";
+import {showNuUndergradProportion,showAlignAlumniJobs,showAlignCoops} from "../../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {getAnalytics, sortAnalytics} from '../actions/index';
-import AnalyticsFilter from './analytics_filter';
-import AnalyticsTable from './analytics_table';
-import AnalyticsCharts from './analytics_charts';
+import {getAnalytics, sortAnalytics} from '../../actions/index';
+import AnalyticsFilter from '../react/analytics/analytics_filter';
+import AnalyticsTable from '../react/analytics/analytics_table';
+import AnalyticsCharts from '../react/analytics/analytics_charts';
 
 class AdminAnalytics extends Component {
 

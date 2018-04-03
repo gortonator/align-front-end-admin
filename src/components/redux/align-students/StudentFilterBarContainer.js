@@ -1,6 +1,6 @@
-import StudentFilterBar from '../../components/align-student/StudentFilterBar';
+import StudentFilterBar from '../../react/align-student/StudentFilterBar';
 import {connect} from 'react-redux';
-import {openEditStudentFilterModal} from "../../actions/align-students-actions";
+import {openEditStudentFilterModal} from "../../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {
