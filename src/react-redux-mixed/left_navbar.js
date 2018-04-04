@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { selectPage } from '../actions';
+import { selectPage } from '../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 

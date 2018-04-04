@@ -1,6 +1,6 @@
 import React from 'react';
 import OverviewReportItem from './OverviewReportItem';
-import OverviewDeeperReportModalContainer from '../../containers/overview/OverviewDeepReportModalContainer';
+import OverviewDeeperReportModalContainer from '../../redux-bindings/overview/OverviewDeepReportModalContainer';
 
 export default (props) => (
     <div style={theStyle}>

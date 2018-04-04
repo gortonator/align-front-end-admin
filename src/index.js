@@ -17,11 +17,11 @@ import './css/align-student.css';
 import './css/overview.css';
 import './css/style.css';
 
-import Header from './components/header';
-import Navbar from './components/left_navbar';
-import Analytics from './components/analytics';
+import Header from './react-components/header';
+import Navbar from './react-redux-mixed/left_navbar';
+import Analytics from './react-redux-mixed/analytics';
 
-import AlignStudent from './components/align-student/RootComponent';
+import AlignStudent from './react-components/align-student/RootComponent';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 

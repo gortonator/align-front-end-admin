@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from 'chart.js';
+import Chart from '../../../node_modules/chart.js/src/chart';
 
 export default function (props) {
 
