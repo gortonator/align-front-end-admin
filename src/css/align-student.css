@@ -3,7 +3,7 @@
 */
 
 .align-student{
-    padding: 70px 50px;
+    padding: 70px 70px;
 }
 
 /*
@@ -11,14 +11,12 @@
 */
 
 .student-heading{
-    font-size: 32px;
+    font-size: 36px;
     margin-right: 18px;
-    float: left;
 }
 
 .student-search{
     display: inline-block;
-    float: left;
     padding: 4px 0;
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import StudentTableHead from './StudentTableHead';
 
 class StudentTable extends React.Component{
     constructor(props){
@@ -32,23 +33,7 @@ class StudentTable extends React.Component{
     render(){
         return (
             <div className={"student-table"}>
-                <div className={"student-table-head"}>
-                    <div className={"id-cell student-table-cell"}>
-                        NUID
-                    </div>
-                    <div className={"name-cell student-table-cell"}>
-                        Name
-                    </div>
-                    <div className={"email-cell student-table-cell"}>
-                        Email
-                    </div>
-                    <div className={"enrollment-status-cell student-table-cell"}>
-                        Enrollment Status
-                    </div>
-                    <div className={"degree-year-cell student-table-cell"}>
-                        Degree Year
-                    </div>
-                </div>
+                <StudentTableHead/>
                 {this.mapStudentsToRows()}
             </div>
         );

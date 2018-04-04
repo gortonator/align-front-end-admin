@@ -10,7 +10,7 @@ class AlignStudentHeading extends React.Component {
     render(){
         return (
             <div>
-                <div style={{"overflow" : "auto"}}>
+                <div>
                     <span className={"student-heading"}>Align Students</span>
                     <StudentSearch students={students}/>
                 </div>
