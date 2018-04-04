@@ -10,9 +10,9 @@ export default function (props) {
         // console.log(props.analytics);
         const listOfYears = props.analytics.map((year) => {
             i = i + 1;
-            return <tr key={year.entryYear}>
+            return <tr key={year.year}>
                 <td>{i}</td>
-                <td>{year.entryYear}</td>
+                <td>{year.year}</td>
                 <td>{year.male}</td>
                 <td>{year.female}</td>
             </tr>
@@ -66,8 +66,8 @@ export default function (props) {
             i = i + 1;
             return <tr key={company.name}>
                 <td>{i}</td>
-                <td>{company.companyName}</td>
-                <td>{company.totalStudents}</td>
+                <td>{company.name}</td>
+                <td>{company.students}</td>
             </tr>
         });
         return (<table className="table table-bordered">
@@ -91,10 +91,10 @@ export default function (props) {
         const studentsList = props.analytics.map((student) => {
             i = i + 1;
             var x = 0;
-            return <tr key={student.neuId}>
+            return <tr key={student.nuid}>
                 <td>{i}</td>
-                <td>{student.neuId}</td>
-                <td>{student.firstName+" "+student.lastName}</td>
+                <td>{student.nuid}</td>
+                <td>{student.name}</td>
                 <td>{student.companies.map((company) => {
                         if (x > 0)
                             return "," + company;
@@ -129,8 +129,8 @@ export default function (props) {
             return <tr key={i}>
                 <td>{i}</td>
                 <td>{student.neuId}</td>
-                <td>{student.firstName+" "+student.lastName}</td>
-                <td>{student.companies?student.companies[0]:""}</td>
+                <td>{student.name}</td>
+                <td>{student.company}</td>
             </tr>
         });
         return (
@@ -155,10 +155,10 @@ export default function (props) {
         const electivesList = props.analytics.map((elective) => {
             i = i + 1;
             var x = 0;
-            return <tr key={elective.courseName}>
+            return <tr key={elective.elective}>
                 <td>{i}</td>
-                <td>{elective.courseName}</td>
-                <td>{elective.totalStudents}</td>
+                <td>{elective.elective}</td>
+                <td>{elective.students}</td>
             </tr>
         });
         return (
@@ -183,10 +183,10 @@ export default function (props) {
         const institutionList = props.analytics.map((institution) => {
             i = i + 1;
             var x = 0;
-            return <tr key={institution.institutionName}>
+            return <tr key={institution.name}>
                 <td>{i}</td>
-                <td>{institution.institutionName}</td>
-                <td>{institution.totalStudents}</td>
+                <td>{institution.name}</td>
+                <td>{institution.count}</td>
             </tr>
         });
         return (

@@ -21,7 +21,7 @@ export default function (props) {
           g=randomColorGenerator();
           b=randomColorGenerator();
           var color2="rgba("+r+","+g+","+b+",0.9)";
-          dataLabels.push(yearlyratioList[i].entryYear);
+          dataLabels.push(yearlyratioList[i].year);
           dataMale.push(yearlyratioList[i].male);
           dataFemale.push(yearlyratioList[i].female);
       }
@@ -69,9 +69,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfCompanies[i].companyName);
+          labelsList.push(listOfCompanies[i].name);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfCompanies[i].totalStudents);
+          dataList.push(listOfCompanies[i].students);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
@@ -151,9 +151,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfInstitutions[i].institutionName);
+          labelsList.push(listOfInstitutions[i].name);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfInstitutions[i].totalStudents);
+          dataList.push(listOfInstitutions[i].count);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
@@ -191,9 +191,9 @@ export default function (props) {
           var r = randomColorGenerator();
           var g = randomColorGenerator();
           var b = randomColorGenerator();
-          labelsList.push(listOfElectives[i].courseName);
+          labelsList.push(listOfElectives[i].elective);
           backgroundColorList.push("rgba(" + r + "," + g + "," + b + ",0.9)");
-          dataList.push(listOfElectives[i].totalStudents);
+          dataList.push(listOfElectives[i].students);
       }
       props.ctxContainer.innerHTML = '<div className={"chart-container ' + props.initialLoadChart + '"} style={{display: "inline-block", position: "relative", height:"350px", width:"600px"}}>' +
           '<canvas id="myChart"></canvas>' +
