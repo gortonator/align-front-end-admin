@@ -1,5 +1,6 @@
 import StudentHeading from '../../react-components/align-student/student-heading/RootComponent';
 import {connect} from 'react-redux';
+import {openEditStudentFilterModal} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {
@@ -9,7 +10,10 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-
+        onAddFilterButtonClick: e => {
+            e.preventDefault();
+            dispatch(openEditStudentFilterModal());
+        }
     };
 }
 

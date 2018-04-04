@@ -1,8 +1,8 @@
 import React from 'react';
-import StudentHeadingContainer from '../../redux-bindings/align-students/StudentHeadingContainer';
-import StudentTableContainer from '../../redux-bindings/align-students/StudentTableContainer';
-import StudentFilterBarContainer from "../../redux-bindings/align-students/StudentFilterBarContainer";
-import EditStudentFilterModalContainer from "../../redux-bindings/align-students/EditStudentFilterModalContainer";
+import StudentHeadingContainer from '../../redux-bindings/align-students/StudentHeading';
+import StudentTableContainer from '../../redux-bindings/align-students/StudentTable';
+import StudentFilterBarContainer from "../../redux-bindings/align-students/AppliedFilters";
+import EditStudentFilterModalContainer from "../../redux-bindings/align-students/EditStudentFilterModal";
 
 export default (props) => {
     return (

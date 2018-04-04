@@ -89,17 +89,14 @@ input.student-search-input:focus, button.student-search-button{
     The Filter Bar
 */
 
-.filter-bar{
-    padding-top: 10px;
-}
-
-.filter-bar a{
+a.add-filter-button{
     text-decoration: none;
     display: inline-block;
     background-color: rgba(255,0,0,.7);
     color: white;
     padding: 4px 30px;
     border-radius: 30px;
+    margin-top: 10px;
 }
 
 /*
