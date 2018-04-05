@@ -175,7 +175,10 @@ const initialStudents = [
 ];
 
 export const initialState = {
-    students: initialStudents,
+    students: {
+        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS,
+        items: initialStudents
+    },
     editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED,
     studentFilters: {
         nameOrId: '',
@@ -200,8 +203,17 @@ export const initialState = {
     overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
 };
 
-export default function adminApp(state=initialState,action){
-    console.log(state);
+export function getMultiSelectableFilterDisplay(f,options){
+    const optionsSelected = [];
+    Object.keys(options).forEach(o => {
+        if (f[options[o].value]){
+            optionsSelected.push(options[o].displayName);
+        }
+    });
+    return optionsSelected.join(' | ');
+}
+
+export default function alignStudent(state=initialState,action){
     switch(action.type){
         case actions.SET_NAME_OR_ID_FILTER:
             return Object.assign({},state, {
@@ -251,18 +263,16 @@ export default function adminApp(state=initialState,action){
             return Object.assign({},state,{
                 overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
             });
+        case actions.STUDENT_RETRIEVAL_REQUEST:
+            console.log('go!');
+            return Object.assign({},state,{
+                students: {
+                    ...state.students,
+                    retrievalStatus: STUDENT_RETRIEVAL_STATUSES.ONGOING
+                }
+            });
         default:
             return state;
     }
-}
-
-export function getMultiSelectableFilterDisplay(f,options){
-    const optionsSelected = [];
-    Object.keys(options).forEach(o => {
-        if (f[options[o].value]){
-            optionsSelected.push(options[o].displayName);
-        }
-    });
-    return optionsSelected.join(' | ');
 }
 

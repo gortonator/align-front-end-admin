@@ -6,15 +6,13 @@ import {
     CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS} from '../../../reducers/align-students';
 
 export default props => {
+    var children;
     switch (props.studentRetrieval){
         case STUDENT_RETRIEVAL_STATUSES.ONGOING:
-            return (
-                <div>
-                    Updating Filters...
-                </div>
-            );
+            children = 'Filters Updating...';
+            break;
         case STUDENT_RETRIEVAL_STATUSES.SUCCESS:
-            return (
+            children = (
                 <div>
                     {getNameOrIdFilterDisplay(props.studentFilters.nameOrId)}
 
@@ -34,21 +32,25 @@ export default props => {
 
                 </div>
             );
+            break;
         case STUDENT_RETRIEVAL_STATUSES.FAILURE:
-            return (
-                <div>
-                    Update Failed.
-                </div>
-            );
+            children = 'Update Failed.';
+            break;
         default:
             return null;
     }
+    return (
+        <div className={'applied-filters'}>
+            {children}
+        </div>
+    )
 };
+
 
 function getNameOrIdFilterDisplay(f){
     return (
         f !== '' &&
-        <AppliedFilter filterName={Number.isInteger(f) ? 'NUID' : 'Name'}
+        <AppliedFilter filterName={Number.isInteger(Number(f)) ? 'NUID' : 'Name'}
                        filterDisplay={f}/>
     );
 }

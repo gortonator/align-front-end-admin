@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 // Action Types
 export const SET_NAME_OR_ID_FILTER = 'SET_NAME_OR_ID_FILTER';
@@ -11,6 +12,10 @@ export const SHOW_NU_UNDERGRAD_PROPORTION = 'SHOW_NU_UNDERGRAD_PROPORTION';
 export const SHOW_ALIGN_ALUMNI_JOBS = 'SHOW_ALIGN_ALUMNI_JOBS';
 export const SHOW_ALIGN_COOPS = 'SHOW_ALIGN_COOPS';
 export const CLOSE_OVERVIEW_DEEPER_REPORT_MODAL = 'CLOSE_OVERVIEW_DEEPER_REPORT_MODAL';
+
+export const STUDENT_RETRIEVAL_REQUEST = 'STUDENT_RETRIEVAL_REQUEST';
+export const STUDENT_RETRIEVAL_SUCCESS = 'STUDENT_RETRIEVAL_SUCCESS';
+export const STUDENT_RETRIEVAL_FAILURE = 'STUDENT_RETRIEVAL_FAILURE';
 
 // Edit Student Filters Modal Statuses
 export const editStudentFilterModalStatus = {
@@ -94,6 +99,18 @@ export function closeOverviewDeeperReportModal(){
     return {
         type: CLOSE_OVERVIEW_DEEPER_REPORT_MODAL
     };
+}
+
+export function studentRetrievalRequest(){
+    return {
+        type: STUDENT_RETRIEVAL_REQUEST
+    };
+}
+
+export function applyStudentFilters(studentFilters){
+    return dispatch => {
+        dispatch(studentRetrievalRequest());
+    }
 }
 
 

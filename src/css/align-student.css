@@ -91,6 +91,16 @@ a.student-search-input-close-button:hover{
     color: rgba(255,0,0,.7);
 }
 
+a.add-filter-button{
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    padding: 4px 30px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+
 /*
     The table
 */
@@ -123,18 +133,25 @@ a.student-search-input-close-button:hover{
 }
 
 /*
-    The Filter Bar
+    The Applied Filters
 */
 
-a.add-filter-button{
-    text-decoration: none;
-    display: inline-block;
-    background-color: rgba(255,0,0,.7);
-    color: white;
-    padding: 4px 30px;
-    border-radius: 30px;
-    margin-top: 10px;
+.applied-filters{
+    padding-top: 10px;
 }
+
+a.applied-filter {
+    display: inline-block;
+    text-decoration: none;
+    color: #B10F1F;
+    border: solid #B10F1F 2px;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+
+}
+
 
 /*
     The Edit Filter Modal

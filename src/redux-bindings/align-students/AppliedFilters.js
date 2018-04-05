@@ -1,10 +1,10 @@
-import StudentFilterBar from '../../components/align-student/applied-filters/RootComponent';
+import AppliedFilters from '../../components/align-student/applied-filters/RootComponent';
 import {connect} from 'react-redux';
-import {openEditStudentFilterModal} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {
-
+        studentRetrieval: 'SUCCESS',
+        studentFilters: state.alignStudent.studentFilters
     };
 }
 
@@ -14,4 +14,4 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(StudentFilterBar);
+export default connect(mapStateToProps,mapDispatchToProps)(AppliedFilters);

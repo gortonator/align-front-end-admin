@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 function mapStateToProps(state){
     return {
-        students: state.alignStudent.students
+        students: state.alignStudent.students.items
     };
 }
 

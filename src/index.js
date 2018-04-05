@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import rootReducer from './reducers/root-reducer';
 import promise from  'redux-promise';
+import thunkMiddleware from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 
 import './css/bootstrap.min.css';
@@ -23,7 +24,7 @@ import Analytics from './react-redux-mixed/analytics';
 
 import AlignStudent from './components/align-student/RootComponent';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(createStore);
 
 // We use switch to handle the route problem of '/' as both index page
 // and /posts/new page showed up

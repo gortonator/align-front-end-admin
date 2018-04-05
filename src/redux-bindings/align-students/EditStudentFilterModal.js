@@ -1,6 +1,6 @@
 import EditStudentFilterModal from '../../components/align-student/edit-student-filter-modal/RootComponent';
 import {connect} from 'react-redux';
-import {closeEditStudentFilterModal} from '../../actions/align-students-actions';
+import {closeEditStudentFilterModal,applyStudentFilters} from '../../actions/align-students-actions';
 
 function mapStateToProps(state){
     return {
@@ -11,9 +11,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-        onApplyButtonClick: e => {
-            e.preventDefault();
-            dispatch();
+        applyFilters: studentFilters => {
+            dispatch(applyStudentFilters(studentFilters));
         },
         onCloseModalButtonClick: () => {
             dispatch(closeEditStudentFilterModal());
