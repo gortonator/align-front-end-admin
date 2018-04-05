@@ -7,9 +7,12 @@ import AnalyticsTable from './analytics_table';
 import AnalyticsCharts from './analytics_charts';
 
 class AdminAnalytics extends Component {
-
     constructor(props) {
         super(props);
+
+        if(!(this.props.login && this.props.login.id && this.props.login.token)){
+          window.location="/";
+        }
 
         //Gender Ratio
         this.toggleGenderRatio = this.toggleGenderRatio.bind(this);
@@ -685,7 +688,7 @@ class AdminAnalytics extends Component {
 }
 
 function mapStateToProps(state) {
-    return {analytics: state.analytics};
+    return {analytics: state.analytics,login:state.login};
 }
 
 

@@ -5,13 +5,14 @@ const ROOT_URL = 'http://asd2.ccs.neu.edu:8081';
 // const ROOT_URL = '';
 const ROOT_URL_ANALYTICS = ROOT_URL + '/analytics';
 const API_KEY = '?key=STUDENT12345';
-const token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..NCAPM_xHpMEqgAdl0QMoXA.-FDoAiAQ9px2jVg0SLoFaKlKnd1XIxStTBsszvhcYf4gCW25VCDee97g2_a6ceayWCeYt4m8MVda5ECZIrYhdx6xC69lfRHmnjI3OCdY9ns.r0gOUAEZD9rj4CSgJ9qnlA";
+const token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0.._rAj8Rc0mDAsCwBdZwENFQ.ocNOwnj21sOu0O4vIaS0NAQUFn4_XH0y4BNIDoZmRTQENpl0qOv4--L-XaxTiCMuIWrJGoFAjp8lDKElbQO92A.68LyuDCzJZ5Gm9g_PoaAsA";
 
 export const SEARCH_STUDENT="search_student";
 export const FETCH_STUDENT="fetch_student";
 export const SELECT_PAGE="select_page";
 export const GET_ANALYTICS="get_analytics";
 export const SORT_ANALYTICS="sort_analytics";
+export const DO_LOGIN="do_login";
 
 export function searchStudent(filters){
     const request = axios.get(`${ROOT_TEST}/posts${API_KEY}`);
@@ -59,4 +60,12 @@ export function sortAnalytics(data){
       type: SORT_ANALYTICS,
       payload: data
     };
+}
+
+export function doLogin(body){
+  const request = axios.post(`${ROOT_URL}/login`,body,{headers:{"Content-Type":"application/json"}});
+  return {
+    type: DO_LOGIN,
+    payload:request
+  }
 }

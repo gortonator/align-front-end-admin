@@ -12,7 +12,9 @@ import './css/bootstrap.min.css';
 import './css/align-student.css';
 import './css/overview.css';
 import './css/style.css';
+import './css/login.css';
 
+import LoginForm from './components/login_form';
 import Header from './components/header';
 import Navbar from './components/left_navbar';
 import Analytics from './components/analytics';
@@ -24,18 +26,26 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 // We use switch to handle the route problem of '/' as both index page
 // and /posts/new page showed up
 
+const RouteWithLayout = ({ component, ...rest }) => {
+      return (
+        <div>
+          <Header />
+          <Route path='/' component={Navbar} />
+          <Route {...rest} render={ () => React.createElement(component) } />
+        </div>
+      );
+    };
+
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter>
             <div className="col-xs-12">
-                <Header />
-                <Route path='/' component={Navbar} />
                 <Switch>
-                    <Route path='/analytics' component={Analytics} />
+                    <RouteWithLayout path='/analytics' component={Analytics} />
                     {/*<Route path='/profile/:id' component={StudentProfile} />*/}
-                    <Route path='/' component={AlignStudent} />
+                    <RouteWithLayout path='/search' component={AlignStudent} />
+                    <Route path='/' component={LoginForm} />
                 </Switch>
-
             </div>
         </BrowserRouter>
     </Provider>

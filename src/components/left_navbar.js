@@ -26,7 +26,7 @@ class LeftNavbar extends Component{
   }
 
   render(){
-    if(this.props.location.pathname=='/') {
+    if(this.props.location.pathname=='/search') {
       var student_select="page-active";
     }else{
       var student_select = "page-inactive";
@@ -53,7 +53,7 @@ class LeftNavbar extends Component{
             <div className="elements"><b>Align Admin Portal</b></div>
           </div>
           <div className="links">
-            <div className={student_select} onClick={this.getSelectedPage.bind(this,'/')}>
+            <div className={student_select} onClick={this.getSelectedPage.bind(this,'/search')}>
               <div className="elements">Student</div>
             </div>
           </div>
@@ -76,7 +76,7 @@ class LeftNavbar extends Component{
         <div className={leftNavBarSmallExpandedClass} >
           <div className="row text-align-center"><b>Align Admin Portal</b><div onClick={this.showHideMenuToggle.bind(this)} className="col-xs-1"><i className="fas fa-bars"></i></div></div>
           <hr />
-          <div className={student_select} onClick={this.getSelectedPage.bind(this,'/')}>&nbsp;&nbsp;Student</div>
+          <div className={student_select} onClick={this.getSelectedPage.bind(this,'/search')}>&nbsp;&nbsp;Student</div>
           <div className={analytics_select} onClick={this.getSelectedPage.bind(this,'/analytics')}>&nbsp;&nbsp;Analytics</div>
           <div className="page-inactive"  onClick={this.getSelectedPage.bind(this,'/profile')}>&nbsp;&nbsp;Logout</div>
         </div>
