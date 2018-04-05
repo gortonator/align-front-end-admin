@@ -34,7 +34,7 @@ function HighlightMatch({match,word,stl}){
         </span>);
 }
 
-class StudentSearch extends React.Component{
+class DeprecatedStudentSearch extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -118,4 +118,4 @@ class StudentSearch extends React.Component{
     }
 }
 
-export default StudentSearch;
+export default DeprecatedStudentSearch;

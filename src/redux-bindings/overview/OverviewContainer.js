@@ -1,4 +1,4 @@
-import Overview from '../../react-components/overview/Overview';
+import Overview from '../../components/overview/Overview';
 import {connect} from 'react-redux';
 import {showNuUndergradProportion,showAlignAlumniJobs,showAlignCoops} from "../../actions/align-students-actions";
 

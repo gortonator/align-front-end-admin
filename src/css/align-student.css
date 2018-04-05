@@ -12,44 +12,83 @@
 
 .student-heading{
     font-size: 36px;
-    margin-right: 18px;
+    margin-right: 10px;
+    float: left;
 }
 
 .student-search{
     display: inline-block;
-    padding: 4px 0;
+    margin-top: 12px;
+    float: left;
+}
+
+.student-search-input-container{
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+}
+
+.student-search-input-container.opened{
+    width: 219px;
+    transition: width .3s;
+}
+
+
+.student-search-input-container.closed{
+    width: 0;
+    transition: width .3s;
 }
 
 .student-search-input{
-    font-size: 14px;
-    padding: 5px;
+    font-size: 15px;
+    padding: 5px 10px 5px 15px;
     width: 100%;
     /*border: solid rgba(255,0,0,.7) 2px;*/
     border: solid #BBBBBB 2px;
     border-right: none;
+    border-radius: 15px 0 0 15px;
 }
-
-/*input.student-search-input::placeholder{*/
-    /*color: rgba(255,0,0,.7);*/
-/*}*/
 
 input.student-search-input:focus, button.student-search-button{
     outline: none;
 }
 
-.student-auto-suggest-container{
-    width: 180px;
-    float: left;
+/*.student-auto-suggest-container{*/
+    /*width: 180px;*/
+    /*float: left;*/
+/*}*/
+
+.student-search-button.input-closed{
+    border-color: transparent;
+    transition: border-color .3s;
+}
+
+.student-search-button.input-opened{
+    border-color: #BBBBBB;
+    transition: border-color .3s;
 }
 
 .student-search-button{
     /*border: solid rgba(255,0,0,.7) 2px;*/
     border: solid #BBBBBB 2px;
     border-left: none;
-    height: 34px;
-    width: 30px;
-    padding: 2px 0;
+    height: 36px;
+    width: 33px;
+    padding: 2px 2px 2px;
     background-color: #FFFFFF;
+    float: left;
+    border-radius: 0 15px 15px 0;
+}
+
+.student-search-input-close-button{
+    color: #BBBBBB;
+    float: left;
+    margin-left: 5px;
+    margin-top: 8px;
+}
+
+a.student-search-input-close-button:hover{
+    color: rgba(255,0,0,.7);
 }
 
 /*
@@ -155,17 +194,17 @@ a.edit-student-filter-modal-close-button{
     margin: 10px;
 }
 
-.edit-student-filter-modal-close-button-hover{
+.edit-student-filter-modal-close-button path{
+    fill: transparent;
+    stroke: rgba(255,0,0,.7);
+    stroke-width: 10px;
+}
+
+.edit-student-filter-modal-close-button path.hover{
     fill: rgba(255,0,0,.7);
     stroke: rgba(255,0,0,.7);
     stroke-width: 10px;
     transition: ease .3s;
-}
-
-.edit-student-filter-modal-close-button-normal{
-    fill: transparent;
-    stroke: rgba(255,0,0,.7);
-    stroke-width: 10px;
 }
 
 .campus-option-container{
@@ -184,20 +223,15 @@ a.nu-undergrad-option{
     border-radius: 20px;
     margin-bottom: 5px;
     text-decoration: none;
-}
-
-a.campus-option-selected,
-a.enrollment-status-option-selected,
-a.nu-undergrad-option-selected{
-    color: white;
-    background-color: rgba(255,0,0,.7);
-}
-
-a.campus-option-unselected,
-a.enrollment-status-option-unselected,
-a.nu-undergrad-option-unselected{
     color: rgba(255,0,0,.7);
     background-color: white;
+}
+
+a.campus-option.selected,
+a.enrollment-status-option.selected,
+a.nu-undergrad-option.selected{
+    color: white;
+    background-color: rgba(255,0,0,.7);
 }
 
 .enrollment-status-option-container,

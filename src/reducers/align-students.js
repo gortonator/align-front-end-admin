@@ -1,23 +1,62 @@
 import * as actions from '../actions/align-students-actions';
 
-export const CAMPUS_NAMES = {
-    boston: 'boston',
-    charlotte: 'charlotte',
-    seattle: 'seattle',
-    siliconValley: 'siliconValley'
+export const CAMPUSES = {
+    BOSTON: {
+        displayName: 'Boston',
+        value: 'BOSTON'
+    },
+    CHARLOTTE: {
+        displayName: 'Charlotte',
+        value: 'CHARLOTTE'
+    },
+    SEATTLE: {
+        displayName: 'Seattle',
+        value: "SEATTLE"
+    },
+    SILICONVALLEY: {
+        displayName: 'Silicon Valley',
+        value: "SILICON_VALLEY"
+    }
 };
 
 export const ENROLLMENT_STATUSES = {
-    fullTime: 'fullTime',
-    partTime: 'partTime',
-    inactive: 'inactive',
-    dropOut: 'dropOut'
+    FULLTIME: {
+        displayName: 'Full Time',
+        value: "FULL_TIME"
+    },
+    PARTTIME: {
+        displayName: 'Part Time',
+        value: "PART_TIME"
+    },
+    INACTIVE: {
+        displayName: 'Inactive',
+        value: "INACTIVE"
+    },
+    DROPOUT: {
+        displayName: 'Drop Out',
+        value: "DROP_OUT"
+    }
 };
 
-export const GENDER_OPTION_VALUE = {
-    any: 'Any',
-    male: 'Male',
-    female: 'Female'
+export const GENDER_OPTIONS = {
+    ANY: {
+        displayName: 'Any',
+        value: "A"
+    },
+    MALE: {
+        displayName: 'Male',
+        value: "M"
+    },
+    FEMALE: {
+        displayName: 'Female',
+        value: "F"
+    }
+};
+
+export const STUDENT_RETRIEVAL_STATUSES = {
+    ONGOING: 'ONGOING',
+    SUCCESS: 'SUCCESS',
+    FAILURE: 'FAILURE'
 };
 
 const initialStudents = [
@@ -139,21 +178,21 @@ export const initialState = {
     students: initialStudents,
     editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED,
     studentFilters: {
-        nameOrId: null,
+        nameOrId: '',
         campus: {
-            [CAMPUS_NAMES.boston] : false,
-            [CAMPUS_NAMES.charlotte] : false,
-            [CAMPUS_NAMES.seattle] : false,
-            [CAMPUS_NAMES.siliconValley] : false
+            [CAMPUSES.BOSTON.value] : false,
+            [CAMPUSES.CHARLOTTE.value] : false,
+            [CAMPUSES.SEATTLE.value] : false,
+            [CAMPUSES.SILICONVALLEY.value] : false
         },
         enrollmentStatus: {
-            [ENROLLMENT_STATUSES.fullTime] : false,
-            [ENROLLMENT_STATUSES.partTime] : false,
-            [ENROLLMENT_STATUSES.inactive] : false,
-            [ENROLLMENT_STATUSES.dropOut] : false
+            [ENROLLMENT_STATUSES.FULLTIME.value] : false,
+            [ENROLLMENT_STATUSES.PARTTIME.value] : false,
+            [ENROLLMENT_STATUSES.INACTIVE.value] : false,
+            [ENROLLMENT_STATUSES.DROPOUT.value] : false
         },
         coop: '',
-        gender: GENDER_OPTION_VALUE.any,
+        gender: GENDER_OPTIONS.ANY.value,
         race: '',
         undergradMajor: '',
         nuUndergrad: false
@@ -169,7 +208,7 @@ export default function adminApp(state=initialState,action){
                 students: state.students.slice(1,3),
                 studentFilters: {
                     ...state.studentFilters,
-                    nameOrIdFilter: action.filter
+                    nameOrId: action.filter
                 }
             });
         case actions.SET_CAMPUS_FILTER:
@@ -215,5 +254,15 @@ export default function adminApp(state=initialState,action){
         default:
             return state;
     }
+}
+
+export function getMultiSelectableFilterDisplay(f,options){
+    const optionsSelected = [];
+    Object.keys(options).forEach(o => {
+        if (f[options[o].value]){
+            optionsSelected.push(options[o].displayName);
+        }
+    });
+    return optionsSelected.join(' | ');
 }
 

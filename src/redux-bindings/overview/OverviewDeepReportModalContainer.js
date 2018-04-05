@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import OverviewDeepReportModal from '../../react-components/overview/OverviewDeepReportModal';
+import OverviewDeepReportModal from '../../components/overview/OverviewDeepReportModal';
 import {closeOverviewDeeperReportModal} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){

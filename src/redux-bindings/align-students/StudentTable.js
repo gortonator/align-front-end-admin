@@ -1,4 +1,4 @@
-import StudentTable from '../../react-components/align-student/student-table/RootComponent';
+import StudentTable from '../../components/align-student/student-table/RootComponent';
 import {connect} from 'react-redux';
 
 function mapStateToProps(state){

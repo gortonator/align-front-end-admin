@@ -1,4 +1,4 @@
-import EditStudentFilterModal from '../../react-components/align-student/edit-student-filter-modal/RootComponent';
+import EditStudentFilterModal from '../../components/align-student/edit-student-filter-modal/RootComponent';
 import {connect} from 'react-redux';
 import {closeEditStudentFilterModal} from '../../actions/align-students-actions';
 
