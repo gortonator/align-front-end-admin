@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../images/login_logo.png'
-import { doLogin } from '../actions/index';
+import { doLogin,clearLogin } from '../actions/index';
 import { connect } from 'react-redux';
 
 class LoginForm extends React.Component {
@@ -35,7 +35,6 @@ class LoginForm extends React.Component {
 	}
 
 	handleSubmit(event){
-		abc=1;
 		if(this.state.username.endsWith("@husky.neu.edu")){
       this.props.doLogin({username:this.state.username,password:this.state.password});
 		}
@@ -47,14 +46,15 @@ class LoginForm extends React.Component {
 	}
 
 	render(){
-		// console.log(this.props.login);
+		console.log(this.props.login);
     if(this.props.login){
       if(this.props.login.id && this.props.login.token){
         sessionStorage.setItem("mscs_align_neu_id",this.props.login.id);
         sessionStorage.setItem("mscs_align_neu_token",this.props.login.token);
         this.props.history.push("search");
       }else{
-  			alert("Must provide valid Husky credentials");
+				alert("Must provide valid Husky credentials");
+				this.props.clearLogin();
   		}
     }
 
@@ -88,4 +88,4 @@ function mapStateToProps(state) {
     return {login: state.login};
 }
 
-export default connect(mapStateToProps, {doLogin})(LoginForm);
+export default connect(mapStateToProps, {doLogin,clearLogin})(LoginForm);
