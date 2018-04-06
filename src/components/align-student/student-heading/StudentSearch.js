@@ -23,12 +23,6 @@ class StudentSearch extends React.Component{
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
-    componentDidUpdate(){
-        if (this.state.showingInput) {
-            this.inputElem.focus();
-        }
-    }
-
     handleSearchButtonClick(e){
         e.preventDefault();
         if (!this.state.showingInput) {
@@ -57,7 +51,6 @@ class StudentSearch extends React.Component{
     }
 
     handleClickOutside(e){
-        e.preventDefault();
         if (this.elem && !this.elem.contains(e.target)){
             this.setState({
                 showingInput: false

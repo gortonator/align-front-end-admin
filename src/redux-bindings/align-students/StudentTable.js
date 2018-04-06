@@ -6,7 +6,9 @@ function mapStateToProps(state){
     return {
         students: state.alignStudent.students.items,
         studentRetrievalStatus: state.alignStudent.students.retrievalStatus,
-        failedAttempt: state.alignStudent.failedAttempt
+        failedAttempt: state.alignStudent.failedAttempt,
+        pagination: state.alignStudent.pagination,
+        studentFilters: state.alignStudent.studentFilters
     };
 }
 

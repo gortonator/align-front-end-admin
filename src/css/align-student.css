@@ -192,6 +192,74 @@ a.add-filter-button{
     transition: color .3s;
 }
 
+.student-pagination-container{
+    text-align: center;
+    margin: auto;
+    padding-top: 15px;
+}
+
+a.student-pagination-button{
+    display: inline-block;
+    text-decoration: none;
+    border: 2px solid rgba(255,0,0,.7);
+    padding: 2px 8px;
+    color: rgba(255,0,0,.7);
+    border-radius: 5px;
+}
+
+a.student-pagination-button:hover{
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    transition: background-color .3s;
+}
+
+a.student-pagination-button.hide{
+    visibility: hidden;
+}
+
+.student-pagination-text{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.student-pagination-text input{
+    width: 45px;
+    display: inline-block;
+}
+
+a.student-pagination-error{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    border-radius: 20px;
+}
+
+a.student-pagination-error.hide {
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+a.student-pagination-go-to-page-button{
+    display: inline-block;
+    text-decoration: none;
+    position: absolute;
+    padding: 5px 25px;
+    color: white;
+    background-color: rgba(255,0,0);
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+    opacity: 1;
+    width: auto;
+    transition: width .3s;
+}
+
+a.student-pagination-go-to-page-button.hide{
+    opacity: 0;
+}
 
 /*
     The Applied Filters

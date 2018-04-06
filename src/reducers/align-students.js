@@ -59,6 +59,8 @@ export const STUDENT_RETRIEVAL_STATUSES = {
     FAILURE: 'FAILURE'
 };
 
+const NUMBER_OF_STUDENTS_PER_PAGE = 20;
+
 const initialStudents = [
     {
         nuid: "1",
@@ -200,7 +202,11 @@ export const initialState = {
         undergradMajor: '',
         nuUndergrad: false
     },
-    failedAttempt: null
+    failedAttempt: null,
+    pagination:{
+        total: '20',
+        current: '1'
+    }
 };
 
 export function getMultiSelectableFilterDisplay(f,options){

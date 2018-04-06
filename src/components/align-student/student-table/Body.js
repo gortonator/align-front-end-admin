@@ -15,7 +15,7 @@ export default props => {
             );
         case STUDENT_RETRIEVAL_STATUSES.SUCCESS:
             return (
-                props.students.map(student => <StudentRow student={student} key={student.id}/>)
+                props.students.map((student,i) => <StudentRow student={student} key={i}/>)
             );
         case STUDENT_RETRIEVAL_STATUSES.FAILURE:
             return (
@@ -37,6 +37,8 @@ export default props => {
                     </a>
                 </div>
             );
+        default:
+            return false;
     }
 }
 
