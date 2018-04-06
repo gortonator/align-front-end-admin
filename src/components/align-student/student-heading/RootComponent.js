@@ -12,12 +12,12 @@ class AlignStudentHeading extends React.Component {
             <div>
                 <div style={{'overflow' : 'auto'}}>
                     <span className={"student-heading"}>Align Students</span>
-                    <StudentSearch/>
+                    <StudentSearch applyFilters={this.props}/>
                 </div>
                 <a className={'add-filter-button'}
                    href={""}
                    onClick={this.props.onAddFilterButtonClick}>
-                    Add Filter
+                    Edit Filters
                 </a>
 
             </div>
@@ -26,4 +26,16 @@ class AlignStudentHeading extends React.Component {
     }
 }
 
-export default AlignStudentHeading;
+export default props => (
+    <div>
+        <div style={{'overflow' : 'auto'}}>
+            <span className={"student-heading"}>Align Students</span>
+            <StudentSearch applyFilters={props.applyFilters} studentFilters={props.studentFilters}/>
+        </div>
+        <a className={'add-filter-button'}
+           href={""}
+           onClick={props.onAddFilterButtonClick}>
+            Edit Filters
+        </a>
+    </div>
+);

@@ -33,7 +33,6 @@
     transition: width .3s;
 }
 
-
 .student-search-input-container.closed{
     width: 0;
     transition: width .3s;
@@ -49,7 +48,7 @@
     border-radius: 15px 0 0 15px;
 }
 
-input.student-search-input:focus, button.student-search-button{
+input.student-search-input:focus{
     outline: none;
 }
 
@@ -63,9 +62,18 @@ input.student-search-input:focus, button.student-search-button{
     transition: border-color .3s;
 }
 
+.student-search-button.input-closed path{
+    fill: rgba(255,0,0,.7);
+    transition: fill .3s;
+}
+
 .student-search-button.input-opened{
     border-color: #BBBBBB;
     transition: border-color .3s;
+}
+
+a.student-search-button.input-opened:hover path{
+    fill: rgba(255,0,0,.7);
 }
 
 .student-search-button{
@@ -89,6 +97,40 @@ input.student-search-input:focus, button.student-search-button{
 
 a.student-search-input-close-button:hover{
     color: rgba(255,0,0,.7);
+}
+
+.applied-name-filter{
+    border: 2px solid #BBBBBB;
+    border-radius: 10px;
+    display: inline-block;
+    min-width: 300px;
+    text-align: center;
+    color: #BBBBBB;
+    font-size: 16px;
+    padding: 4px 0;
+    margin-left: 30px;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.applied-name-filter a{
+    text-decoration: none;
+    color: #BBBBBB;
+    position: absolute;
+    display: inline-block;
+    right: -50px;
+    transition: right .3s;
+    padding-right: 10px;
+}
+
+.applied-name-filter a:hover{
+    color: rgba(277,0,0,.7);
+}
+
+.applied-name-filter:hover a{
+    right: 0;
+    transition: right .3s;
 }
 
 a.add-filter-button{
@@ -132,12 +174,31 @@ a.add-filter-button{
     width: 25%;
 }
 
+.student-retrieval-message{
+    text-align: center;
+    padding-top: 50px;
+    font-size: 18px;
+}
+
+.student-retrieval-message a{
+    display: inline-block;
+    padding-top: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.student-retrieval-message a:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
+}
+
+
 /*
     The Applied Filters
 */
 
 .applied-filters{
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 a.applied-filter {
@@ -145,7 +206,9 @@ a.applied-filter {
     text-decoration: none;
     color: #B10F1F;
     border: solid #B10F1F 2px;
-    padding: 4px 20px;
+    padding: 4px 0;
+    min-width: 200px;
+    text-align: center;
     border-radius: 20px;
     font-weight: bold;
     margin-right: 15px;
@@ -217,7 +280,7 @@ a.edit-student-filter-modal-close-button{
     stroke-width: 10px;
 }
 
-.edit-student-filter-modal-close-button path.hover{
+a.edit-student-filter-modal-close-button:hover path{
     fill: rgba(255,0,0,.7);
     stroke: rgba(255,0,0,.7);
     stroke-width: 10px;

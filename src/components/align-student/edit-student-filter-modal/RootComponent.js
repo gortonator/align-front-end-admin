@@ -4,14 +4,14 @@ import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS, initialState} from "../..
 
 import CampusFilter from './CampusFilter';
 import CoopFilter from './CoopFilter';
-import EditStudentFilterApplyButton from './controls/EditStudentFilterApplyButton';
-import EditStudentFilterHeading from './EditStudentFilterHeading';
+import ApplyButton from './controls/ApplyButton';
+import Heading from './Heading';
 import EnrollmentStatusFilter from './EnrollmentStatusFilter';
 import GenderFilter from './GenderFilter';
 import MiscellaneousFilters from './miscellaneous-filters/RootComponent';
 import RaceFilter from './RaceFilter';
 import UndergradMajorFilter from './UndergradMajorFilter';
-import EditStudentFilterModalCloseButton from './controls/EditStudentFilterModalCloseButton';
+import CloseButton from './controls/CloseButton';
 
 const defaultStudentFilter = {
     nameOrId: '',
@@ -129,20 +129,21 @@ class EditStudentFilterModal extends React.Component {
         );
     }
 
-    applyFilters(e){
-        e.preventDefault();
+    applyFilters(){
         this.props.applyFilters(this.state);
+        this.props.onCloseModalButtonClick();
     }
 
-    closeModal(e){
-        e.preventDefault();
+    closeModal(){
         this.setState(JSON.parse(JSON.stringify(this.props.studentFilters)));
         this.props.onCloseModalButtonClick();
     }
 
-    clearAllFilters(e){
-        e.preventDefault();
-        this.setState(JSON.parse(JSON.stringify(defaultStudentFilter)));
+    clearAllFilters(){
+        this.setState({
+            ...JSON.parse(JSON.stringify(defaultStudentFilter)),
+            nameOrId: this.state.nameOrId
+        });
     }
 
     render(){
@@ -150,9 +151,9 @@ class EditStudentFilterModal extends React.Component {
             this.props.editStudentFilterModal === editStudentFilterModalStatus.OPENED &&
             <div className={"edit-student-filter-modal"} style={{"width": "28%", height: window.innerHeight}}>
 
-                <EditStudentFilterModalCloseButton onClick={this.closeModal}/>
+                <CloseButton closeModal={this.closeModal}/>
 
-                <EditStudentFilterHeading onClearFilterClick={this.clearAllFilters}/>
+                <Heading clearAllFilters={this.clearAllFilters}/>
 
                 <CampusFilter optionChecker={this.isCampusChosen}
                               onOptionToggle={this.toggleCampusOption}/>
@@ -175,7 +176,7 @@ class EditStudentFilterModal extends React.Component {
                 <MiscellaneousFilters onNuUndergradToggle={this.toggleNuUndergrad}
                                       nuUndergradChecker={this.state.nuUndergrad}/>
 
-                <EditStudentFilterApplyButton onClick={this.applyFilters}/>
+                <ApplyButton applyFilters={this.applyFilters}/>
 
             </div>
         );

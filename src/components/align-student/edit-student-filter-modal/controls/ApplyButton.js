@@ -4,7 +4,10 @@ export default props => (
     <div>
         <div className={"edit-student-filter-modal-button-container"}>
             <a href={""} className={"edit-student-filter-modal-button"}
-               onClick={props.onClick}>
+               onClick={e => {
+                   e.preventDefault();
+                   props.applyFilters();
+               }}>
                 Apply
             </a>
         </div>

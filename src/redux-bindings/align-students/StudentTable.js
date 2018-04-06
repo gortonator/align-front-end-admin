@@ -1,15 +1,23 @@
 import StudentTable from '../../components/align-student/student-table/RootComponent';
 import {connect} from 'react-redux';
+import {acceptRetrievalFailure, applyStudentFilters} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {
-        students: state.alignStudent.students.items
+        students: state.alignStudent.students.items,
+        studentRetrievalStatus: state.alignStudent.students.retrievalStatus,
+        failedAttempt: state.alignStudent.failedAttempt
     };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-
+        acceptRetrievalFailure: () => {
+            dispatch(acceptRetrievalFailure());
+        },
+        applyFilters: studentFilters => {
+            dispatch(applyStudentFilters(studentFilters));
+        }
     };
 }
 

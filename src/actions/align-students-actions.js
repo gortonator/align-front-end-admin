@@ -17,6 +17,8 @@ export const STUDENT_RETRIEVAL_REQUEST = 'STUDENT_RETRIEVAL_REQUEST';
 export const STUDENT_RETRIEVAL_SUCCESS = 'STUDENT_RETRIEVAL_SUCCESS';
 export const STUDENT_RETRIEVAL_FAILURE = 'STUDENT_RETRIEVAL_FAILURE';
 
+export const ACCEPT_RETRIEVAL_FAILURE = 'ACCEPT_RETRIEVAL_FAILURE';
+
 // Edit Student Filters Modal Statuses
 export const editStudentFilterModalStatus = {
     CLOSED: 'CLOSED',
@@ -112,5 +114,12 @@ export function applyStudentFilters(studentFilters){
         dispatch(studentRetrievalRequest());
     }
 }
+
+export function acceptRetrievalFailure(){
+    return {
+        type: ACCEPT_RETRIEVAL_FAILURE
+    };
+}
+
 
 

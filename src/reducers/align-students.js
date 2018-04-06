@@ -176,12 +176,12 @@ const initialStudents = [
 
 export const initialState = {
     students: {
-        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS,
+        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.FAILURE,
         items: initialStudents
     },
     editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED,
     studentFilters: {
-        nameOrId: '',
+        nameOrId: '123',
         campus: {
             [CAMPUSES.BOSTON.value] : false,
             [CAMPUSES.CHARLOTTE.value] : false,
@@ -200,7 +200,7 @@ export const initialState = {
         undergradMajor: '',
         nuUndergrad: false
     },
-    overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
+    failedAttempt: null
 };
 
 export function getMultiSelectableFilterDisplay(f,options){
@@ -215,30 +215,6 @@ export function getMultiSelectableFilterDisplay(f,options){
 
 export default function alignStudent(state=initialState,action){
     switch(action.type){
-        case actions.SET_NAME_OR_ID_FILTER:
-            return Object.assign({},state, {
-                students: state.students.slice(1,3),
-                studentFilters: {
-                    ...state.studentFilters,
-                    nameOrId: action.filter
-                }
-            });
-        case actions.SET_CAMPUS_FILTER:
-            return Object.assign({},state, {
-                students: state.students.slice(1,3),
-                studentFilters: {
-                    ...state.studentFilters,
-                    campusFilter: action.campus
-                }
-            });
-        case actions.SET_COOP_FILTER:
-            return Object.assign({},state, {
-                students: state.students.slice(1,3),
-                studentFilters: {
-                    ...state.studentFilters,
-                    coopFilter: action.coop
-                }
-            });
         case actions.OPEN_EDIT_STUDENT_FILTER_MODAL:
             return Object.assign({},state,{
                 editStudentFilterModal: actions.editStudentFilterModalStatus.OPENED
@@ -247,28 +223,19 @@ export default function alignStudent(state=initialState,action){
             return Object.assign({},state,{
                 editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED
             });
-        case actions.SHOW_NU_UNDERGRAD_PROPORTION:
-            return Object.assign({},state,{
-                overviewDeepReport: actions.overviewDeepReportModalStatus.SHOW_UNDERGRAD_PROPORTION
-            });
-        case actions.SHOW_ALIGN_ALUMNI_JOBS:
-            return Object.assign({},state,{
-                overviewDeepReport: actions.overviewDeepReportModalStatus.SHOW_ALUMNI_JOBS
-            });
-        case actions.SHOW_ALIGN_COOPS:
-            return Object.assign({},state,{
-                overviewDeepReport: actions.overviewDeepReportModalStatus.SHOW_COOPS
-            });
-        case actions.CLOSE_OVERVIEW_DEEPER_REPORT_MODAL:
-            return Object.assign({},state,{
-                overviewDeepReport: actions.overviewDeepReportModalStatus.CLOSED
-            });
         case actions.STUDENT_RETRIEVAL_REQUEST:
-            console.log('go!');
             return Object.assign({},state,{
                 students: {
                     ...state.students,
                     retrievalStatus: STUDENT_RETRIEVAL_STATUSES.ONGOING
+                }
+            });
+        case actions.ACCEPT_RETRIEVAL_FAILURE:
+            return Object.assign({},state,{
+                failedAttempt: null,
+                students: {
+                    ...state.students,
+                    retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS
                 }
             });
         default:

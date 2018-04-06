@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 function mapStateToProps(state){
     return {
-        studentRetrieval: 'SUCCESS',
+        studentRetrieval: state.alignStudent.students.retrievalStatus,
         studentFilters: state.alignStudent.studentFilters
     };
 }
