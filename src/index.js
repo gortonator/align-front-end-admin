@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import rootReducer from './reducers/root-reducer';
 import promise from  'redux-promise';
 import registerServiceWorker from './registerServiceWorker';
+import {checkLogin} from './actions/index';
 
 import './css/bootstrap.min.css';
 
@@ -22,9 +23,6 @@ import Analytics from './components/analytics';
 import AlignStudent from './components/align-students/AlignStudent';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-
-// We use switch to handle the route problem of '/' as both index page
-// and /posts/new page showed up
 
 const RouteWithLayout = ({ component, ...rest }) => {
       return (

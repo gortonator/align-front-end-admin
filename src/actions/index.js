@@ -2,10 +2,9 @@ import axios from 'axios';
 
 const ROOT_TEST = 'http://reduxblog.herokuapp.com/api';
 const ROOT_URL = 'http://asd2.ccs.neu.edu:8081';
-// const ROOT_URL = '';
 const ROOT_URL_ANALYTICS = ROOT_URL + '/analytics';
 const API_KEY = '?key=STUDENT12345';
-const token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0.._rAj8Rc0mDAsCwBdZwENFQ.ocNOwnj21sOu0O4vIaS0NAQUFn4_XH0y4BNIDoZmRTQENpl0qOv4--L-XaxTiCMuIWrJGoFAjp8lDKElbQO92A.68LyuDCzJZ5Gm9g_PoaAsA";
+// const token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0.._rAj8Rc0mDAsCwBdZwENFQ.ocNOwnj21sOu0O4vIaS0NAQUFn4_XH0y4BNIDoZmRTQENpl0qOv4--L-XaxTiCMuIWrJGoFAjp8lDKElbQO92A.68LyuDCzJZ5Gm9g_PoaAsA";
 
 export const SEARCH_STUDENT="search_student";
 export const FETCH_STUDENT="fetch_student";
@@ -13,6 +12,8 @@ export const SELECT_PAGE="select_page";
 export const GET_ANALYTICS="get_analytics";
 export const SORT_ANALYTICS="sort_analytics";
 export const DO_LOGIN="do_login";
+export const CHECK_LOGIN="check_login";
+export const DO_LOGOUT="do_logout";
 
 export function searchStudent(filters){
     const request = axios.get(`${ROOT_TEST}/posts${API_KEY}`);
@@ -40,8 +41,8 @@ export function selectPage(page){
 }
 
 
-export function getAnalytics(chartRequest, callback){
-    console.log(chartRequest);
+export function getAnalytics(chartRequest, token){
+    // console.log(chartRequest);
     // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`).then(()=>{
     // const request = axios.post(`${ROOT_URL_ANALYTICS}/${chartRequest.url}`,{"campus":"boston"},{headers:{"Content-Type":"application/json","token":token}}).then(()=>{
     //     callback(chartRequest.url);
@@ -67,5 +68,31 @@ export function doLogin(body){
   return {
     type: DO_LOGIN,
     payload:request
+  }
+}
+export function checkLogin(){
+  // console.log("In checkLogin");
+  var sessionID=sessionStorage.getItem("mscs_align_neu_id");
+  var sessionToken=sessionStorage.getItem("mscs_align_neu_token");
+  // console.log("sessionID",sessionID,"sessionToken",sessionToken);
+  if(!(sessionID && sessionToken)){
+    // alert("Session timed out. Please login again.");
+    // console.log("redirecting");
+    window.location.replace("/");
+  }else{
+    return{
+        type:CHECK_LOGIN,
+        payload: {id:sessionID,token:sessionToken}
+    }
+  }
+}
+
+export function doLogout(){
+  sessionStorage.removeItem("mscs_align_neu_id");
+  sessionStorage.removeItem("mscs_align_neu_token");
+  window.location.replace("/");
+  return {
+    type:DO_LOGOUT,
+    payload:null
   }
 }

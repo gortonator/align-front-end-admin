@@ -35,12 +35,9 @@ class LoginForm extends React.Component {
 	}
 
 	handleSubmit(event){
+		abc=1;
 		if(this.state.username.endsWith("@husky.neu.edu")){
-			//api login check
-      // this.props.doLogin({username:this.state.username,password:this.state.password});
-      this.props.doLogin({username:'testadminone@gmail.com',password:this.state.password});
-			// alert("username: " + this.state.username +
-					  // "\npassword: " + this.state.password);
+      this.props.doLogin({username:this.state.username,password:this.state.password});
 		}
 		else{
 			alert("Must provide valid Husky email address");
@@ -50,11 +47,11 @@ class LoginForm extends React.Component {
 	}
 
 	render(){
-
+		// console.log(this.props.login);
     if(this.props.login){
       if(this.props.login.id && this.props.login.token){
-        // sessionStorage.setItem("mscs_align_neu_id",this.props.login.id);
-        // sessionStorage.setItem("mscs_align_neu_token",this.props.login.token);
+        sessionStorage.setItem("mscs_align_neu_id",this.props.login.id);
+        sessionStorage.setItem("mscs_align_neu_token",this.props.login.token);
         this.props.history.push("search");
       }else{
   			alert("Must provide valid Husky credentials");

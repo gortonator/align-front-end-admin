@@ -95,12 +95,12 @@ export default function (props) {
                 <td>{i}</td>
                 <td>{student.nuid}</td>
                 <td>{student.name}</td>
-                <td>{student.companies.map((company) => {
+                <td>{student.companies ? student.companies.map((company) => {
                         if (x > 0)
                             return "," + company;
                         x = x + 1;
                         return company;
-                    })}
+                    }):null}
                 </td>
             </tr>
         });
@@ -128,7 +128,7 @@ export default function (props) {
             var x = 0;
             return <tr key={i}>
                 <td>{i}</td>
-                <td>{student.neuId}</td>
+                <td>{student.nuid}</td>
                 <td>{student.name}</td>
                 <td>{student.company}</td>
             </tr>
