@@ -1,5 +1,5 @@
 import React from 'react';
-import TogglableOption from '../TogglableOption';
+import TogglableOption from '../../common/TogglableOption';
 import {ENROLLMENT_STATUSES} from "../../../reducers/align-students";
 
 export default props => (

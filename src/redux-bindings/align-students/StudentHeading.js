@@ -1,4 +1,4 @@
-import StudentHeading from '../../components/align-student/student-heading/RootComponent';
+import StudentHeading from '../../components/align-student/heading/RootComponent';
 import {connect} from 'react-redux';
 import {openEditStudentFilterModal,applyStudentFilters} from "../../actions/align-students-actions";
 

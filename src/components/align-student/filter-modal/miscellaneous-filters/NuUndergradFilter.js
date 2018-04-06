@@ -1,5 +1,5 @@
 import React from 'react';
-import TogglableOption from '../../TogglableOption';
+import TogglableOption from '../../../common/TogglableOption';
 
 export default props => (
     <TogglableOption containerStyle={'nu-undergrad-option-container'}

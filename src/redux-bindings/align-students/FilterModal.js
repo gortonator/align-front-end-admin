@@ -1,4 +1,4 @@
-import EditStudentFilterModal from '../../components/align-student/edit-student-filter-modal/RootComponent';
+import FilterModal from '../../components/align-student/filter-modal/RootComponent';
 import {connect} from 'react-redux';
 import {closeEditStudentFilterModal,applyStudentFilters} from '../../actions/align-students-actions';
 
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditStudentFilterModal);
+export default connect(mapStateToProps,mapDispatchToProps)(FilterModal);
