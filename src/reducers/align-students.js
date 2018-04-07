@@ -181,7 +181,6 @@ export const initialState = {
         retrievalStatus: STUDENT_RETRIEVAL_STATUSES.FAILURE,
         items: initialStudents
     },
-    editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED,
     studentFilters: {
         nameOrId: '123',
         campus: {
@@ -221,14 +220,6 @@ export function getMultiSelectableFilterDisplay(f,options){
 
 export default function alignStudent(state=initialState,action){
     switch(action.type){
-        case actions.OPEN_EDIT_STUDENT_FILTER_MODAL:
-            return Object.assign({},state,{
-                editStudentFilterModal: actions.editStudentFilterModalStatus.OPENED
-            });
-        case actions.CLOSE_EDIT_STUDENT_FILTER_MODAL:
-            return Object.assign({},state,{
-                editStudentFilterModal: actions.editStudentFilterModalStatus.CLOSED
-            });
         case actions.STUDENT_RETRIEVAL_REQUEST:
             return Object.assign({},state,{
                 students: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {editStudentFilterModalStatus} from '../../../actions/align-students-actions';
+import {FILTER_MODAL_STATUSES} from '../RootComponent';
 import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS, initialState} from "../../../reducers/align-students";
 
 import CampusFilter from './CampusFilter';
@@ -135,8 +135,7 @@ class EditStudentFilterModal extends React.Component {
     }
 
     closeModal(){
-        this.setState(JSON.parse(JSON.stringify(this.props.studentFilters)));
-        this.props.onCloseModalButtonClick();
+        this.props.closeModal();
     }
 
     clearAllFilters(){
@@ -148,7 +147,7 @@ class EditStudentFilterModal extends React.Component {
 
     render(){
         return (
-            this.props.editStudentFilterModal === editStudentFilterModalStatus.OPENED &&
+            this.props.modalStatus === FILTER_MODAL_STATUSES.OPENED &&
             <div className={"edit-student-filter-modal"} style={{"width": "28%", height: window.innerHeight}}>
 
                 <CloseButton closeModal={this.closeModal}/>

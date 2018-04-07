@@ -4,8 +4,7 @@ import {closeEditStudentFilterModal,applyStudentFilters} from '../../actions/ali
 
 function mapStateToProps(state){
     return {
-        studentFilters: state.alignStudent.studentFilters,
-        editStudentFilterModal: state.alignStudent.editStudentFilterModal
+        studentFilters: state.alignStudent.studentFilters
     };
 }
 
@@ -13,9 +12,6 @@ function mapDispatchToProps(dispatch){
     return {
         applyFilters: studentFilters => {
             dispatch(applyStudentFilters(studentFilters));
-        },
-        onCloseModalButtonClick: () => {
-            dispatch(closeEditStudentFilterModal());
         }
     };
 }

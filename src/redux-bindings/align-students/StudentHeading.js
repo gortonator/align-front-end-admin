@@ -10,10 +10,6 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-        onAddFilterButtonClick: e => {
-            e.preventDefault();
-            dispatch(openEditStudentFilterModal());
-        },
         applyFilters: studentFilters => {
             dispatch(applyStudentFilters(studentFilters));
         }

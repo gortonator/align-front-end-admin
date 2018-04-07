@@ -9,7 +9,12 @@ export default props => (
         </div>
         <a className={'add-filter-button'}
            href={""}
-           onClick={props.onAddFilterButtonClick}>
+           onClick={
+               e => {
+                   e.preventDefault();
+                   props.openFilterModal();
+               }
+           }>
             Edit Filters
         </a>
     </div>
