@@ -13,7 +13,9 @@ export default props => (
        }}
        onDrag={e => {
            props.dragging(e.clientX,e.clientY);
-       }}>
+       }} onDragEnd={e => {
+           props.endDragging(e.clientX,e.clientY);}
+       }>
         <FontAwesomeIcon icon={faEllipsisV}/>
     </a>
 );

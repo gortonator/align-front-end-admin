@@ -20,7 +20,7 @@ export default props => (
            }>
             Notes
             <span>
-                    {props.numberOfNotes}
+                {props.numberOfNotes}
                 </span>
         </a>
     </div>

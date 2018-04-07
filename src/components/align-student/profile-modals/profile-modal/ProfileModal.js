@@ -29,6 +29,7 @@ class ProfileModal extends React.Component{
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
         this.dragging =this.dragging.bind(this);
+        this.endDragging =this.endDragging.bind(this);
     }
 
     changeDisplay(d){
@@ -55,6 +56,17 @@ class ProfileModal extends React.Component{
         });
     }
 
+    endDragging(x,y){
+        this.setState(prevState => {
+            return {
+                mouseX: x,
+                mouseY: y,
+                positionX: prevState.positionX,
+                positionY: prevState.positionY
+            }
+        });
+    }
+
     render(){
         console.log(this.state);
         return (
@@ -73,7 +85,8 @@ class ProfileModal extends React.Component{
                         changeDisplay={this.changeDisplay}
                         numberOfNotes={4}
                         startDragging={this.startDragging}
-                        dragging={this.dragging}/>
+                        dragging={this.dragging}
+                        endDragging={this.endDragging}/>
             </div>
         );
     }
