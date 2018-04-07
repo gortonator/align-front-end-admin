@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './nav-bar/NavBar';
+import Notes from './notes/Notes';
 
 export const PROFILE_MODAL_DISPLAY_CONTENT = {
     PROFILE: 'PROFILE',
@@ -12,8 +13,8 @@ const PROFILE_MODAL_INITIAL_POSITION = {
 };
 
 const PROFILE_MODAL_DIMENSIONS = {
-    width: 500,
-    height: 350
+    width: 600,
+    height: 400
 };
 
 class ProfileModal extends React.Component{
@@ -24,12 +25,24 @@ class ProfileModal extends React.Component{
             positionX: PROFILE_MODAL_INITIAL_POSITION.positionX,
             positionY: PROFILE_MODAL_INITIAL_POSITION.positionY,
             mouseX: -1,
-            mouseY: -1
+            mouseY: -1,
+            dragging: false
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
         this.dragging =this.dragging.bind(this);
-        this.endDragging =this.endDragging.bind(this);
+        this.endDragging = this.endDragging.bind(this);
+    }
+
+    componentDidUpdate(props,state){
+        if (this.state.dragging && !state.dragging) {
+            document.addEventListener('mousemove', this.dragging)
+            document.addEventListener('mouseup', this.endDragging)
+        }
+        if (!this.state.dragging && state.dragging) {
+            document.removeEventListener('mousemove', this.dragging)
+            document.removeEventListener('mouseup', this.endDragging)
+        }
     }
 
     changeDisplay(d){
@@ -41,11 +54,14 @@ class ProfileModal extends React.Component{
     startDragging(x,y){
         this.setState({
             mouseX: x,
-            mouseY: y
+            mouseY: y,
+            dragging: true
         });
     }
 
-    dragging(x,y){
+    dragging(e){
+        const x = e.clientX;
+        const y = e.clientY;
         this.setState(prevState => {
             return {
                 mouseX: x,
@@ -56,26 +72,32 @@ class ProfileModal extends React.Component{
         });
     }
 
-    endDragging(x,y){
-        this.setState(prevState => {
-            return {
-                mouseX: x,
-                mouseY: y,
-                positionX: prevState.positionX,
-                positionY: prevState.positionY
-            }
+    endDragging(){
+        this.setState({
+            dragging: false
         });
     }
 
     render(){
-        console.log(this.state);
+        var children;
+        switch(this.state.display){
+            case PROFILE_MODAL_DISPLAY_CONTENT.PROFILE:
+                children = null;
+                break;
+            case PROFILE_MODAL_DISPLAY_CONTENT.NOTES:
+                children = <Notes/>;
+                break;
+            default:
+                children = null;
+                break;
+        }
         return (
             <div style={
                 {
                     'width' : PROFILE_MODAL_DIMENSIONS.width + 'px',
                     'height': PROFILE_MODAL_DIMENSIONS.height + 'px',
-                    'left' : this.state.positionX,
-                    'top': this.state.positionY,
+                    'left' : this.state.positionX + 'px',
+                    'top': this.state.positionY + 'px',
                     'zIndex': (this.props.active ? '7' : '3')
                 }
             }
@@ -86,7 +108,9 @@ class ProfileModal extends React.Component{
                         numberOfNotes={4}
                         startDragging={this.startDragging}
                         dragging={this.dragging}
-                        endDragging={this.endDragging}/>
+                        endDragging={this.endDragging}
+                        isDragging={this.state.dragging}/>
+                {children}
             </div>
         );
     }

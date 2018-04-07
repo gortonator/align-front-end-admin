@@ -8,14 +8,29 @@ export default props => (
        onClick={e => {
            e.preventDefault();}
        }
-       onDragStart={e => {
-           props.startDragging(e.clientX,e.clientY);
+        onMouseDown={e => {
+            if (e.button === 0){
+                props.startDragging(e.clientX,e.clientY);
+            }
+            e.stopPropagation();
+            e.preventDefault();
+        }}
+       onMouseMove={e => {
+           if (props.idDragging){
+               props.dragging(e.clientX,e.clentY);
+           }
+           e.stopPropagation();
+           e.preventDefault();
        }}
-       onDrag={e => {
-           props.dragging(e.clientX,e.clientY);
-       }} onDragEnd={e => {
-           props.endDragging(e.clientX,e.clientY);}
-       }>
+        onMouseUp={e => {
+            if (e.button === 0){
+                props.endDragging();
+            }
+            e.stopPropagation();
+            e.preventDefault();
+        }}>
         <FontAwesomeIcon icon={faEllipsisV}/>
     </a>
 );
+
+

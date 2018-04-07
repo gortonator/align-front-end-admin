@@ -8,7 +8,8 @@ export default props => (
     <div className={'student-profile-modal-nav-bar'}>
         <Drag startDragging={props.startDragging}
               dragging={props.dragging}
-              endDragging={props.endDragging}/>
+              endDragging={props.endDragging}
+              isDragging={props.isDragging}/>
 
         <NavLinks display={props.display}
                   changeDisplay={props.changeDisplay}
