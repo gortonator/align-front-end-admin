@@ -1,9 +1,10 @@
 import React from 'react';
-import {STUDENT_RETRIEVAL_STATUSES} from "../../../reducers/align-students";
+import {STUDENT_RETRIEVAL_STATUSES} from "../../../../reducers/align-students";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 import faRedo from '@fortawesome/fontawesome-free-solid/faRedo';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
+import Row from './Row';
 
 export default props => {
     switch (props.studentRetrievalStatus){
@@ -15,7 +16,7 @@ export default props => {
             );
         case STUDENT_RETRIEVAL_STATUSES.SUCCESS:
             return (
-                props.students.map((student,i) => <StudentRow student={student} key={i}/>)
+                props.students.map((student,i) => <Row openProfileModal={props.openProfileModal} student={student} key={student.nuid}/>)
             );
         case STUDENT_RETRIEVAL_STATUSES.FAILURE:
             return (
@@ -42,23 +43,3 @@ export default props => {
     }
 }
 
-function StudentRow(props){
-    return (
-        <div className={"student-table-row"}>
-            <div className={"id-cell student-table-cell"}>
-                {props.student.nuid}
-            </div>
-            <div className={"name-cell student-table-cell"}>
-                {props.student.name}
-            </div>
-            <div className={"email-cell student-table-cell"}>
-                {props.student.email}
-            </div>
-            <div className={"enrollment-status-cell student-table-cell"}>
-                {props.student.enrollmentStatus}
-            </div>
-            <div className={"degree-year-cell student-table-cell"}>
-                {props.student.degreeYear}
-            </div>
-        </div>);
-}

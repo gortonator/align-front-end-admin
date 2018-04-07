@@ -22,7 +22,7 @@ import Header from './components/header';
 import Navbar from './react-redux-mixed/left_navbar';
 import Analytics from './react-redux-mixed/analytics';
 
-import AlignStudent from './components/align-student/RootComponent';
+import AlignStudent from './components/align-student/AlignStudent';
 
 const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(createStore);
 

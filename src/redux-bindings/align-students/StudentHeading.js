@@ -1,6 +1,6 @@
-import StudentHeading from '../../components/align-student/heading/RootComponent';
+import StudentHeading from '../../components/align-student/heading/Heading';
 import {connect} from 'react-redux';
-import {openEditStudentFilterModal,applyStudentFilters} from "../../actions/align-students-actions";
+import {applyStudentFilters} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {GENDER_OPTIONS} from '../../../reducers/align-students';
+import {GENDER_OPTIONS} from '../../../../reducers/align-students';
 
 export default props => (
     <div className={'student-filter'}>

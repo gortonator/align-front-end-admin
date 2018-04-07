@@ -70,106 +70,29 @@ const initialStudents = [
         degreeYear: "2018"
     },
     {
-        nuid: "1",
-        name: "A",
+        nuid: "2",
+        name: "B",
         email: "123",
         enrollmentStatus: "ft",
         degreeYear: "2018"
     },
     {
-        nuid: "1",
-        name: "A",
+        nuid: "3",
+        name: "C",
         email: "123",
         enrollmentStatus: "ft",
         degreeYear: "2018"
     },
     {
-        nuid: "1",
-        name: "A",
+        nuid: "4",
+        name: "D",
         email: "123",
         enrollmentStatus: "ft",
         degreeYear: "2018"
     },
     {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
-        email: "123",
-        enrollmentStatus: "ft",
-        degreeYear: "2018"
-    },
-    {
-        nuid: "1",
-        name: "A",
+        nuid: "5",
+        name: "E",
         email: "123",
         enrollmentStatus: "ft",
         degreeYear: "2018"
@@ -178,11 +101,11 @@ const initialStudents = [
 
 export const initialState = {
     students: {
-        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.FAILURE,
+        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS,
         items: initialStudents
     },
     studentFilters: {
-        nameOrId: '123',
+        nameOrId: '',
         campus: {
             [CAMPUSES.BOSTON.value] : false,
             [CAMPUSES.CHARLOTTE.value] : false,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from './Head';
-import Body from './Body';
-import Pagination from './pagination/RootComponent';
+import Body from './body/Body';
+import Pagination from './pagination/Pagination';
 
 export default props => (
     <div>
@@ -10,7 +10,8 @@ export default props => (
               students={props.students}
               acceptRetrievalFailure={props.acceptRetrievalFailure}
               applyFilters={props.applyFilters}
-              failedAttempt={props.failedAttempt}/>
+              failedAttempt={props.failedAttempt}
+              openProfileModal={props.openProfileModal}/>
         <Pagination pagination={props.pagination}
                     studentRetrievalStatus={props.studentRetrievalStatus}
                     applyFilters={props.applyFilters}

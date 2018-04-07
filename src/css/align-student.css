@@ -398,6 +398,83 @@ a.nu-undergrad-option{
     margin-bottom: 5px;
 }
 
+/*
+    The Student Profile Modal
+*/
+
+.student-profile-modal{
+    position: fixed;
+    border: 2px solid #BBBBBB;
+    background-color: white;
+    padding-top: 70px;
+}
+
+.student-profile-modal-nav-bar{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: rgba(187,187,187,.1);
+}
+
+.student-profile-modal-nav-bar a{
+    display: inline-block;
+    text-decoration: none;
+    color: #022A52;
+    font-size: 18px;
+}
+
+.student-profile-modal-drag{
+    padding: 10px 20px;
+}
+
+.student-profile-modal-close-button{
+    position: absolute;
+    right: 0;
+    padding: 10px 20px;
+    margin-right: 0;
+}
+
+.student-profile-modal-nav-bar a:hover,.student-profile-modal-nav-bar a.active{
+    color: rgba(255,0,0,.7);
+    background-color: white;
+    transition: color .3s, background-color .3s;
+}
+
+.student-profile-modal-nav-links{
+    display: inline-block;
+}
+
+.student-profile-modal-nav-links a{
+    padding: 10px 15px;
+    margin: 0 1px;
+}
+
+.student-profile-modal-nav-links a.with-badge{
+    padding: 10px 15px;
+}
+
+.student-profile-modal-nav-links a.with-badge span{
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: white;
+    background-color: #70777D;
+}
+
+.student-profile-modal-nav-links a.with-badge.active span{
+    color: white;
+    background-color: rgba(255,0,0,.7);
+}
+
+.student-profile-modal-nav-links a.with-badge:hover span{
+    background-color: rgba(255,0,0,.7);
+    transition: background-color .3s;
+}
+
+
+
 
 
 

@@ -1,16 +1,16 @@
 import React from 'react';
-import {FILTER_MODAL_STATUSES} from '../RootComponent';
+import {FILTER_MODAL_STATUSES} from '../AlignStudent';
 import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS, initialState} from "../../../reducers/align-students";
 
-import CampusFilter from './CampusFilter';
-import CoopFilter from './CoopFilter';
+import CampusFilter from './filters/CampusFilter';
+import CoopFilter from './filters/CoopFilter';
 import ApplyButton from './controls/ApplyButton';
-import Heading from './Heading';
-import EnrollmentStatusFilter from './EnrollmentStatusFilter';
-import GenderFilter from './GenderFilter';
-import MiscellaneousFilters from './miscellaneous-filters/RootComponent';
-import RaceFilter from './RaceFilter';
-import UndergradMajorFilter from './UndergradMajorFilter';
+import Heading from './filters/Heading';
+import EnrollmentStatusFilter from './filters/EnrollmentStatusFilter';
+import GenderFilter from './filters/GenderFilter';
+import MiscellaneousFilters from './filters/miscellaneous-filters/RootComponent';
+import RaceFilter from './filters/RaceFilter';
+import UndergradMajorFilter from './filters/UndergradMajorFilter';
 import CloseButton from './controls/CloseButton';
 
 const defaultStudentFilter = {
@@ -131,7 +131,7 @@ class EditStudentFilterModal extends React.Component {
 
     applyFilters(){
         this.props.applyFilters(this.state);
-        this.props.onCloseModalButtonClick();
+        this.props.closeModal();
     }
 
     closeModal(){

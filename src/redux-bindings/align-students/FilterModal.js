@@ -1,6 +1,6 @@
-import FilterModal from '../../components/align-student/filter-modal/RootComponent';
+import FilterModal from '../../components/align-student/filter-modal/FilterModal';
 import {connect} from 'react-redux';
-import {closeEditStudentFilterModal,applyStudentFilters} from '../../actions/align-students-actions';
+import {applyStudentFilters} from '../../actions/align-students-actions';
 
 function mapStateToProps(state){
     return {

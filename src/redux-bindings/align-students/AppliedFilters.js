@@ -1,4 +1,4 @@
-import AppliedFilters from '../../components/align-student/applied-filters/RootComponent';
+import AppliedFilters from '../../components/align-student/applied-filters/AppliedFilters';
 import {connect} from 'react-redux';
 
 function mapStateToProps(state){

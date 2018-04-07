@@ -1,4 +1,4 @@
-import StudentTable from '../../components/align-student/table/RootComponent';
+import StudentTable from '../../components/align-student/table/Table';
 import {connect} from 'react-redux';
 import {acceptRetrievalFailure, applyStudentFilters} from "../../actions/align-students-actions";
 

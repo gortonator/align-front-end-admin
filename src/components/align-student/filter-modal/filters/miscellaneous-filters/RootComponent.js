@@ -1,5 +1,5 @@
 import React from 'react';
-import TogglableOption from '../../../common/TogglableOption';
+import TogglableOption from '../../../../common/TogglableOption';
 import NuUndergradFilter from './NuUndergradFilter';
 
 export default props => (
