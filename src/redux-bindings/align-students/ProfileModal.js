@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ProfileModals from '../../components/align-student/profile-modals/ProfileModals';
+import ProfileModal from '../../components/align-student/profile-modals/profile-modal/ProfileModal';
 import {retrieveStudentProfile} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
@@ -17,4 +17,4 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProfileModals);
+export default connect(mapStateToProps,mapDispatchToProps)(ProfileModal);

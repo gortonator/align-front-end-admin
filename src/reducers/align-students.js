@@ -41,15 +41,15 @@ export const ENROLLMENT_STATUSES = {
 export const GENDER_OPTIONS = {
     ANY: {
         displayName: 'Any',
-        value: "A"
+        value: "any"
     },
     MALE: {
         displayName: 'Male',
-        value: "M"
+        value: "male"
     },
     FEMALE: {
         displayName: 'Female',
-        value: "F"
+        value: "female"
     }
 };
 
@@ -58,8 +58,6 @@ export const ASYNC_ACTION_STATUSES = {
     SUCCESS: 'SUCCESS',
     FAILURE: 'FAILURE'
 };
-
-const NUMBER_OF_STUDENTS_PER_PAGE = 20;
 
 const initialStudents = [
     {
@@ -126,18 +124,8 @@ export const initialState = {
     },
     studentFilters: {
         nameOrId: '',
-        campus: {
-            [CAMPUSES.BOSTON.value] : false,
-            [CAMPUSES.CHARLOTTE.value] : false,
-            [CAMPUSES.SEATTLE.value] : false,
-            [CAMPUSES.SILICONVALLEY.value] : false
-        },
-        enrollmentStatus: {
-            [ENROLLMENT_STATUSES.FULLTIME.value] : false,
-            [ENROLLMENT_STATUSES.PARTTIME.value] : false,
-            [ENROLLMENT_STATUSES.INACTIVE.value] : false,
-            [ENROLLMENT_STATUSES.DROPOUT.value] : false
-        },
+        campus: [],
+        enrollmentStatus: [],
         coop: '',
         gender: GENDER_OPTIONS.ANY.value,
         race: '',

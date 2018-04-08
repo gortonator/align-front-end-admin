@@ -5,7 +5,10 @@ export default (props) => {
         <div className={props.containerStyle}>
             <a href={""}
                className={props.filterStyle}
-               onClick={props.onToggle}>
+               onClick={e => {
+                   e.preventDefault();
+                   props.onToggle();
+               }}>
                 {props.name}
             </a>
     </div>);

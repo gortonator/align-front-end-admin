@@ -8,7 +8,7 @@ import ApplyButton from './controls/ApplyButton';
 import Heading from './filters/Heading';
 import EnrollmentStatusFilter from './filters/EnrollmentStatusFilter';
 import GenderFilter from './filters/GenderFilter';
-import MiscellaneousFilters from './filters/miscellaneous-filters/RootComponent';
+import MiscellaneousFilters from './filters/miscellaneous-filters/MiscellaneousFilters';
 import RaceFilter from './filters/RaceFilter';
 import UndergradMajorFilter from './filters/UndergradMajorFilter';
 import CloseButton from './controls/CloseButton';
@@ -45,6 +45,9 @@ class EditStudentFilterModal extends React.Component {
         this.isEnrollmentStatusChosen = this.isEnrollmentStatusChosen.bind(this);
         this.toggleEnrollmentStatusOption = this.toggleEnrollmentStatusOption.bind(this);
 
+        this.isTogglableOptionChosen = this.isTogglableOptionChosen.bind(this);
+        this.toggleFilterOption = this.toggleFilterOption.bind(this);
+
         this.handleCoopFilterChange = this.handleCoopFilterChange.bind(this);
         this.handleGenderFilterChange = this.handleGenderFilterChange.bind(this);
         this.handleRaceFilterChange = this.handleRaceFilterChange.bind(this);
@@ -57,23 +60,47 @@ class EditStudentFilterModal extends React.Component {
     }
 
     isCampusChosen(campus){
-        return this.state.campus[campus];
+        return this.state.campus.indexOf(campus) !== -1;
     }
 
     toggleCampusOption(campus){
-        return (e => {
-            e.preventDefault();
+        const index = this.state.campus.indexOf(campus);
+        const newCampus = JSON.parse(JSON.stringify(this.state.campus));
+        if (index === -1){
+            newCampus.push(campus);
             this.setState({
-                campus: {
-                    ...this.state.campus,
-                    [campus] : !this.state.campus[campus]
-                }
+                campus: newCampus
             });
-        });
+        } else{
+            newCampus.splice(index,1);
+            this.setState({
+                campus: newCampus
+            });
+        }
+    }
+
+    isTogglableOptionChosen(option,filter){
+        return this.state[filter].indexOf(option) !== -1;
+    }
+
+    toggleFilterOption(option,filter){
+        const index = this.state[filter].indexOf(option);
+        const newFilter = JSON.parse(JSON.stringify(this.state[filter]));
+        if (index === -1){
+            newFilter.push(option);
+            this.setState({
+                [filter]: newFilter
+            });
+        } else{
+            newFilter.splice(index,1);
+            this.setState({
+                [filter]: newFilter
+            });
+        }
     }
 
     isEnrollmentStatusChosen(status){
-        return this.state.enrollmentStatus[status];
+        return this.state.enrollmentStatus.indexOf(status) !== -1;
     }
 
     toggleEnrollmentStatusOption(status){
@@ -120,8 +147,7 @@ class EditStudentFilterModal extends React.Component {
         );
     }
 
-    toggleNuUndergrad(e){
-        e.preventDefault();
+    toggleNuUndergrad(){
         this.setState(
             {
                 nuUndergrad: !this.state.nuUndergrad
@@ -154,11 +180,13 @@ class EditStudentFilterModal extends React.Component {
 
                 <Heading clearAllFilters={this.clearAllFilters}/>
 
-                <CampusFilter optionChecker={this.isCampusChosen}
-                              onOptionToggle={this.toggleCampusOption}/>
+                <CampusFilter isCampusChosen={campus => this.isTogglableOptionChosen(campus,'campus')}
+                              toggleCampusOption={campus => this.toggleFilterOption(campus,'campus')}/>
 
-                <EnrollmentStatusFilter optionChecker={this.isEnrollmentStatusChosen}
-                                        onOptionToggle={this.toggleEnrollmentStatusOption}/>
+                <EnrollmentStatusFilter isEnrollmentStatusChosen={enrollmentStatus =>
+                    this.isTogglableOptionChosen(enrollmentStatus,'enrollmentStatus')}
+                                        toggleEnrollmentStatusOption={enrollmentStatus =>
+                                            this.toggleFilterOption(enrollmentStatus,'enrollmentStatus')}/>
 
                 <CoopFilter onChange={this.handleCoopFilterChange}
                             value={this.state.coop}/>

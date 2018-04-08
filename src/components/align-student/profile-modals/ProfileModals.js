@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileModal from './profile-modal/ProfileModal';
+import ProfileModal from '../../../redux-bindings/align-students/ProfileModal';
 
 export default props => (
     <React.Fragment>
@@ -9,9 +9,7 @@ export default props => (
                           isActive={props.activeProfile === nuid}
                           closeModal={() => {props.closeProfileModal(nuid)}}
                           name={getNameByNuid(nuid,props.students)}
-                          activateThisModal={() => {props.openProfileModal(nuid)}}
-                          studentProfiles={props.studentProfiles}
-                          retrieveStudentProfile={props.retrieveStudentProfile}/>)}
+                          activateThisModal={() => {props.openProfileModal(nuid)}}/>)}
     </React.Fragment>
 );
 
