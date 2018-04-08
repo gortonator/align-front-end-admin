@@ -1,7 +1,7 @@
 import React from 'react';
-import Drag from './Drag';
-import NavLinks from './NavLinks';
-import CloseButton from './CloseButton';
+import Drag from './parts/Drag';
+import NavLinks from './parts/NavLinks';
+import CloseButton from './parts/CloseButton';
 
 
 export default props => (

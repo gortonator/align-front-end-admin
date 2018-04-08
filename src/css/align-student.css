@@ -407,6 +407,7 @@ a.nu-undergrad-option{
     border: 2px solid #BBBBBB;
     background-color: white;
     padding-top: 70px;
+    overflow-y: auto;
 }
 
 .student-profile-modal-nav-bar{
@@ -524,15 +525,64 @@ a.nu-undergrad-option{
     transition: background-color .3s;
 }
 
-.note-editor-back-button{
+.note-editor-back-button,.add-note-button{
     color: #BBBBBB;
     font-size: 25px;
+    margin-left: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
-a.note-editor-back-button:hover{
+a.note-editor-back-button:hover,a.add-note-button:hover{
     color: rgba(255,0,0,.7);
     transition: color .3s;
 }
+
+.note{
+    position: relative;
+    margin: 0 20px;
+    overflow: hidden;
+}
+
+.note-title{
+    background-color: rgba(187,187,187,.3);
+    font-size: 20px;
+    font-style: italic;
+    padding: 5px 15px;
+}
+
+.note-desc{
+    padding: 10px 15px 0;
+    min-height: 200px;
+    background: linear-gradient(rgba(187,187,187,.2),white);
+}
+
+.note:hover .note-control-panel{
+    right: 0;
+    transition: right .3s;
+}
+
+.note-control-panel{
+    position: absolute;
+    width: 80px;
+    top: 0;
+    right: -80px;
+    padding-top: 7px;
+    transition: right .3s;
+}
+
+.note-control-container{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.note-control-container a:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
+}
+
+
 
 
 

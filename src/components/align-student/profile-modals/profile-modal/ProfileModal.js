@@ -26,7 +26,9 @@ class ProfileModal extends React.Component{
             positionY: PROFILE_MODAL_INITIAL_POSITION.positionY,
             mouseX: -1,
             mouseY: -1,
-            dragging: false
+            dragging: false,
+            profile: null,
+            notes: notes
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
@@ -36,12 +38,12 @@ class ProfileModal extends React.Component{
 
     componentDidUpdate(props,state){
         if (this.state.dragging && !state.dragging) {
-            document.addEventListener('mousemove', this.dragging)
-            document.addEventListener('mouseup', this.endDragging)
+            document.addEventListener('mousemove', this.dragging);
+            document.addEventListener('mouseup', this.endDragging);
         }
         if (!this.state.dragging && state.dragging) {
-            document.removeEventListener('mousemove', this.dragging)
-            document.removeEventListener('mouseup', this.endDragging)
+            document.removeEventListener('mousemove', this.dragging);
+            document.removeEventListener('mouseup', this.endDragging);
         }
     }
 
@@ -85,7 +87,7 @@ class ProfileModal extends React.Component{
                 children = null;
                 break;
             case PROFILE_MODAL_DISPLAY_CONTENT.NOTES:
-                children = <Notes/>;
+                children = <Notes notes={this.state.notes}/>;
                 break;
             default:
                 children = null;
@@ -141,3 +143,16 @@ function  confineVerticalPosition(y) {
         return window.innerHeight - PROFILE_MODAL_DIMENSIONS.height;
     }
 }
+
+const notes = [
+    {
+        noteId: '1',
+        title: '1',
+        desc: '1'
+    },
+    {
+        noteId: '2',
+        title: '2',
+        desc: '2'
+    }
+];

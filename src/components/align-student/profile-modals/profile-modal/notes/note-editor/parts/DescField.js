@@ -6,8 +6,8 @@ export default props => (
             Description
         </div>
         <div className={'note-editor-field-input'}>
-            <textArea value={props.desc}
-                      onchange={props.handleDescChange}
+            <textarea value={props.desc}
+                      onChange={props.handleDescChange}
                       className={'form-control'} rows="5"/>
         </div>
     </div>

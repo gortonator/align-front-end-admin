@@ -1,5 +1,5 @@
 import React from 'react';
-import {PROFILE_MODAL_DISPLAY_CONTENT} from "../ProfileModal";
+import {PROFILE_MODAL_DISPLAY_CONTENT} from "../../ProfileModal";
 
 export default props => (
     <div className={'student-profile-modal-nav-links'}>

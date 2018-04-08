@@ -1,7 +1,7 @@
 import React from 'react';
-import TitleField from './TitleField';
-import DescField from './DescField';
-import Controls from './Controls';
+import TitleField from './parts/TitleField';
+import DescField from './parts/DescField';
+import Controls from './parts/Controls';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faArrowAltCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowAltCircleLeft';
 
