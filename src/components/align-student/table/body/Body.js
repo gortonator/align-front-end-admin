@@ -1,42 +1,28 @@
 import React from 'react';
-import {STUDENT_RETRIEVAL_STATUSES} from "../../../../reducers/align-students";
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
-import faRedo from '@fortawesome/fontawesome-free-solid/faRedo';
-import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
+import {ASYNC_ACTION_STATUSES} from "../../../../reducers/align-students";
 import Row from './Row';
+import RetrievalOngoingMessage from '../../../common/data-retrieval-messages/RetrievalOngoingMessage';
+import RetrievalFailureMessage from '../../../common/data-retrieval-messages/RetrievalFailureMessage';
 
 export default props => {
     switch (props.studentRetrievalStatus){
-        case STUDENT_RETRIEVAL_STATUSES.ONGOING:
+        case ASYNC_ACTION_STATUSES.ONGOING:
             return (
-                <div className={'student-retrieval-message'}>
-                    <FontAwesomeIcon icon={faSpinner} spin/> Retrieving Students...
-                </div>
+                <RetrievalOngoingMessage message={'Retrieving Students...'}/>
             );
-        case STUDENT_RETRIEVAL_STATUSES.SUCCESS:
+        case ASYNC_ACTION_STATUSES.SUCCESS:
             return (
-                props.students.map((student,i) => <Row openProfileModal={props.openProfileModal} student={student} key={student.nuid}/>)
+                props.students.map((student,i) => <Row openProfileModal={props.openProfileModal}
+                                                       student={student}
+                                                       key={student.nuid}/>)
             );
-        case STUDENT_RETRIEVAL_STATUSES.FAILURE:
+        case ASYNC_ACTION_STATUSES.FAILURE:
             return (
-                <div className={'student-retrieval-message'}>
-                    Students Retrieval Failed.
-                    <br/>
-                    <a onClick={e => {
-                        e.preventDefault();
-                        props.applyFilters(props.failedAttempt);}}
-                       href={''}>
-                        <FontAwesomeIcon icon={faRedo}/> Retry
-                    </a>
-                    <br/>
-                    <a onClick={e => {
-                        e.preventDefault();
-                        props.acceptRetrievalFailure();}}
-                       href={''}>
-                        <FontAwesomeIcon icon={faTimes}/> Cancel
-                    </a>
-                </div>
+                <RetrievalFailureMessage message={'Student Retrieval Failed.'}
+                                         onRetry={()=> {}}
+                                         onCancel={() => {
+                                             props.acceptRetrievalFailure();
+                                         }}/>
             );
         default:
             return false;

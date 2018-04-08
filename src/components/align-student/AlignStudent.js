@@ -39,8 +39,8 @@ class AlignStudent extends React.Component{
     }
 
     openProfileModal(nuid){
-        const profileIndex = this.state.openedProfiles.indexOf(p => p === nuid);
-        if ( profileIndex !== -1){
+        const profileFound = this.state.openedProfiles.find(p => p === nuid);
+        if ( profileFound !== undefined){
             this.setState(
                 {
                     activeProfile: nuid
@@ -85,7 +85,8 @@ class AlignStudent extends React.Component{
                 <Table openProfileModal={this.openProfileModal}/>
                 <ProfileModals openedProfiles={this.state.openedProfiles}
                                activeProfile={this.state.activeProfile}
-                               closeProfileModal={this.closeProfileModal}/>
+                               closeProfileModal={this.closeProfileModal}
+                               openProfileModal={this.openProfileModal}/>
             </div>
         );
     }

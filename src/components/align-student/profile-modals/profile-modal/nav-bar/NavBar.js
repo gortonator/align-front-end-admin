@@ -3,6 +3,8 @@ import Drag from './parts/Drag';
 import NavLinks from './parts/NavLinks';
 import CloseButton from './parts/CloseButton';
 
+import {ASYNC_ACTION_STATUSES} from "../../../../../reducers/align-students";
+
 
 export default props => (
     <div className={'student-profile-modal-nav-bar'}>
@@ -11,10 +13,16 @@ export default props => (
               endDragging={props.endDragging}
               isDragging={props.isDragging}/>
 
-        <NavLinks display={props.display}
+        {
+            props.profile !== null && props.profile.personalInformation !== null &&
+            <NavLinks display={props.display}
                   changeDisplay={props.changeDisplay}
                   numberOfNotes={props.numberOfNotes}/>
+        }
 
         <CloseButton closeModal={props.closeModal}/>
+        <span className={'student-profile-modal-title'}>
+            {props.name}'s Profile
+        </span>
     </div>
 );

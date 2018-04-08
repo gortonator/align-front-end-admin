@@ -53,7 +53,7 @@ export const GENDER_OPTIONS = {
     }
 };
 
-export const STUDENT_RETRIEVAL_STATUSES = {
+export const ASYNC_ACTION_STATUSES = {
     ONGOING: 'ONGOING',
     SUCCESS: 'SUCCESS',
     FAILURE: 'FAILURE'
@@ -99,9 +99,29 @@ const initialStudents = [
     }
 ];
 
+const initialStudentProfiles = [
+    {
+        nuid: "1",
+        retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
+        personalInformation: {name: 'haha'},
+        notes: [
+            {
+                noteId: '1',
+                title: '1',
+                desc: '1'
+            },
+            {
+                noteId: '2',
+                title: '2',
+                desc: '2'
+            }
+        ]
+    }
+];
+
 export const initialState = {
     students: {
-        retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS,
+        retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
         items: initialStudents
     },
     studentFilters: {
@@ -128,7 +148,8 @@ export const initialState = {
     pagination:{
         total: '20',
         current: '1'
-    }
+    },
+    studentProfiles: initialStudentProfiles
 };
 
 export function getMultiSelectableFilterDisplay(f,options){
@@ -147,7 +168,7 @@ export default function alignStudent(state=initialState,action){
             return Object.assign({},state,{
                 students: {
                     ...state.students,
-                    retrievalStatus: STUDENT_RETRIEVAL_STATUSES.ONGOING
+                    retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING
                 }
             });
         case actions.ACCEPT_RETRIEVAL_FAILURE:
@@ -155,8 +176,19 @@ export default function alignStudent(state=initialState,action){
                 failedAttempt: null,
                 students: {
                     ...state.students,
-                    retrievalStatus: STUDENT_RETRIEVAL_STATUSES.SUCCESS
+                    retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS
                 }
+            });
+        case actions.STUDENT_PROFILE_RETRIEVAL_REQUEST:
+            const studentProfiles = JSON.parse(JSON.stringify(state.studentProfiles));
+            studentProfiles.push({
+                nuid: action.nuid,
+                retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING,
+                notes: [],
+                personalInformation: null
+            });
+            return Object.assign({},state,{
+                studentProfiles: studentProfiles
             });
         default:
             return state;

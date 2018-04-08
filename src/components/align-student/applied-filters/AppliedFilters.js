@@ -1,17 +1,17 @@
 import React from 'react';
 import AppliedFilter from './AppliedFilter';
 import {
-    STUDENT_RETRIEVAL_STATUSES,
+    ASYNC_ACTION_STATUSES,
     getMultiSelectableFilterDisplay,
     CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS} from '../../../reducers/align-students';
 
 export default props => {
     var children;
     switch (props.studentRetrieval){
-        case STUDENT_RETRIEVAL_STATUSES.ONGOING:
+        case ASYNC_ACTION_STATUSES.ONGOING:
             children = 'Filters Updating...';
             break;
-        case STUDENT_RETRIEVAL_STATUSES.SUCCESS:
+        case ASYNC_ACTION_STATUSES.SUCCESS:
             children = (
                 <div>
                     {getNameOrIdFilterDisplay(props.studentFilters.nameOrId)}
@@ -33,7 +33,7 @@ export default props => {
                 </div>
             );
             break;
-        case STUDENT_RETRIEVAL_STATUSES.FAILURE:
+        case ASYNC_ACTION_STATUSES.FAILURE:
             children = 'Update Failed.';
             break;
         default:

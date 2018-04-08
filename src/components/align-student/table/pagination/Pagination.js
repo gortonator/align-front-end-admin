@@ -1,5 +1,5 @@
 import React from 'react';
-import {STUDENT_RETRIEVAL_STATUSES} from "../../../../reducers/align-students";
+import {ASYNC_ACTION_STATUSES} from "../../../../reducers/align-students";
 import NextPageButton from './NextPageButton';
 import PaginationInput from './PaginationInput';
 import PreviousPageButton from './PreviousPageButton';
@@ -51,7 +51,7 @@ class Pagination extends React.Component {
 
     render(){
         return (
-            this.props.studentRetrievalStatus === STUDENT_RETRIEVAL_STATUSES.SUCCESS &&
+            this.props.studentRetrievalStatus === ASYNC_ACTION_STATUSES.SUCCESS &&
             <div className={"student-pagination-container"}>
                 <div >
 

@@ -174,24 +174,6 @@ a.add-filter-button{
     width: 25%;
 }
 
-.student-retrieval-message{
-    text-align: center;
-    padding-top: 50px;
-    font-size: 18px;
-}
-
-.student-retrieval-message a{
-    display: inline-block;
-    padding-top: 10px;
-    text-decoration: none;
-    color: black;
-}
-
-.student-retrieval-message a:hover{
-    color: rgba(255,0,0,.7);
-    transition: color .3s;
-}
-
 .student-pagination-container{
     text-align: center;
     margin: auto;
@@ -407,7 +389,7 @@ a.nu-undergrad-option{
     border: 2px solid #BBBBBB;
     background-color: white;
     padding-top: 70px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .student-profile-modal-nav-bar{
@@ -415,6 +397,7 @@ a.nu-undergrad-option{
     width: 100%;
     top: 0;
     background-color: rgba(187,187,187,.1);
+    overflow: auto;
 }
 
 .student-profile-modal-nav-bar a{
@@ -429,8 +412,7 @@ a.nu-undergrad-option{
 }
 
 .student-profile-modal-close-button{
-    position: absolute;
-    right: 0;
+    float: right;
     padding: 10px 20px;
     margin-right: 0;
 }
@@ -472,6 +454,17 @@ a.nu-undergrad-option{
 .student-profile-modal-nav-links a.with-badge:hover span{
     background-color: rgba(255,0,0,.7);
     transition: background-color .3s;
+}
+
+.student-profile-modal-title{
+    float: right;
+    display: inline-block;
+    padding: 10px 10px 0;
+    font-style: italic;
+    font-weight: 600;
+    margin-right: 40px;
+    color: #022A52;
+    font-size: 18px;
 }
 
 /*
