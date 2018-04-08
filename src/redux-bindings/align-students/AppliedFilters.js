@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 function mapStateToProps(state){
     return {
         studentRetrieval: state.alignStudent.students.retrievalStatus,
-        studentFilters: state.alignStudent.studentFilters
+        studentFilters: state.alignStudent.students.studentFilters
     };
 }
 

@@ -9,7 +9,7 @@ export default props => (
     )} href={''}
        onClick={e => {
            e.preventDefault();
-           props.handlePageChange(Number(props.currentPage)+1);}
+           props.goToNextPage();}
        }>
         <FontAwesomeIcon icon={faAngleRight}/>
     </a>

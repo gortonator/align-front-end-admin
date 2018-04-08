@@ -3,7 +3,7 @@ import Heading from '../../redux-bindings/align-students/StudentHeading';
 import Table from '../../redux-bindings/align-students/StudentTable';
 import AppliedFilters from "../../redux-bindings/align-students/AppliedFilters";
 import FilterModal from "../../redux-bindings/align-students/FilterModal";
-import ProfileModals from "./profile-modals/ProfileModals";
+import ProfileModals from "../../redux-bindings/align-students/ProfileModals";
 
 // Edit Student Filters Modal Statuses
 export const FILTER_MODAL_STATUSES = {

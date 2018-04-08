@@ -1,63 +1,7 @@
 import * as actions from '../actions/align-students-actions';
+import {combineReducers} from 'redux';
+import {ASYNC_ACTION_STATUSES, GENDER_OPTIONS, TOKEN} from "../constants";
 
-export const CAMPUSES = {
-    BOSTON: {
-        displayName: 'Boston',
-        value: 'BOSTON'
-    },
-    CHARLOTTE: {
-        displayName: 'Charlotte',
-        value: 'CHARLOTTE'
-    },
-    SEATTLE: {
-        displayName: 'Seattle',
-        value: "SEATTLE"
-    },
-    SILICONVALLEY: {
-        displayName: 'Silicon Valley',
-        value: "SILICON_VALLEY"
-    }
-};
-
-export const ENROLLMENT_STATUSES = {
-    FULLTIME: {
-        displayName: 'Full Time',
-        value: "FULL_TIME"
-    },
-    PARTTIME: {
-        displayName: 'Part Time',
-        value: "PART_TIME"
-    },
-    INACTIVE: {
-        displayName: 'Inactive',
-        value: "INACTIVE"
-    },
-    DROPOUT: {
-        displayName: 'Drop Out',
-        value: "DROP_OUT"
-    }
-};
-
-export const GENDER_OPTIONS = {
-    ANY: {
-        displayName: 'Any',
-        value: "any"
-    },
-    MALE: {
-        displayName: 'Male',
-        value: "male"
-    },
-    FEMALE: {
-        displayName: 'Female',
-        value: "female"
-    }
-};
-
-export const ASYNC_ACTION_STATUSES = {
-    ONGOING: 'ONGOING',
-    SUCCESS: 'SUCCESS',
-    FAILURE: 'FAILURE'
-};
 
 const initialStudents = [
     {
@@ -102,26 +46,29 @@ const initialStudentProfiles = [
         nuid: "1",
         retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
         personalInformation: {name: 'haha'},
-        notes: [
-            {
-                noteId: '1',
-                title: '1',
-                desc: '1'
-            },
-            {
-                noteId: '2',
-                title: '2',
-                desc: '2'
-            }
-        ]
     }
 ];
 
-export const initialState = {
-    students: {
-        retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
-        items: initialStudents
+const initialNotes = [
+    {
+        noteId: '1',
+        nuid: '1',
+        title: '1',
+        desc: '1'
     },
+    {
+        noteId: '2',
+        nuid: '1',
+        title: '2',
+        desc: '2'
+    }
+];
+
+
+
+const initalStudentsState = {
+    retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
+    items: initialStudents,
     studentFilters: {
         nameOrId: '',
         campus: [],
@@ -132,54 +79,99 @@ export const initialState = {
         undergradMajor: '',
         nuUndergrad: false
     },
-    failedAttempt: null,
+    failedStudentRetrieval: null,
     pagination:{
-        total: '20',
-        current: '1'
-    },
-    studentProfiles: initialStudentProfiles
+        total: 20,
+        current: 1
+    }
 };
-
-export function getMultiSelectableFilterDisplay(f,options){
-    const optionsSelected = [];
-    Object.keys(options).forEach(o => {
-        if (f[options[o].value]){
-            optionsSelected.push(options[o].displayName);
-        }
-    });
-    return optionsSelected.join(' | ');
+function token(state=TOKEN,action){
+    return state;
 }
 
-export default function alignStudent(state=initialState,action){
-    switch(action.type){
+function students(state=initalStudentsState,action){
+    switch (action.type){
         case actions.STUDENT_RETRIEVAL_REQUEST:
             return Object.assign({},state,{
-                students: {
-                    ...state.students,
-                    retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING
+                retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING
+            });
+        case actions.STUDENT_RETRIEVAL_SUCCESS:
+            return Object.assign({},state,{
+                items: action.students,
+                studentFilters: action.studentFilters,
+                retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
+                pagination:{
+                    total: action.totalPage,
+                    current: action.currentPage
+                }});
+        case actions.STUDENT_RETRIEVAL_FAILURE:
+            return Object.assign({},state,{
+                retrievalStatus: ASYNC_ACTION_STATUSES.FAILURE,
+                failedStudentRetrieval: {
+                    studentFilters: action.studentFilters,
+                    page: action.page
                 }
             });
         case actions.ACCEPT_RETRIEVAL_FAILURE:
             return Object.assign({},state,{
-                failedAttempt: null,
-                students: {
-                    ...state.students,
-                    retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS
-                }
-            });
-        case actions.STUDENT_PROFILE_RETRIEVAL_REQUEST:
-            const studentProfiles = JSON.parse(JSON.stringify(state.studentProfiles));
-            studentProfiles.push({
-                nuid: action.nuid,
-                retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING,
-                notes: [],
-                personalInformation: null
-            });
-            return Object.assign({},state,{
-                studentProfiles: studentProfiles
+                retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS
             });
         default:
             return state;
     }
 }
+
+function studentProfiles(state=initialStudentProfiles,action){
+    switch(action.type){
+        case actions.STUDENT_PROFILE_RETRIEVAL_REQUEST:
+            if (state.find(p => p.nuid === action.nuid) === undefined){
+                state.push(
+                    {
+                        nuid: action.nuid,
+                        retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING,
+                        personalInformation: null
+                    });
+                return state.slice();
+            } else {
+                return state.map(p => p.nuid === action.nuid ?
+                    {
+                        nuid: p.nuid,
+                        retrievalStatus: ASYNC_ACTION_STATUSES.ONGOING,
+                        personalInformation: null
+                    } : p);
+            }
+        case actions.STUDENT_PROFILE_RETRIEVAL_SUCCESS:
+            return state.map(p => p.nuid === action.nuid ?
+                {
+                nuid: p.nuid,
+                retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
+                personalInformation: action.profile
+                } : p);
+        default:
+            return state;
+    }
+}
+
+function notes(state=initialNotes,action){
+    switch(action.type){
+        case actions.STUDENT_PROFILE_RETRIEVAL_SUCCESS:
+            return state.concat(action.profile.notes.map(n => ({
+                nuid: n.neuId,
+                adminId: n.administratorNeuId,
+                noteId: n.administratorNoteId,
+                title: n.title,
+                desc: n.desc
+            })));
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({
+    token,
+    students,
+    studentProfiles,
+    notes
+});
+
 

@@ -180,6 +180,12 @@ a.add-filter-button{
     padding-top: 15px;
 }
 
+.student-pagination-input-container{
+    display: inline-block;
+    width: 45px;
+    position: relative;
+}
+
 a.student-pagination-button{
     display: inline-block;
     text-decoration: none;
@@ -202,11 +208,6 @@ a.student-pagination-button.hide{
 .student-pagination-text{
     display: inline-block;
     padding: 0 10px;
-}
-
-.student-pagination-text input{
-    width: 45px;
-    display: inline-block;
 }
 
 a.student-pagination-error{
@@ -232,11 +233,10 @@ a.student-pagination-go-to-page-button{
     color: white;
     background-color: rgba(255,0,0);
     border-radius: 10px;
-    margin-left: 10px;
-    margin-top: 3px;
+    right: -180px;
+    top: 0;
     opacity: 1;
-    width: auto;
-    transition: width .3s;
+    transition: opacity .3s;
 }
 
 a.student-pagination-go-to-page-button.hide{
@@ -256,7 +256,7 @@ a.applied-filter {
     text-decoration: none;
     color: #B10F1F;
     border: solid #B10F1F 2px;
-    padding: 4px 0;
+    padding: 4px 20px;
     min-width: 200px;
     text-align: center;
     border-radius: 20px;
@@ -396,7 +396,8 @@ a.nu-undergrad-option{
     position: absolute;
     width: 100%;
     top: 0;
-    background-color: rgba(187,187,187,.1);
+    background-color: white;
+    border-bottom: 2px groove #BBBBBB;
     overflow: auto;
 }
 
@@ -539,8 +540,9 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 .note-title{
     background-color: rgba(187,187,187,.3);
-    font-size: 20px;
+    font-size: 23px;
     font-style: italic;
+    font-weight: 700;
     padding: 5px 15px;
 }
 

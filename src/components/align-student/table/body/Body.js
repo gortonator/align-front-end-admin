@@ -1,5 +1,5 @@
 import React from 'react';
-import {ASYNC_ACTION_STATUSES} from "../../../../reducers/align-students";
+import {ASYNC_ACTION_STATUSES} from "../../../../constants";
 import Row from './Row';
 import RetrievalOngoingMessage from '../../../common/data-retrieval-messages/RetrievalOngoingMessage';
 import RetrievalFailureMessage from '../../../common/data-retrieval-messages/RetrievalFailureMessage';
@@ -19,7 +19,7 @@ export default props => {
         case ASYNC_ACTION_STATUSES.FAILURE:
             return (
                 <RetrievalFailureMessage message={'Student Retrieval Failed.'}
-                                         onRetry={()=> {}}
+                                         onRetry={()=> {props.retryRetrieval();}}
                                          onCancel={() => {
                                              props.acceptRetrievalFailure();
                                          }}/>

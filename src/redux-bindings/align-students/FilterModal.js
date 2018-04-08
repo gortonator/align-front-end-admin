@@ -4,14 +4,15 @@ import {applyStudentFilters} from '../../actions/align-students-actions';
 
 function mapStateToProps(state){
     return {
-        studentFilters: state.alignStudent.studentFilters
+        studentFilters: state.alignStudent.students.studentFilters,
+        token: state.alignStudent.token
     };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        applyFilters: studentFilters => {
-            dispatch(applyStudentFilters(studentFilters));
+        applyFilters: (studentFilters,token) => {
+            dispatch(applyStudentFilters(studentFilters,token,1));
         }
     };
 }

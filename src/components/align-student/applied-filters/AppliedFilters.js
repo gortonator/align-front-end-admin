@@ -1,9 +1,7 @@
 import React from 'react';
 import AppliedFilter from './AppliedFilter';
-import {
-    ASYNC_ACTION_STATUSES,
-    getMultiSelectableFilterDisplay,
-    CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS} from '../../../reducers/align-students';
+import {GENDER_OPTIONS} from '../../../constants';
+import {ASYNC_ACTION_STATUSES, CAMPUSES, ENROLLMENT_STATUSES} from "../../../constants";
 
 export default props => {
     var children;
@@ -55,8 +53,18 @@ function getNameOrIdFilterDisplay(f){
     );
 }
 
+function getArrayValuedFilterDisplay(f, options) {
+    const optionsSelected = [];
+    Object.keys(options).forEach(o => {
+        if (f.indexOf(options[o].value) !== -1) {
+            optionsSelected.push(options[o].displayName);
+        }
+    });
+    return optionsSelected.join(' | ');
+}
+
 function getCampusFilterDisplay(f){
-    const display = getMultiSelectableFilterDisplay(f,CAMPUSES);
+    const display = getArrayValuedFilterDisplay(f,CAMPUSES);
     return (
         display !== '' &&
         <AppliedFilter filterName={'Campus'}
@@ -65,7 +73,7 @@ function getCampusFilterDisplay(f){
 }
 
 function getEnrollmentStatusFilterDisplay(f){
-    const display = getMultiSelectableFilterDisplay(f,ENROLLMENT_STATUSES);
+    const display = getArrayValuedFilterDisplay(f,ENROLLMENT_STATUSES);
     return (
         display !== '' &&
         <AppliedFilter filterName={'Enrollment Status'}

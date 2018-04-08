@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GENDER_OPTIONS} from "../reducers/align-students";
+import {GENDER_OPTIONS, NUMBER_OF_STUDENTS_PER_PAGE, BASE_URL} from "../constants";
 
 // Action Types
 
@@ -41,12 +41,13 @@ export function studentRetrievalRequest(){
     };
 }
 
-export function studentRetrievalSuccess(students,totalCount,page){
+export function studentRetrievalSuccess(students,totalPage,currentPage,studentFilters){
     return {
         type: STUDENT_RETRIEVAL_SUCCESS,
         students: students,
-        totalCount: totalCount,
-        page: page
+        totalPage: totalPage,
+        currentPage: currentPage,
+        studentFilters: studentFilters
     };
 }
 
@@ -71,9 +72,11 @@ export function studentProfileRetrievalRequest(nuid){
     };
 }
 
-export function studentProfileRetrievalSuccess(){
+export function studentProfileRetrievalSuccess(profile,nuid){
     return {
-        type: STUDENT_PROFILE_RETRIEVAL_SUCCESS
+        type: STUDENT_PROFILE_RETRIEVAL_SUCCESS,
+        profile: profile,
+        nuid: nuid
     };
 }
 
@@ -89,24 +92,41 @@ export function applyStudentFilters(studentFilters,token,page){
     return dispatch => {
         dispatch(studentRetrievalRequest());
 
-        console.log(getStudentSearchRequestBody(studentFilters,'1'));
-        // axios.post(
-        //     URL_FOR_STUDENT_SEARCH,
-        //     getStudentSearchRequestBody(studentFilters,page),
-        //     {
-        //         headers: {
-        //         'token': token
-        //         }
-        //     })
-        //     .then(
-        //
-        //     )
+        axios.post(
+            BASE_URL + '/students',
+            getStudentSearchRequestBody(studentFilters,page),
+            {
+                headers: {
+                'token': token
+                },
+            })
+            .then(
+                response => {
+                    const students = response.data.students.map(s => {
+                        return {
+                            nuid: s.neuid,
+                            degreeYear: s.expectedlastyear,
+                            email: s.email,
+                            hasNote: s.notes.length > 0,
+                            name: [s.firstname,s.middlename,s.lastname].join(' '),
+                            enrollmentStatus: s.enrollmentstatus
+                        };
+                    });
+                    dispatch(studentRetrievalSuccess(
+                        students,
+                        Math.ceil(Number(response.data.totalcount)/NUMBER_OF_STUDENTS_PER_PAGE),
+                        page,
+                        studentFilters));
+                },
+                error => {
+                    dispatch(studentRetrievalFailure(studentFilters,page));
+                });
     };
 }
 
 function getStudentSearchRequestBody(studentFilters,page){
     const body = {};
-    if (studentFilters.nameOrId !== ''){
+    if (studentFilters.nameOrId !== undefined && studentFilters.nameOrId !== ''){
         setRequestBodyNameAndIdFields(studentFilters.nameOrId,body);
     }
 
@@ -131,6 +151,8 @@ function getStudentSearchRequestBody(studentFilters,page){
     body.beginIndex = (page - 1) * NUMBER_OF_STUDENTS_PER_PAGE + 1;
 
     body.endIndex = body.beginIndex + NUMBER_OF_STUDENTS_PER_PAGE - 1;
+
+    console.log(body);
 
     return body;
 
@@ -164,24 +186,33 @@ function setRequestBodySingleValuedField(filter,body,fieldName){
 
 
 
-export function retrieveStudentProfile(nuid){
+export function retrieveStudentProfile(nuid,token){
     return dispatch => {
         dispatch(studentProfileRetrievalRequest(nuid));
+
+        axios.get(BASE_URL + '/students/' + nuid,{
+            headers: {
+                token: token
+            }
+        })
+            .then(
+                response => {
+                    dispatch(studentProfileRetrievalSuccess(response.data,nuid));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(studentProfileRetrievalFailure());
+                }
+            )
     };
 }
 
-export function manipulateNote(manipulationType,noteId,nuid){
-    return dispacth => {
-
-    };
-}
-
-// Constants
 
 
 
-const NUMBER_OF_STUDENTS_PER_PAGE = 20;
 
-const URL_FOR_STUDENT_SEARCH = 'http://asd2.ccs.neu.edu:8081/students';
+
+
+
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {CAMPUSES} from "../../../../reducers/align-students";
+import {CAMPUSES} from "../../../../constants";
 import TogglableOption from '../../../common/TogglableOption';
 
 export default props => (

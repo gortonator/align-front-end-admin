@@ -9,12 +9,18 @@ export default props => (
         <Body studentRetrievalStatus={props.studentRetrievalStatus}
               students={props.students}
               acceptRetrievalFailure={props.acceptRetrievalFailure}
-              applyFilters={props.applyFilters}
-              failedAttempt={props.failedAttempt}
+              retryRetrieval={() => {
+                  props.applyFilters(
+                      props.failedStudentRetrieval.studentFilters,
+                      props.token,
+                      props.failedStudentRetrieval.page)
+              }}
               openProfileModal={props.openProfileModal}/>
         <Pagination pagination={props.pagination}
                     studentRetrievalStatus={props.studentRetrievalStatus}
-                    applyFilters={props.applyFilters}
+                    goToPage={page => {
+                        props.applyFilters(props.studentFilters,props.token,page);
+                    }}
                     studentFilters={props.studentFilters}/>
     </div>
 )

@@ -6,9 +6,10 @@ function mapStateToProps(state){
     return {
         students: state.alignStudent.students.items,
         studentRetrievalStatus: state.alignStudent.students.retrievalStatus,
-        failedAttempt: state.alignStudent.failedAttempt,
-        pagination: state.alignStudent.pagination,
-        studentFilters: state.alignStudent.studentFilters
+        failedStudentRetrieval: state.alignStudent.students.failedStudentRetrieval,
+        pagination: state.alignStudent.students.pagination,
+        studentFilters: state.alignStudent.students.studentFilters,
+        token: state.alignStudent.token
     };
 }
 
@@ -17,8 +18,8 @@ function mapDispatchToProps(dispatch){
         acceptRetrievalFailure: () => {
             dispatch(acceptRetrievalFailure());
         },
-        applyFilters: studentFilters => {
-            dispatch(applyStudentFilters(studentFilters));
+        applyFilters: (studentFilters,token,page) => {
+            dispatch(applyStudentFilters(studentFilters,token,page));
         }
     };
 }

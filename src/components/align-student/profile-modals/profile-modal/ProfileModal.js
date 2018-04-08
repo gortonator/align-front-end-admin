@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './nav-bar/NavBar';
 import Notes from './notes/Notes';
-import {ASYNC_ACTION_STATUSES} from "../../../../reducers/align-students";
+import {ASYNC_ACTION_STATUSES} from "../../../../constants";
 import RetrievalOngoingMessage from "../../../common/data-retrieval-messages/RetrievalOngoingMessage";
 import RetrievalFailureMessage from '../../../common/data-retrieval-messages/RetrievalFailureMessage';
 
@@ -30,7 +30,8 @@ class ProfileModal extends React.Component{
             mouseX: -1,
             mouseY: -1,
             dragging: false,
-            profile: null
+            profile: this.props.studentProfiles.find(p => p.nuid === this.props.nuid),
+            notes: this.props.notes.filter(n => n.nuid === this.props.nuid)
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
@@ -39,13 +40,8 @@ class ProfileModal extends React.Component{
     }
 
     componentDidMount(){
-        const profileFound = this.props.studentProfiles.find(p => p.nuid === this.props.nuid);
-        if (profileFound === undefined){
-            this.props.retrieveStudentProfile(this.props.nuid);
-        } else{
-            this.setState({
-                profile: profileFound
-            });
+        if (this.state.profile === undefined || this.state.profile.personalInformation === null) {
+            this.props.retrieveProfile();
         }
     }
 
@@ -61,6 +57,11 @@ class ProfileModal extends React.Component{
         if (JSON.stringify(this.props.studentProfiles) !== JSON.stringify(props.studentProfiles)){
             this.setState({
                 profile: this.props.studentProfiles.find(p => p.nuid === this.props.nuid)
+            });
+        }
+        if (this.props.notes !== props.notes){
+            this.setState({
+               notes: this.props.notes.filter(n => n.nuid === this.props.nuid)
             });
         }
     }
@@ -116,14 +117,14 @@ class ProfileModal extends React.Component{
                 <NavBar closeModal={this.props.closeModal}
                         display={this.state.display}
                         changeDisplay={this.changeDisplay}
-                        numberOfNotes={4}
+                        numberOfNotes={this.props.notes.filter(n => n.nuid === this.props.nuid).length}
                         startDragging={this.startDragging}
                         dragging={this.dragging}
                         endDragging={this.endDragging}
                         isDragging={this.state.dragging}
                         name={this.props.name}
                         profile={this.state.profile}/>
-                {getDisplayContent(this.state.profile,this.state.display)}
+                {getDisplayContent(this.state.profile,this.state.display,this.state.notes)}
             </div>
         );
     }
@@ -168,8 +169,8 @@ const notes = [
     }
 ];
 
-function getDisplayContent(profile,display,onCancel,onRetry){
-    if (profile === null){
+function getDisplayContent(profile,display,notes){
+    if (profile === undefined){
         return null;
     } else {
         switch (profile.retrievalStatus){
@@ -185,7 +186,7 @@ function getDisplayContent(profile,display,onCancel,onRetry){
                     case PROFILE_MODAL_DISPLAY_CONTENT.PROFILE:
                         return JSON.stringify(profile.personalInformation);
                     case PROFILE_MODAL_DISPLAY_CONTENT.NOTES:
-                        return <Notes notes={profile.notes}/>;
+                        return <Notes notes={notes}/>;
                     default:
                         return null;
                 }

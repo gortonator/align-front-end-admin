@@ -1,32 +1,23 @@
 import React from 'react';
 import {FILTER_MODAL_STATUSES} from '../AlignStudent';
-import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS, initialState} from "../../../reducers/align-students";
+import {initialState} from "../../../reducers/align-students";
 
 import CampusFilter from './filters/CampusFilter';
 import CoopFilter from './filters/CoopFilter';
 import ApplyButton from './controls/ApplyButton';
-import Heading from './filters/Heading';
+import Heading from './Heading';
 import EnrollmentStatusFilter from './filters/EnrollmentStatusFilter';
 import GenderFilter from './filters/GenderFilter';
 import MiscellaneousFilters from './filters/miscellaneous-filters/MiscellaneousFilters';
 import RaceFilter from './filters/RaceFilter';
 import UndergradMajorFilter from './filters/UndergradMajorFilter';
 import CloseButton from './controls/CloseButton';
+import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS} from "../../../constants";
 
 const defaultStudentFilter = {
     nameOrId: '',
-    campus: {
-        [CAMPUSES.BOSTON.value] : false,
-        [CAMPUSES.CHARLOTTE.value] : false,
-        [CAMPUSES.SEATTLE.value] : false,
-        [CAMPUSES.SILICONVALLEY.value] : false
-    },
-    enrollmentStatus: {
-        [ENROLLMENT_STATUSES.FULLTIME.value] : false,
-        [ENROLLMENT_STATUSES.PARTTIME.value] : false,
-        [ENROLLMENT_STATUSES.INACTIVE.value] : false,
-        [ENROLLMENT_STATUSES.DROPOUT.value] : false
-    },
+    campus: [],
+    enrollmentStatus: [],
     coop: '',
     gender: GENDER_OPTIONS.ANY.value,
     race: '',
@@ -38,12 +29,6 @@ class EditStudentFilterModal extends React.Component {
     constructor(props){
         super(props);
         this.state = JSON.parse(JSON.stringify(props.studentFilters));
-
-        this.isCampusChosen = this.isCampusChosen.bind(this);
-        this.toggleCampusOption = this.toggleCampusOption.bind(this);
-
-        this.isEnrollmentStatusChosen = this.isEnrollmentStatusChosen.bind(this);
-        this.toggleEnrollmentStatusOption = this.toggleEnrollmentStatusOption.bind(this);
 
         this.isTogglableOptionChosen = this.isTogglableOptionChosen.bind(this);
         this.toggleFilterOption = this.toggleFilterOption.bind(this);
@@ -57,26 +42,6 @@ class EditStudentFilterModal extends React.Component {
         this.applyFilters = this.applyFilters.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.clearAllFilters = this.clearAllFilters.bind(this);
-    }
-
-    isCampusChosen(campus){
-        return this.state.campus.indexOf(campus) !== -1;
-    }
-
-    toggleCampusOption(campus){
-        const index = this.state.campus.indexOf(campus);
-        const newCampus = JSON.parse(JSON.stringify(this.state.campus));
-        if (index === -1){
-            newCampus.push(campus);
-            this.setState({
-                campus: newCampus
-            });
-        } else{
-            newCampus.splice(index,1);
-            this.setState({
-                campus: newCampus
-            });
-        }
     }
 
     isTogglableOptionChosen(option,filter){
@@ -156,7 +121,7 @@ class EditStudentFilterModal extends React.Component {
     }
 
     applyFilters(){
-        this.props.applyFilters(this.state);
+        this.props.applyFilters(this.state,this.props.token);
         this.props.closeModal();
     }
 

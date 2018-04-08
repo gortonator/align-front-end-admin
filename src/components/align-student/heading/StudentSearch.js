@@ -7,7 +7,7 @@ class StudentSearch extends React.Component{
         super(props);
         this.state = {
             showingInput: false,
-            value: this.props.studentFilters.nameOrId
+            value: this.props.nameOrId
         };
         this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -35,10 +35,7 @@ class StudentSearch extends React.Component{
                     showingInput: false
                 });
             } else{
-                this.props.applyFilters({
-                    ...this.props.studentFilters,
-                    nameOrId: this.state.value
-                });
+                this.props.searchByNameOrId(this.state.value);
             }
         }
 
@@ -60,10 +57,7 @@ class StudentSearch extends React.Component{
 
     handleClearFilterButtonClick(e){
         e.preventDefault();
-        this.props.applyFilters({
-            ...this.props.studentFilters,
-            nameOrId: ''
-        });
+        this.props.searchByNameOrId('');
         this.setState({
             showingInput: false
         });
@@ -96,9 +90,9 @@ class StudentSearch extends React.Component{
                         </path>
                     </svg>
                 </a>
-                {this.state.showingInput && this.props.studentFilters.nameOrId !== '' &&
+                {this.state.showingInput && this.props.nameOrId !== '' &&
                 <div className={'applied-name-filter'}>
-                    Searching for: "<span style={{'color' : 'rgba(255,0,0,.7)'}}>{this.props.studentFilters.nameOrId}</span>"
+                    Searching for: "<span style={{'color' : 'rgba(255,0,0,.7)'}}>{this.props.nameOrId}</span>"
                     <a href={''} onClick={this.handleClearFilterButtonClick}>
                         <FontAwesomeIcon icon={faTimes}/>
                     </a>

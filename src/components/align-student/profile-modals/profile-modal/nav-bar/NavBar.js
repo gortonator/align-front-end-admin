@@ -3,7 +3,7 @@ import Drag from './parts/Drag';
 import NavLinks from './parts/NavLinks';
 import CloseButton from './parts/CloseButton';
 
-import {ASYNC_ACTION_STATUSES} from "../../../../../reducers/align-students";
+import {ASYNC_ACTION_STATUSES} from "../../../../../constants";
 
 
 export default props => (
@@ -14,7 +14,7 @@ export default props => (
               isDragging={props.isDragging}/>
 
         {
-            props.profile !== null && props.profile.personalInformation !== null &&
+            props.personalInformation !== null &&
             <NavLinks display={props.display}
                   changeDisplay={props.changeDisplay}
                   numberOfNotes={props.numberOfNotes}/>

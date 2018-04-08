@@ -5,7 +5,13 @@ export default props => (
     <div>
         <div style={{'overflow' : 'auto'}}>
             <span className={"student-heading"}>Align Students</span>
-            <StudentSearch applyFilters={props.applyFilters} studentFilters={props.studentFilters}/>
+            <StudentSearch
+                searchByNameOrId={(nameOrId) => {
+                    const studentFilters = JSON.parse(JSON.stringify(props.studentFilters));
+                    studentFilters.nameOrId = nameOrId;
+                    props.applyFilters(studentFilters,props.token,1);
+                }}
+                nameOrId={props.studentFilters.nameOrId}/>
         </div>
         <a className={'add-filter-button'}
            href={""}

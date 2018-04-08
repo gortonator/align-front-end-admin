@@ -1,10 +1,13 @@
 import React from 'react';
-import ProfileModal from '../../../redux-bindings/align-students/ProfileModal';
+import ProfileModal from './profile-modal/ProfileModal';
 
 export default props => (
     <React.Fragment>
         {props.openedProfiles.map(nuid =>
             <ProfileModal key={nuid}
+                          notes={props.notes}
+                          studentProfiles={props.studentProfiles}
+                          retrieveProfile={() => {props.retrieveStudentProfile(nuid,props.token)}}
                           nuid={nuid}
                           isActive={props.activeProfile === nuid}
                           closeModal={() => {props.closeProfileModal(nuid)}}

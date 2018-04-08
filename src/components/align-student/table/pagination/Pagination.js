@@ -1,5 +1,5 @@
 import React from 'react';
-import {ASYNC_ACTION_STATUSES} from "../../../../reducers/align-students";
+import {ASYNC_ACTION_STATUSES} from "../../../../constants";
 import NextPageButton from './NextPageButton';
 import PaginationInput from './PaginationInput';
 import PreviousPageButton from './PreviousPageButton';
@@ -8,15 +8,19 @@ class Pagination extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            page: this.props.pagination.current,
-            editing: false
+            page: this.props.pagination.current
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.isInputValid = this.isInputValid.bind(this);
-        this.handleFocus = this.handleFocus.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
-        this.handlePageChange = this.handlePageChange.bind(this);
+    }
+
+    componentDidUpdate(props){
+        if (props.pagination.current !== this.props.pagination.current){
+            this.setState({
+                page: this.props.pagination.current
+            });
+        }
     }
 
     isInputValid(){
@@ -33,41 +37,29 @@ class Pagination extends React.Component {
         })
     };
 
-    handleFocus(e){
-        this.setState({
-            editing: true
-        })
-    };
-
-    handleBlur(e){
-        this.setState({
-            editing: false
-        })
-    };
-
-    handlePageChange(p){
-        this.props.applyFilters(this.props.studentFilters);
-    }
 
     render(){
         return (
-            this.props.studentRetrievalStatus === ASYNC_ACTION_STATUSES.SUCCESS &&
+            this.props.studentRetrievalStatus === ASYNC_ACTION_STATUSES.SUCCESS && this.props.pagination.total > 0 &&
             <div className={"student-pagination-container"}>
                 <div >
 
                     <PreviousPageButton currentPage={this.props.pagination.current}
-                                        handlePageChange={this.handlePageChange}/>
+                                        goToPreviousPage={() => {
+                                            this.props.goToPage(this.props.pagination.current-1)
+                                        }}/>
 
                     <PaginationInput page={this.state.page}
                                      handleInputChange={this.handleInputChange}
-                                     handlePageChange={this.handlePageChange}
-                                     handleFocus={this.handleFocus}
-                                     handleBlur={this.handleBlur}
-                                     isEditing={this.state.editing}/>
+                                     goToPage={p => {this.props.goToPage(p)}}
+                                     isEditing={this.state.editing}
+                                     totalPage={this.props.pagination.total}/>
 
                     <NextPageButton currentPage={this.props.pagination.current}
                                     totalPage={this.props.pagination.total}
-                                    handlePageChange={this.handlePageChange}/>
+                                    goToNextPage={() => {
+                                        this.props.goToPage(this.props.pagination.current+1);
+                                    }}/>
                 </div>
                 <a className={'student-pagination-error' + ' ' + (
                     this.isInputValid() ? 'hide' : ''
