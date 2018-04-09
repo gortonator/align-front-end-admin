@@ -116,7 +116,7 @@ function students(state=initalStudentsState,action){
                     page: action.page
                 }
             });
-        case actions.ACCEPT_RETRIEVAL_FAILURE:
+        case actions.ACCEPT_STUDENT_RETRIEVAL_FAILURE:
             return Object.assign({},state,{
                 retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS
             });
@@ -158,6 +158,13 @@ function studentProfiles(state=initialStudentProfiles,action){
                     retrievalStatus: ASYNC_ACTION_STATUSES.FAILURE,
                     personalInformation: null
                 } : p);
+        case actions.ACCEPT_PROFILE_RETRIEVAL_FAILURE:
+            return state.map(p => p.nuid === action.nuid ?
+                {
+                    nuid: p.nuid,
+                    retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
+                    personalInformation: null
+                }: p);
         default:
             return state;
     }

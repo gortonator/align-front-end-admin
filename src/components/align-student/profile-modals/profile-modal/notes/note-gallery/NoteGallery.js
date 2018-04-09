@@ -3,7 +3,7 @@ import Note from './note/Note';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
 import {ASYNC_ACTION_STATUSES, NOTE_CREATION_PLACE_HOLDER} from "../../../../../../constants";
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // export default props => (
 //     <div>
@@ -60,17 +60,35 @@ class NoteGallery extends React.Component {
                    }}>
                     <FontAwesomeIcon icon={faPlusCircle}/>
                 </a>
-                {this.props.notes.map(n => (
-                    <Note key={n.noteId}
-                          note={n}
-                          delete={() => {
-                              this.setState({
-                                  deletionStatus: ASYNC_ACTION_STATUSES.ONGOING
-                              });
-                              this.props.delete(n.noteId,()=>{},this.deletionFailureCallback);
-                          }}
-                          startEditing={() => this.props.startEditing(n.noteId)}/>
-                ))}
+
+                <TransitionGroup>
+                    {this.props.notes.map(n => (
+                        <CSSTransition key={n.noteId}
+                                       timeout={300}
+                                       classNames={'note'}>
+                            <Note note={n}
+                                  delete={() => {
+                                      this.setState({
+                                          deletionStatus: ASYNC_ACTION_STATUSES.ONGOING
+                                      });
+                                      this.props.delete(n.noteId,()=>{},this.deletionFailureCallback);
+                                  }}
+                                  startEditing={() => this.props.startEditing(n.noteId)}/>
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup>
+
+                {/*{this.props.notes.map(n => (*/}
+                    {/*<Note key={n.noteId}*/}
+                          {/*note={n}*/}
+                          {/*delete={() => {*/}
+                              {/*this.setState({*/}
+                                  {/*deletionStatus: ASYNC_ACTION_STATUSES.ONGOING*/}
+                              {/*});*/}
+                              {/*this.props.delete(n.noteId,()=>{},this.deletionFailureCallback);*/}
+                          {/*}}*/}
+                          {/*startEditing={() => this.props.startEditing(n.noteId)}/>*/}
+                {/*))}*/}
 
                 <CSSTransition in={this.state.deletionStatus === ASYNC_ACTION_STATUSES.FAILURE}
                                timeout={300}

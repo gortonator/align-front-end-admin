@@ -23,7 +23,8 @@ export const NOTE_DELETION_REQUEST = 'NOTE_DELETION_REQUEST';
 export const NOTE_DELETION_SUCCESS = 'NOTE_DELETION_SUCCESS';
 export const NOTE_DELETION_FAILURE = 'NOTE_DELETION_FAILURE';
 
-export const ACCEPT_RETRIEVAL_FAILURE = 'ACCEPT_RETRIEVAL_FAILURE';
+export const ACCEPT_STUDENT_RETRIEVAL_FAILURE = 'ACCEPT_STUDENT_RETRIEVAL_FAILURE';
+export const ACCEPT_PROFILE_RETRIEVAL_FAILURE = 'ACCEPT_PROFILE_RETRIEVAL_FAILURE';
 
 // // Overview Deeper Report Modal Statuses
 // export const overviewDeepReportModalStatus = {
@@ -59,9 +60,9 @@ export function studentRetrievalFailure(studentFilters,page){
     };
 }
 
-export function acceptRetrievalFailure(){
+export function acceptStudentRetrievalFailure(){
     return {
-        type: ACCEPT_RETRIEVAL_FAILURE
+        type: ACCEPT_STUDENT_RETRIEVAL_FAILURE
     };
 }
 
@@ -84,6 +85,13 @@ export function studentProfileRetrievalSuccess(profile,nuid,notes){
 export function studentProfileRetrievalFailure(){
     return {
         type: STUDENT_PROFILE_RETRIEVAL_FAILURE
+    };
+}
+
+export function acceptProfileRetrievalFailure(nuid){
+    return {
+        type: ACCEPT_PROFILE_RETRIEVAL_FAILURE,
+        nuid: nuid
     };
 }
 
@@ -158,37 +166,36 @@ export function applyStudentFilters(studentFilters,token,page){
     return dispatch => {
         dispatch(studentRetrievalRequest());
 
-        // axios.post(
-        //     BASE_URL + '/students',
-        //     getStudentSearchRequestBody(studentFilters,page),
-        //     {
-        //         headers: {
-        //         'token': token
-        //         },
-        //     })
-        //     .then(
-        //         response => {
-        //             const students = response.data.students.map(s => {
-        //                 return {
-        //                     nuid: s.neuid,
-        //                     degreeYear: s.expectedlastyear,
-        //                     email: s.email,
-        //                     hasNote: s.notes.length > 0,
-        //                     name: [s.firstname,s.middlename,s.lastname].join(' '),
-        //                     enrollmentStatus: s.enrollmentstatus
-        //                 };
-        //             });
-        //             dispatch(studentRetrievalSuccess(
-        //                 students,
-        //                 Math.ceil(Number(response.data.totalcount)/NUMBER_OF_STUDENTS_PER_PAGE),
-        //                 page,
-        //                 studentFilters));
-        //         },
-        //         error => {
-        //             dispatch(studentRetrievalFailure(studentFilters,page));
-        //         });
-        //
-        // dispatch(studentRetrievalSuccess([],1,1,studentFilters));
+        axios.post(
+            BASE_URL + '/students',
+            getStudentSearchRequestBody(studentFilters,page),
+            {
+                headers: {
+                'token': token
+                },
+            })
+            .then(
+                response => {
+                    const students = response.data.students.map(s => {
+                        return {
+                            nuid: s.neuid,
+                            degreeYear: s.expectedlastyear,
+                            email: s.email,
+                            hasNote: s.notes.length > 0,
+                            name: [s.firstname,s.middlename,s.lastname].join(' '),
+                            enrollmentStatus: s.enrollmentstatus
+                        };
+                    });
+                    dispatch(studentRetrievalSuccess(
+                        students,
+                        Math.ceil(Number(response.data.totalcount)/NUMBER_OF_STUDENTS_PER_PAGE),
+                        page,
+                        studentFilters));
+                },
+                error => {
+                    dispatch(studentRetrievalFailure(studentFilters,page));
+                });
+
     };
 }
 
@@ -254,27 +261,28 @@ export function retrieveStudentProfile(nuid,token){
     return dispatch => {
         dispatch(studentProfileRetrievalRequest(nuid));
 
-        axios.get(BASE_URL + '/students/' + nuid,{
-            headers: {
-                token: token
-            }
-        })
-            .then(
-                response => {
-                    const notes = response.data.notes.map(n => ({
-                        nuid: n.neuId,
-                        adminId: n.administratorNeuId,
-                        noteId: n.administratorNoteId,
-                        title: n.title,
-                        desc: n.desc
-                    }));
-                    dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
-                },
-                error => {
-                    console.log(error);
-                    dispatch(studentProfileRetrievalFailure());
-                }
-            );
+        // axios.get(BASE_URL + '/students/' + nuid,{
+        //     headers: {
+        //         token: token
+        //     }
+        // })
+        //     .then(
+        //         response => {
+        //             const notes = response.data.notes.map(n => ({
+        //                 nuid: n.neuId,
+        //                 adminId: n.administratorNeuId,
+        //                 noteId: n.administratorNoteId,
+        //                 title: n.title,
+        //                 desc: n.desc
+        //             }));
+        //             dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
+        //         },
+        //         error => {
+        //             console.log(error);
+        //             dispatch(studentProfileRetrievalFailure());
+        //         }
+        //     );
+        dispatch(studentProfileRetrievalFailure());
     };
 };
 

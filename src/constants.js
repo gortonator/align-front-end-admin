@@ -70,4 +70,4 @@ export const BASE_URL = 'http://asd2.ccs.neu.edu:8081';
 export const ADMIN_ID = '8123094';
 
 export const TOKEN =
-'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..jufbOMfIy54cOEloapXgGw.beM2DMb4Y5yDleNU7e4UAO5psOB18Zcpc5vy9AyTUVnjPhJBNdrRU6_MqDjcxzwU7ZeRbtJ-pwroacPn67Zs_uUM8t84d0-Xd3MqCwpd4_A.7FUTdRNgx5ZUfooJOrGZRw';
+'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..nYXlF2XKxgY5lyFGsxa1qw.d2ioX0xu2nd2M7thLZfxqmF7n4w01ZtCJCcssc5lvABJjiUSboyOeYksXlBqkWARSRe9H4URVtkhtLdZD-NF5zwPfYdAU1JmSbCty8PzCNA.0hVvizphTh4Nh1HupqD3xA';

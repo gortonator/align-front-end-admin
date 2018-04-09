@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import ProfileModals from '../../components/align-student/profile-modals/ProfileModals';
-import {retrieveStudentProfile,createNote,updateNote,deleteNote} from "../../actions/align-students-actions";
+import {retrieveStudentProfile,createNote,updateNote,deleteNote,acceptProfileRetrievalFailure} from "../../actions/align-students-actions";
 
 function mapStateToProps(state){
     return {
@@ -25,6 +25,9 @@ function mapDispatchToProps(dispatch){
         },
         deleteNote: (noteId,token,successCallback,failureCallback) => {
             dispatch(deleteNote(noteId,token,successCallback,failureCallback));
+        },
+        acceptRetrievalFailure: nuid => {
+            dispatch(acceptProfileRetrievalFailure(nuid));
         }
     };
 }

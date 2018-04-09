@@ -8,6 +8,7 @@ export default props => (
                           notes={props.notes.filter(n => n.nuid === nuid)}
                           profile={props.studentProfiles.find(p => p.nuid === nuid)}
                           retrieveProfile={() => {props.retrieveStudentProfile(nuid,props.token)}}
+                          acceptRetrievalFailure={() => {props.acceptRetrievalFailure(nuid)}}
                           nuid={nuid}
                           isActive={props.activeProfile === nuid}
                           closeModal={() => {props.closeProfileModal(nuid)}}

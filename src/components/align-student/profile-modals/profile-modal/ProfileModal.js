@@ -16,8 +16,8 @@ const PROFILE_MODAL_INITIAL_POSITION = {
 };
 
 const PROFILE_MODAL_DIMENSIONS = {
-    width: 800,
-    height: 500
+    width: 900,
+    height: 550
 };
 
 class ProfileModal extends React.Component{
@@ -156,19 +156,6 @@ function  confineVerticalPosition(y) {
         return window.innerHeight - PROFILE_MODAL_DIMENSIONS.height;
     }
 }
-
-const notes = [
-    {
-        noteId: '1',
-        title: '1',
-        desc: '1'
-    },
-    {
-        noteId: '2',
-        title: '2',
-        desc: '2'
-    }
-];
 
 function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote,onRetry){
     if (profile === undefined){

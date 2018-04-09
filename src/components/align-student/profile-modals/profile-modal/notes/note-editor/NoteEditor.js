@@ -136,7 +136,7 @@ class NoteEditor extends React.Component{
 
     render(){
         return (
-            <div>
+            <div >
                 <div>
                     <a className={'note-editor-back-button'}
                        href={''}
@@ -148,21 +148,23 @@ class NoteEditor extends React.Component{
                     </a>
                 </div>
 
-                <TitleField title={this.state.title} handleTitleChange={this.handleTitleChange}/>
+                <div className={'note-editor'}>
+                    <TitleField title={this.state.title} handleTitleChange={this.handleTitleChange}/>
 
-                <DescField desc={this.state.desc} handleDescChange={this.handleDescChange}/>
+                    <DescField desc={this.state.desc} handleDescChange={this.handleDescChange}/>
 
-                <Controls isPublishable={this.state.title !== '' && this.state.desc !== ''}
-                          backToDisplay={this.props.backToDisplay}
-                          creating={this.state.creating}
-                          publishChange={this.publishChange}/>
+                    <Controls isPublishable={this.state.title !== '' && this.state.desc !== ''}
+                              backToDisplay={this.props.backToDisplay}
+                              creating={this.state.creating}
+                              publishChange={this.publishChange}/>
 
-                {
-                    this.state.error &&
-                    <div className={'note-editor-message'}>
-                        Title or Description can't be blank.
-                    </div>
-                }
+                    {
+                        this.state.error &&
+                        <div className={'note-editor-message'}>
+                            Title or Description can't be blank.
+                        </div>
+                    }
+                </div>
 
                 <CSSTransition in={this.state.operationStatus === ASYNC_ACTION_STATUSES.FAILURE}
                                timeout={300}

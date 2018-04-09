@@ -3,7 +3,6 @@ import {ASYNC_ACTION_STATUSES} from "../../../../constants";
 import Row from './Row';
 import OperationOngoingMessage from '../../../common/OperationOngoingMessage';
 import RetrievalFailureMessage from '../../../common/RetriableFailureMessage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export default props => {
     switch (props.studentRetrievalStatus) {
