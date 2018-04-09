@@ -17,7 +17,6 @@ import 'react-virtualized-select/styles.css'
 import './css/align-student.css';
 import './css/overview.css';
 import './css/style.css';
-import './css/common.css';
 
 import Header from './components/header';
 import Navbar from './react-redux-mixed/left_navbar';

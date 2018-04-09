@@ -12,12 +12,16 @@ class Controls extends React.Component{
 
     handlePublishClick(e){
         e.preventDefault();
-        if (this.props.noteState.title === '' && this.props.noteState.desc === ''){
+        if (!this.props.isPublishable){
             this.setState({
                 error: true
             });
         } else {
-
+            if (this.props.creating){
+                this.props.create();
+            } else {
+                this.props.update();
+            }
         }
     }
 

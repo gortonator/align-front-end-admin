@@ -14,7 +14,7 @@ export default props => (
               isDragging={props.isDragging}/>
 
         {
-            props.personalInformation !== null &&
+            props.profile !== undefined && props.profile.personalInformation !== null &&
             <NavLinks display={props.display}
                   changeDisplay={props.changeDisplay}
                   numberOfNotes={props.numberOfNotes}/>

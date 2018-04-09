@@ -15,10 +15,9 @@ export default props => (
         </a>
         {props.notes.map(n => (
             <Note key={n.noteId}
-                  title={n.title}
-                  desc={n.desc}
-                  noteId={n.noteId}
-                  startEditing={props.startEditing}/>
+                  note={n}
+                  delete={() => props.delete(n.noteId)}
+                  startEditing={() => props.startEditing(n.noteId)}/>
         ))}
     </div>
 );

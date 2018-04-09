@@ -1,6 +1,6 @@
 import * as actions from '../actions/align-students-actions';
 import {combineReducers} from 'redux';
-import {ASYNC_ACTION_STATUSES, GENDER_OPTIONS, TOKEN} from "../constants";
+import {ASYNC_ACTION_STATUSES, GENDER_OPTIONS, NOTE_CREATION_PLACE_HOLDER, TOKEN,ADMIN_ID} from "../constants";
 
 
 const initialStudents = [
@@ -89,6 +89,10 @@ function token(state=TOKEN,action){
     return state;
 }
 
+function adminId(state=ADMIN_ID,action){
+    return state;
+}
+
 function students(state=initalStudentsState,action){
     switch (action.type){
         case actions.STUDENT_RETRIEVAL_REQUEST:
@@ -147,6 +151,13 @@ function studentProfiles(state=initialStudentProfiles,action){
                 retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
                 personalInformation: action.profile
                 } : p);
+        case actions.STUDENT_PROFILE_RETRIEVAL_FAILURE:
+            return state.map(p => p.nuid === action.nuid ?
+                {
+                    nuid: p.nuid,
+                    retrievalStatus: ASYNC_ACTION_STATUSES.FAILURE,
+                    personalInformation: null
+                } : p);
         default:
             return state;
     }
@@ -162,6 +173,22 @@ function notes(state=initialNotes,action){
                 title: n.title,
                 desc: n.desc
             })));
+        case actions.NOTE_CREATION_REQUEST:
+            state.push({
+                noteId: NOTE_CREATION_PLACE_HOLDER,
+                nuid: action.nuid
+            });
+            return state.slice();
+        case actions.NOTE_CREATION_SUCCESS:
+            state.splice(
+                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === "NOTE_CREATION_PLACE_HOLDER"),
+                1,
+                action.note);
+            return state.slice();
+        case actions.NOTE_CREATION_FAILURE:
+            state.splice(
+                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === "NOTE_CREATION_PLACE_HOLDER"), 1);
+            return state.slice();
         default:
             return state;
     }
@@ -171,7 +198,8 @@ export default combineReducers({
     token,
     students,
     studentProfiles,
-    notes
+    notes,
+    adminId
 });
 
 

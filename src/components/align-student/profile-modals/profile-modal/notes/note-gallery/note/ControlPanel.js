@@ -9,7 +9,7 @@ export default props => (
             <a href={''}
                onClick={e=> {
                    e.preventDefault();
-                   props.startEditing(props.noteId);
+                   props.startEditing();
                }}>
                 <FontAwesomeIcon icon={faEdit}/>
             </a>

@@ -237,10 +237,30 @@ a.student-pagination-go-to-page-button{
     top: 0;
     opacity: 1;
     transition: opacity .3s;
+    z-index: 1;
 }
 
 a.student-pagination-go-to-page-button.hide{
     opacity: 0;
+    z-index: -1;
+}
+
+.student-retrieval-message{
+    text-align: center;
+    padding-top: 50px;
+    font-size: 18px;
+}
+
+.student-retrieval-message a{
+    display: inline-block;
+    padding-top: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.student-retrieval-message a:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
 }
 
 /*

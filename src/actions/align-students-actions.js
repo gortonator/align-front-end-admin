@@ -86,6 +86,68 @@ export function studentProfileRetrievalFailure(){
     };
 }
 
+export function noteCreationRequest(nuid){
+    return {
+        type: NOTE_CREATION_REQUEST,
+        nuid: nuid
+    };
+}
+
+export function noteCreationSuccess(note){
+    return {
+        type: NOTE_CREATION_SUCCESS,
+        note: note
+    };
+}
+
+export function noteCreationFailure(){
+    return {
+        type: NOTE_CREATION_FAILURE
+    };
+}
+
+export function noteUpdateRequest(noteId){
+    return {
+        type: NOTE_UPDATE_REQUEST,
+        noteId: noteId
+    };
+}
+
+export function noteUpdateSuccess(note){
+    return {
+        type: NOTE_UPDATE_SUCCESS,
+        note: note
+    };
+}
+
+export function noteUpdateFailure(noteId){
+    return {
+        type: NOTE_DELETION_FAILURE,
+        noteId: noteId
+    };
+}
+
+export function noteDeletionRequest(noteId){
+    return {
+        type: NOTE_DELETION_REQUEST,
+        noteId: noteId
+    };
+}
+
+export function noteDeletionSuccess(noteId){
+    return {
+        type: NOTE_UPDATE_SUCCESS,
+        noteId: noteId
+    };
+}
+
+export function noteDeletionFailure(noteId){
+    return {
+        type: NOTE_DELETION_FAILURE,
+        noteId: noteId
+    };
+}
+
 // Async Actions
 
 export function applyStudentFilters(studentFilters,token,page){
@@ -152,8 +214,6 @@ function getStudentSearchRequestBody(studentFilters,page){
 
     body.endIndex = body.beginIndex + NUMBER_OF_STUDENTS_PER_PAGE - 1;
 
-    console.log(body);
-
     return body;
 
 }
@@ -204,6 +264,24 @@ export function retrieveStudentProfile(nuid,token){
                     dispatch(studentProfileRetrievalFailure());
                 }
             )
+    };
+}
+
+export function createNote(noteContent,nuid,token,adminId){
+    return dispatch => {
+        dispatch(noteCreationRequest(nuid));
+    };
+}
+
+export function updateNote(note,token,adminId){
+    return dispatch => {
+        dispatch(noteUpdateRequest(note.noteId));
+    };
+}
+
+export function deleteNote(noteId,token){
+    return dispatch => {
+        dispatch(noteDeletionRequest(noteId));
     };
 }
 

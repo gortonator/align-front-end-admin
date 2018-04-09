@@ -4,12 +4,13 @@ import Controlpanel from './ControlPanel';
 export default props => (
     <div className={'note'}>
         <div className={'note-title'}>
-            {props.title}
+            {props.note.title}
         </div>
         <div className={'note-desc'}>
-            {props.desc}
+            {props.note.desc}
         </div>
 
-        <Controlpanel startEditing={props.startEditing} noteId={props.noteId}/>
+        <Controlpanel startEditing={() => props.startEditing()}
+                      delete={() => props.delete()}/>
     </div>
 );

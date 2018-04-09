@@ -61,8 +61,13 @@ export const GENDER_OPTIONS = {
     }
 };
 
+export const NOTE_CREATION_PLACE_HOLDER = 'NOTE_CREATION_PLACE_HOLDER';
+
 export const NUMBER_OF_STUDENTS_PER_PAGE = 20;
 
 export const BASE_URL = 'http://asd2.ccs.neu.edu:8081';
 
-export const TOKEN = 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..EC6FLJA3h_IAZu7Vy0UELQ.xkvPqc0LqbDZzaPqG40WCa8sDNdIS5whQLJI_DOO6nDJOm5xbhGEuHwNqS56RwDoM3ve657TYvHGnzaqKxvluecuOIPvDQDuP6G2kbwjFRw.pkktTVcVW6grFzhVaKvsyw';
+export const ADMIN_ID = '8123094';
+
+export const TOKEN =
+    'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..hcVgQuYXb2BnZ5l7GcpgJw.HX1JJQby6XjVL9f2D6h6kCJVzjca-sTvoYIhgP_HwY962xQrVhC2itLq5YxciJUntMrj6X7s_8fbOcOKSo8cjcCEkaPvvd8xCP8nh0cgPHU.gLIN1kDOXeWZlATrU-p7hA';

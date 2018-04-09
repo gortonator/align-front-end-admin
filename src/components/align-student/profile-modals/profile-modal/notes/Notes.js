@@ -21,7 +21,6 @@ class Notes extends React.Component{
         };
         this.backToDisplay = this.backToDisplay.bind(this);
         this.startEditing = this.startEditing.bind(this);
-        this.getNotePropertyValue = this.getNotePropertyValue.bind(this);
     }
 
     backToDisplay(){
@@ -37,29 +36,20 @@ class Notes extends React.Component{
         });
     }
 
-    getNotePropertyValue(noteId,property){
-        if (noteId === ''){
-            return '';
-        }
-        const note = this.props.notes.find(n => n.noteId === noteId);
-        return note[property];
-    }
-
     render(){
         var children;
         switch(this.state.mode){
             case NOTES_MODES.EDIT:
-                const title = this.getNotePropertyValue(this.state.noteEditing,NOTE_PROPERTIES.TITLE);
-                const desc = this.getNotePropertyValue(this.state.noteEditing,NOTE_PROPERTIES.DESC);
                 children = <NoteEditor backToDisplay={this.backToDisplay}
-                                       noteId={this.state.noteEditing}
-                                       nuid={this.props.nuid}
-                                       adminId={this.props.adminId}
-                                       title={title}
-                                       desc={desc}/>;
+                                       note={this.props.notes.find(n => n.noteId === this.state.noteEditing)}
+                                       notes={this.props.notes}
+                                       create={this.props.create}
+                                       update={this.props.update}/>;
                 break;
             case NOTES_MODES.DISPLAY:
-                children = <NoteGallery notes={this.props.notes} startEditing={this.startEditing}/>;
+                children = <NoteGallery notes={this.props.notes}
+                                        startEditing={this.startEditing}
+                                        delete={this.props.delete}/>;
                 break;
             default:
                 children = null;

@@ -9,12 +9,20 @@ import faArrowAltCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowAlt
 class NoteEditor extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            title: props.title,
-            desc: props.desc,
-            nuid: props.nuid,
-            noteId: props.noteId
-        };
+        if (this.props.note === undefined) {
+            this.state = {
+                title: '',
+                desc: '',
+                creating: true
+            }
+        }else{
+            this.state = {
+                title: this.props.note.title,
+                desc: this.props.note.desc,
+                creating: false
+            };
+
+        }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
     }
@@ -49,7 +57,20 @@ class NoteEditor extends React.Component{
 
                 <DescField desc={this.state.desc} handleDescChange={this.handleDescChange}/>
 
-                <Controls noteState={this.state} backToDisplay={this.props.backToDisplay}/>
+                <Controls isPublishable={this.state.title !== '' && this.state.desc !== ''}
+                          backToDisplay={this.props.backToDisplay}
+                          creating={this.state.creating}
+                          create={() => {this.props.create({
+                              title: this.state.title,
+                              desc: this.state.desc
+                          })}}
+                          update={() => this.props.update(
+                              {
+                                  title: this.state.title,
+                                  desc: this.state.desc,
+                                  noteId: this.props.note.noteId
+                              }
+                          )}/>
 
             </div>
         )

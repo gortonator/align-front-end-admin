@@ -4,7 +4,7 @@ import faTimes from "@fortawesome/fontawesome-free-solid/faTimes";
 import faRedo from "@fortawesome/fontawesome-free-solid/faRedo";
 
 export default props => (
-    <div className={'retrieval-message'}>
+    <div className={props.className}>
         {props.message}
         <br/>
         <a onClick={e => {

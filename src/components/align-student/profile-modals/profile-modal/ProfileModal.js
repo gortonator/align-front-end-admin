@@ -2,8 +2,8 @@ import React from 'react';
 import NavBar from './nav-bar/NavBar';
 import Notes from './notes/Notes';
 import {ASYNC_ACTION_STATUSES} from "../../../../constants";
-import RetrievalOngoingMessage from "../../../common/data-retrieval-messages/RetrievalOngoingMessage";
-import RetrievalFailureMessage from '../../../common/data-retrieval-messages/RetrievalFailureMessage';
+import OperationOngoingMessage from "../../../common/OperationOngoingMessage";
+import RetriableFailureMessage from '../../../common/RetriableFailureMessage';
 
 export const PROFILE_MODAL_DISPLAY_CONTENT = {
     PROFILE: 'PROFILE',
@@ -16,8 +16,8 @@ const PROFILE_MODAL_INITIAL_POSITION = {
 };
 
 const PROFILE_MODAL_DIMENSIONS = {
-    width: 600,
-    height: 400
+    width: 800,
+    height: 500
 };
 
 class ProfileModal extends React.Component{
@@ -30,8 +30,8 @@ class ProfileModal extends React.Component{
             mouseX: -1,
             mouseY: -1,
             dragging: false,
-            profile: this.props.studentProfiles.find(p => p.nuid === this.props.nuid),
-            notes: this.props.notes.filter(n => n.nuid === this.props.nuid)
+            profile: this.props.profile,
+            notes: this.props.notes
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
@@ -53,16 +53,6 @@ class ProfileModal extends React.Component{
         if (!this.state.dragging && state.dragging) {
             document.removeEventListener('mousemove', this.dragging);
             document.removeEventListener('mouseup', this.endDragging);
-        }
-        if (JSON.stringify(this.props.studentProfiles) !== JSON.stringify(props.studentProfiles)){
-            this.setState({
-                profile: this.props.studentProfiles.find(p => p.nuid === this.props.nuid)
-            });
-        }
-        if (this.props.notes !== props.notes){
-            this.setState({
-               notes: this.props.notes.filter(n => n.nuid === this.props.nuid)
-            });
         }
     }
 
@@ -117,14 +107,20 @@ class ProfileModal extends React.Component{
                 <NavBar closeModal={this.props.closeModal}
                         display={this.state.display}
                         changeDisplay={this.changeDisplay}
-                        numberOfNotes={this.props.notes.filter(n => n.nuid === this.props.nuid).length}
+                        numberOfNotes={this.props.notes.length}
                         startDragging={this.startDragging}
                         dragging={this.dragging}
                         endDragging={this.endDragging}
                         isDragging={this.state.dragging}
                         name={this.props.name}
                         profile={this.state.profile}/>
-                {getDisplayContent(this.state.profile,this.state.display,this.state.notes)}
+                {getDisplayContent(
+                    this.state.profile,
+                    this.state.display,
+                    this.state.notes,
+                    this.props.createNote,
+                    this.props.updateNote,
+                    this.props.deleteNote)}
             </div>
         );
     }
@@ -169,15 +165,15 @@ const notes = [
     }
 ];
 
-function getDisplayContent(profile,display,notes){
+function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote){
     if (profile === undefined){
         return null;
     } else {
         switch (profile.retrievalStatus){
             case ASYNC_ACTION_STATUSES.ONGOING:
-                return <RetrievalOngoingMessage message={'Retrieving profile...'}/>;
+                return <OperationOngoingMessage message={'Retrieving profile...'}/>;
             case ASYNC_ACTION_STATUSES.FAILURE:
-                return <RetrievalFailureMessage message={'Profile retrieval failed.'}/>
+                return <RetriableFailureMessage message={'Profile retrieval failed.'}/>
             case ASYNC_ACTION_STATUSES.SUCCESS:
             {
                 if (profile.personalInformation === null) return null;
@@ -186,7 +182,10 @@ function getDisplayContent(profile,display,notes){
                     case PROFILE_MODAL_DISPLAY_CONTENT.PROFILE:
                         return JSON.stringify(profile.personalInformation);
                     case PROFILE_MODAL_DISPLAY_CONTENT.NOTES:
-                        return <Notes notes={notes}/>;
+                        return <Notes notes={notes}
+                                      create={createNote}
+                                      update={updateNote}
+                                      delete={deleteNote}/>;
                     default:
                         return null;
                 }
