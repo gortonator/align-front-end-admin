@@ -17,14 +17,14 @@ function mapDispatchToProps(dispatch){
         retrieveStudentProfile: (nuid,token) => {
             dispatch(retrieveStudentProfile(nuid,token));
         },
-        createNote: (noteContent,nuid,token,adminId) => {
-            dispatch(createNote(noteContent,nuid,token,adminId));
+        createNote: (noteContent,nuid,token,adminId,successCallback,failureCallback) => {
+            dispatch(createNote(noteContent,nuid,token,adminId,successCallback,failureCallback));
         },
-        updateNote: (note,token,adminId) => {
-            dispatch(updateNote(note,token,adminId));
+        updateNote: (note,token,adminId,successCallback,failureCallback) => {
+            dispatch(updateNote(note,token,adminId,successCallback,failureCallback));
         },
-        deleteNote: (noteId,token) => {
-            dispatch(deleteNote(noteId,token));
+        deleteNote: (noteId,token,successCallback,failureCallback) => {
+            dispatch(deleteNote(noteId,token,successCallback,failureCallback));
         }
     };
 }

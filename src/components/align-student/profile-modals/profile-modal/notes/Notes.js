@@ -55,7 +55,7 @@ class Notes extends React.Component{
                 break;
         }
         return (
-            <div>
+            <div className={'notes'}>
                 {children}
             </div>
         );

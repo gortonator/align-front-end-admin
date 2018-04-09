@@ -18,6 +18,7 @@ export default props => (
             <a href={''}
                onClick={e=> {
                    e.preventDefault();
+                   props.delete();
                }}>
                 <FontAwesomeIcon icon={faTrash}/>
             </a>

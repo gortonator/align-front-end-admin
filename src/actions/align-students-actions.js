@@ -72,11 +72,12 @@ export function studentProfileRetrievalRequest(nuid){
     };
 }
 
-export function studentProfileRetrievalSuccess(profile,nuid){
+export function studentProfileRetrievalSuccess(profile,nuid,notes){
     return {
         type: STUDENT_PROFILE_RETRIEVAL_SUCCESS,
         profile: profile,
-        nuid: nuid
+        nuid: nuid,
+        notes: notes
     };
 }
 
@@ -93,16 +94,18 @@ export function noteCreationRequest(nuid){
     };
 }
 
-export function noteCreationSuccess(note){
+export function noteCreationSuccess(note,callback){
     return {
         type: NOTE_CREATION_SUCCESS,
-        note: note
+        note: note,
+        callback: callback
     };
 }
 
-export function noteCreationFailure(){
+export function noteCreationFailure(callback){
     return {
-        type: NOTE_CREATION_FAILURE
+        type: NOTE_CREATION_FAILURE,
+        callback: callback
     };
 }
 
@@ -113,38 +116,39 @@ export function noteUpdateRequest(noteId){
     };
 }
 
-export function noteUpdateSuccess(note){
+export function noteUpdateSuccess(note,callback){
     return {
         type: NOTE_UPDATE_SUCCESS,
-        note: note
+        note: note,
+        callback: callback
     };
 }
 
-export function noteUpdateFailure(noteId){
+export function noteUpdateFailure(callback){
     return {
         type: NOTE_DELETION_FAILURE,
-        noteId: noteId
+        callback: callback
     };
 }
 
-export function noteDeletionRequest(noteId){
+export function noteDeletionRequest(){
     return {
-        type: NOTE_DELETION_REQUEST,
-        noteId: noteId
+        type: NOTE_DELETION_REQUEST
     };
 }
 
-export function noteDeletionSuccess(noteId){
+export function noteDeletionSuccess(noteId,callback){
     return {
-        type: NOTE_UPDATE_SUCCESS,
-        noteId: noteId
+        type: NOTE_DELETION_SUCCESS,
+        noteId: noteId,
+        callback: callback
     };
 }
 
-export function noteDeletionFailure(noteId){
+export function noteDeletionFailure(callback){
     return {
         type: NOTE_DELETION_FAILURE,
-        noteId: noteId
+        callback: callback
     };
 }
 
@@ -154,35 +158,37 @@ export function applyStudentFilters(studentFilters,token,page){
     return dispatch => {
         dispatch(studentRetrievalRequest());
 
-        axios.post(
-            BASE_URL + '/students',
-            getStudentSearchRequestBody(studentFilters,page),
-            {
-                headers: {
-                'token': token
-                },
-            })
-            .then(
-                response => {
-                    const students = response.data.students.map(s => {
-                        return {
-                            nuid: s.neuid,
-                            degreeYear: s.expectedlastyear,
-                            email: s.email,
-                            hasNote: s.notes.length > 0,
-                            name: [s.firstname,s.middlename,s.lastname].join(' '),
-                            enrollmentStatus: s.enrollmentstatus
-                        };
-                    });
-                    dispatch(studentRetrievalSuccess(
-                        students,
-                        Math.ceil(Number(response.data.totalcount)/NUMBER_OF_STUDENTS_PER_PAGE),
-                        page,
-                        studentFilters));
-                },
-                error => {
-                    dispatch(studentRetrievalFailure(studentFilters,page));
-                });
+        // axios.post(
+        //     BASE_URL + '/students',
+        //     getStudentSearchRequestBody(studentFilters,page),
+        //     {
+        //         headers: {
+        //         'token': token
+        //         },
+        //     })
+        //     .then(
+        //         response => {
+        //             const students = response.data.students.map(s => {
+        //                 return {
+        //                     nuid: s.neuid,
+        //                     degreeYear: s.expectedlastyear,
+        //                     email: s.email,
+        //                     hasNote: s.notes.length > 0,
+        //                     name: [s.firstname,s.middlename,s.lastname].join(' '),
+        //                     enrollmentStatus: s.enrollmentstatus
+        //                 };
+        //             });
+        //             dispatch(studentRetrievalSuccess(
+        //                 students,
+        //                 Math.ceil(Number(response.data.totalcount)/NUMBER_OF_STUDENTS_PER_PAGE),
+        //                 page,
+        //                 studentFilters));
+        //         },
+        //         error => {
+        //             dispatch(studentRetrievalFailure(studentFilters,page));
+        //         });
+        //
+        // dispatch(studentRetrievalSuccess([],1,1,studentFilters));
     };
 }
 
@@ -244,8 +250,6 @@ function setRequestBodySingleValuedField(filter,body,fieldName){
     }
 }
 
-
-
 export function retrieveStudentProfile(nuid,token){
     return dispatch => {
         dispatch(studentProfileRetrievalRequest(nuid));
@@ -257,7 +261,14 @@ export function retrieveStudentProfile(nuid,token){
         })
             .then(
                 response => {
-                    dispatch(studentProfileRetrievalSuccess(response.data,nuid));
+                    const notes = response.data.notes.map(n => ({
+                        nuid: n.neuId,
+                        adminId: n.administratorNeuId,
+                        noteId: n.administratorNoteId,
+                        title: n.title,
+                        desc: n.desc
+                    }));
+                    dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
                 },
                 error => {
                     console.log(error);
@@ -267,52 +278,89 @@ export function retrieveStudentProfile(nuid,token){
     };
 };
 
-const noteForTest = {
-    "administratorNeuId": "8123094",
-    "administratorNoteId": 5,
-    "desc": "abc",
-    "neuId": "1",
-    "title": "abc"
-};
-
-export function createNote(noteContent,nuid,token,adminId){
+export function createNote(noteContent,nuid,token,adminId,successCallback,failureCallback){
     return dispatch => {
-        dispatch(noteCreationRequest(nuid));
+        dispatch(noteCreationRequest());
 
-        // axios.post(BASE_URL+'/' + adminId + '/notes',
-        //     {
-        //         neuId: nuid,
-        //         Title: noteContent.title,
-        //         Desc: noteContent.desc
-        //     },
-        //     {
-        //         headers:{
-        //             token:token
-        //         }
-        //     })
-        //     .then(
-        //         response => {
-        //             dispatch(noteCreationSuccess(response.data));
-        //         },
-        //         error => {
-        //             console.log(error);
-        //             dispatch(noteCreationFailure());
-        //         }
-        //     );
-
-        // dispatch(noteCreationSuccess(noteForTest));
+        axios.post(BASE_URL+'/' + adminId + '/notes',
+            {
+                neuId: nuid,
+                Title: noteContent.title,
+                Desc: noteContent.desc
+            },
+            {
+                headers:{
+                    token:token
+                }
+            })
+            .then(
+                response => {
+                    const note = {
+                        nuid: response.data.neuId,
+                        adminId: response.data.administratorNeuId,
+                        noteId : response.data.administratorNoteId,
+                        desc: response.data.desc,
+                        title: response.data.title,
+                    };
+                    dispatch(noteCreationSuccess(note,successCallback));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(noteCreationFailure(failureCallback));
+                }
+            );
     };
 }
 
-export function updateNote(note,token,adminId){
+export function updateNote(note,token,adminId,successCallback,failureCallback){
     return dispatch => {
-        dispatch(noteUpdateRequest(note.noteId));
+        dispatch(noteUpdateRequest());
+
+        axios.put(
+            BASE_URL + '/notes/' + note.noteId,
+            {
+                "administratorNeuId": adminId,
+                "title": note.title,
+                "desc": note.desc
+            },
+            {
+                headers: {
+                    token: token
+                }
+            }
+        )
+            .then(
+                response => {
+                    dispatch(noteUpdateSuccess(note,successCallback));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(noteUpdateFailure(failureCallback));
+                }
+            )
     };
 }
 
-export function deleteNote(noteId,token){
+export function deleteNote(noteId,token,successCallback,failureCallback){
     return dispatch => {
         dispatch(noteDeletionRequest(noteId));
+        axios.delete(
+            BASE_URL + '/notes/' + noteId,
+            {
+                headers: {
+                    token: token
+                }
+            }
+        )
+            .then(
+                response => {
+                    dispatch(noteDeletionSuccess(noteId,successCallback));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(noteDeletionFailure(failureCallback));
+                }
+            );
     };
 }
 

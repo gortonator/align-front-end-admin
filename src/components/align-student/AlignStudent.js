@@ -4,6 +4,7 @@ import Table from '../../redux-bindings/align-students/StudentTable';
 import AppliedFilters from "../../redux-bindings/align-students/AppliedFilters";
 import FilterModal from "../../redux-bindings/align-students/FilterModal";
 import ProfileModals from "../../redux-bindings/align-students/ProfileModals";
+import { CSSTransition } from 'react-transition-group';
 
 // Edit Student Filters Modal Statuses
 export const FILTER_MODAL_STATUSES = {
@@ -74,11 +75,21 @@ class AlignStudent extends React.Component{
     render(){
         return (
             <div className={'align-student'}>
-                {
-                    this.state.filterModalStatus === FILTER_MODAL_STATUSES.OPENED &&
-                    <FilterModal closeModal={this.closeFilterModal}
-                                 modalStatus={this.state.filterModalStatus}/>
-                }
+                {/*{*/}
+                    {/*this.state.filterModalStatus === FILTER_MODAL_STATUSES.OPENED &&*/}
+                    {/*<FilterModal closeModal={this.closeFilterModal}*/}
+                                 {/*modalStatus={this.state.filterModalStatus}/>*/}
+                {/*}*/}
+
+                <CSSTransition timeout={500}
+                               unmountOnExit
+                               in={this.state.filterModalStatus === FILTER_MODAL_STATUSES.OPENED}
+                               classNames={'student-filter-modal'}>
+                    <FilterModal closeModal={this.closeFilterModal}/>
+                </CSSTransition>
+
+
+
                 <Heading openFilterModal={this.openFilterModal}/>
                 <AppliedFilters/>
                 <hr/>

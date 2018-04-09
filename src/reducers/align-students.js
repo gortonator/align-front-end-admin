@@ -166,29 +166,31 @@ function studentProfiles(state=initialStudentProfiles,action){
 function notes(state=initialNotes,action){
     switch(action.type){
         case actions.STUDENT_PROFILE_RETRIEVAL_SUCCESS:
-            return state.concat(action.profile.notes.map(n => ({
-                nuid: n.neuId,
-                adminId: n.administratorNeuId,
-                noteId: n.administratorNoteId,
-                title: n.title,
-                desc: n.desc
-            })));
+            return state.concat(action.notes);
         case actions.NOTE_CREATION_REQUEST:
-            state.push({
-                noteId: NOTE_CREATION_PLACE_HOLDER,
-                nuid: action.nuid,
-                operationStatus: ASYNC_ACTION_STATUSES.ONGOING
-            });
+        case actions.NOTE_UPDATE_REQUEST:
+        case actions.NOTE_DELETION_REQUEST:
             return state.slice();
         case actions.NOTE_CREATION_SUCCESS:
-            state.splice(
-                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === NOTE_CREATION_PLACE_HOLDER),
-                1,
-                action.note);
+            state.push(action.note);
+            action.callback();
             return state.slice();
         case actions.NOTE_CREATION_FAILURE:
-            state.splice(
-                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === NOTE_CREATION_PLACE_HOLDER), 1);
+            action.callback();
+            return state.slice();
+        case actions.NOTE_UPDATE_SUCCESS:
+            const newState = state.map(n => (
+               n.noteId === action.note.noteId ? action.note : n
+            ));
+            action.callback();
+            return newState;
+        case actions.NOTE_UPDATE_FAILURE:
+            action.callback();
+            return state.slice();
+        case actions.NOTE_DELETION_SUCCESS:
+            return state.filter(n => n.noteId !== action.noteId);
+        case actions.NOTE_DELETION_FAILURE:
+            action.callback();
             return state.slice();
         default:
             return state;

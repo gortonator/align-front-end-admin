@@ -28,6 +28,15 @@ class NoteEditor extends React.Component{
         }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
+
+        this.creationSuccessCallback = this.creationSuccessCallback.bind(this);
+        this.creationFailureCallback = this.creationFailureCallback.bind(this);
+
+        this.updateSuccessCallback = this.updateSuccessCallback.bind(this);
+        this.updateFailureCallback = this.updateFailureCallback.bind(this);
+
+        this.publishChange = this.publishChange.bind(this);
+        this.handleOkClick = this.handleOkClick.bind(this);
     }
 
     componentDidUpdate(){
@@ -51,6 +60,80 @@ class NoteEditor extends React.Component{
         });
     }
 
+    creationSuccessCallback(){
+        try {
+            this.props.backToDisplay();
+        } catch (e) {
+            console.log('Note created!')
+        }
+    }
+
+    creationFailureCallback(){
+        try{
+            this.setState({
+               operationStatus: ASYNC_ACTION_STATUSES.FAILURE
+            });
+        } catch (e) {
+            console.log('Note creation failed!');
+        }
+    }
+
+    updateSuccessCallback(){
+        try {
+            this.props.backToDisplay();
+        } catch (e) {
+            console.log('Note updated!');
+        }
+    }
+
+    updateFailureCallback(){
+        try{
+            this.setState({
+                operationStatus: ASYNC_ACTION_STATUSES.FAILURE
+            });
+        } catch (e) {
+            console.log('Note update failed!');
+        }
+    }
+
+    handleOkClick(e){
+        e.preventDefault();
+        this.setState({
+            operationStatus: ASYNC_ACTION_STATUSES.SUCCESS
+        });
+    }
+
+    publishChange(){
+        if (this.state.title === '' || this.state.desc === ''){
+            this.setState({
+                error: true
+            })
+        } else{
+            this.setState({
+                operationStatus: ASYNC_ACTION_STATUSES.ONGOING
+            });
+            if (this.state.creating){
+                this.props.create(
+                    {
+                        title: this.state.title,
+                        desc: this.state.desc
+                    },
+                    this.creationSuccessCallback,
+                    this.creationFailureCallback);
+            } else{
+                this.props.update(
+                    {
+                        title: this.state.title,
+                        desc: this.state.desc,
+                        nuid: this.props.note.nuid,
+                        noteId: this.props.note.noteId
+                    },
+                    this.updateSuccessCallback,
+                    this.updateFailureCallback)
+            }
+        }
+    }
+
     render(){
         return (
             <div>
@@ -72,26 +155,29 @@ class NoteEditor extends React.Component{
                 <Controls isPublishable={this.state.title !== '' && this.state.desc !== ''}
                           backToDisplay={this.props.backToDisplay}
                           creating={this.state.creating}
-                          publishButtonClick={() => {
-                              if (this.state.creating){
-                                  this.props.create({
-                                      title: this.state.title,
-                                      desc: this.state.desc
-                                  });
-                              } else{
-                                  this.props.update({
-                                      title: this.state.title,
-                                      desc: this.state.desc,
-                                      noteId: this.props.note.noteId
-                                  })
-                              }
-                          }}/>
+                          publishChange={this.publishChange}/>
 
-                <CSSTransition in={this.state.shading}
+                {
+                    this.state.error &&
+                    <div className={'note-editor-message'}>
+                        Title or Description can't be blank.
+                    </div>
+                }
+
+                <CSSTransition in={this.state.operationStatus === ASYNC_ACTION_STATUSES.FAILURE}
                                timeout={300}
                                unmountOnExit
-                               className={'note-operation-message'}>
-                    <a>123</a>
+                               classNames={'note-editor-failure-message'}>
+                    <div className={'note-editor-failure-message'}>
+                        <div>
+                            {this.state.creating? 'Note creation failed!' : 'Note update failed!'}
+                        </div>
+
+                        <a onClick={this.handleOkClick}
+                           href={''}>
+                            OK
+                        </a>
+                    </div>
                 </CSSTransition>
 
             </div>

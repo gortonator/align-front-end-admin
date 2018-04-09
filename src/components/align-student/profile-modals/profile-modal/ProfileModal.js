@@ -30,8 +30,6 @@ class ProfileModal extends React.Component{
             mouseX: -1,
             mouseY: -1,
             dragging: false,
-            profile: this.props.profiles.find(p => p.nuid === this.props.nuid),
-            notes: this.props.notes
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.startDragging = this.startDragging.bind(this);
@@ -40,7 +38,7 @@ class ProfileModal extends React.Component{
     }
 
     componentDidMount(){
-        if (this.state.profile === undefined || this.state.profile.personalInformation === null) {
+        if (this.props.profile === undefined || this.props.profile.personalInformation === null) {
             this.props.retrieveProfile();
         }
     }
@@ -118,20 +116,22 @@ class ProfileModal extends React.Component{
                         endDragging={this.endDragging}
                         isDragging={this.state.dragging}
                         name={this.props.name}
-                        profile={this.state.profile}/>
+                        profile={this.props.profile}/>
                 {getDisplayContent(
-                    this.state.profile,
+                    this.props.profile,
                     this.state.display,
-                    this.state.notes,
+                    this.props.notes,
                     this.props.createNote,
                     this.props.updateNote,
-                    this.props.deleteNote)}
+                    this.props.deleteNote,
+                    this.props.retrieveStudentProfile)}
             </div>
         );
     }
 }
 
 export default ProfileModal;
+
 
 function confineHorizontalPosition(x){
     if (x  < 0){
@@ -170,15 +170,18 @@ const notes = [
     }
 ];
 
-function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote){
+function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote,onRetry){
     if (profile === undefined){
         return null;
     } else {
         switch (profile.retrievalStatus){
             case ASYNC_ACTION_STATUSES.ONGOING:
-                return <OperationOngoingMessage message={'Retrieving profile...'} className={'student-profile-retrieval-message'}/>;
+                return <OperationOngoingMessage message={'Retrieving profile...'}
+                                                className={'student-profile-retrieval-message'}/>;
             case ASYNC_ACTION_STATUSES.FAILURE:
-                return <RetriableFailureMessage message={'Profile retrieval failed.'} className={'student-profile-retrieval-message'}/>
+                return <RetriableFailureMessage message={'Profile retrieval failed.'}
+                                                className={'student-profile-retrieval-message'}
+                                                onRetry={onRetry}/>
             case ASYNC_ACTION_STATUSES.SUCCESS:
             {
                 if (profile.personalInformation === null) return null;

@@ -138,7 +138,6 @@ class EditStudentFilterModal extends React.Component {
 
     render(){
         return (
-            this.props.modalStatus === FILTER_MODAL_STATUSES.OPENED &&
             <div className={"edit-student-filter-modal"} style={{"width": "28%", height: window.innerHeight}}>
 
                 <CloseButton closeModal={this.closeModal}/>
