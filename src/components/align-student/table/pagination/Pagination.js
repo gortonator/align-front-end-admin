@@ -64,7 +64,7 @@ class Pagination extends React.Component {
                 <a className={'student-pagination-error' + ' ' + (
                     this.isInputValid() ? 'hide' : ''
                 )}>
-                    You should input a number between 1 and 20
+                    You should input a number between 1 and {this.props.pagination.total}
                 </a>
             </div>
         );

@@ -41,8 +41,8 @@ export const ENROLLMENT_STATUSES = {
         value: "INACTIVE"
     },
     DROPOUT: {
-        displayName: 'Drop Out',
-        value: "DROP_OUT"
+        displayName: 'Dropped Out',
+        value: "DROPPED_OUT"
     }
 };
 
@@ -70,4 +70,4 @@ export const BASE_URL = 'http://asd2.ccs.neu.edu:8081';
 export const ADMIN_ID = '8123094';
 
 export const TOKEN =
-'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..nYXlF2XKxgY5lyFGsxa1qw.d2ioX0xu2nd2M7thLZfxqmF7n4w01ZtCJCcssc5lvABJjiUSboyOeYksXlBqkWARSRe9H4URVtkhtLdZD-NF5zwPfYdAU1JmSbCty8PzCNA.0hVvizphTh4Nh1HupqD3xA';
+'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..NLnMQJYee7OaP_LFZ3cGzw.HdgCFk8MOicFc4AxSfXxWfPAFwW7JmQHZSKPVXmQJ9G8XjJIKQkk_8t_Q9inkcua6icyjETWZ7fEBjJcPVGpdH1MkNa_2LH84LDNiYPo7XQ.HvecPLZRSupLL1MKRPTY0Q';

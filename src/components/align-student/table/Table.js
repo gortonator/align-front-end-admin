@@ -9,6 +9,7 @@ export default props => (
         <Body studentRetrievalStatus={props.studentRetrievalStatus}
               students={props.students}
               acceptRetrievalFailure={props.acceptRetrievalFailure}
+              resultNumber={props.pagination.total}
               retryRetrieval={() => {
                   props.applyFilters(
                       props.failedStudentRetrieval.studentFilters,

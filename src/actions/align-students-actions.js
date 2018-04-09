@@ -82,9 +82,10 @@ export function studentProfileRetrievalSuccess(profile,nuid,notes){
     };
 }
 
-export function studentProfileRetrievalFailure(){
+export function studentProfileRetrievalFailure(nuid){
     return {
-        type: STUDENT_PROFILE_RETRIEVAL_FAILURE
+        type: STUDENT_PROFILE_RETRIEVAL_FAILURE,
+        nuid: nuid
     };
 }
 
@@ -220,7 +221,7 @@ function getStudentSearchRequestBody(studentFilters,page){
     }
 
     if (studentFilters.nuUndergrad){
-        body.nuUndergrad = true;
+        body.nuUndergrad = 'true';
     }
 
     body.beginIndex = (page - 1) * NUMBER_OF_STUDENTS_PER_PAGE + 1;
@@ -261,28 +262,27 @@ export function retrieveStudentProfile(nuid,token){
     return dispatch => {
         dispatch(studentProfileRetrievalRequest(nuid));
 
-        // axios.get(BASE_URL + '/students/' + nuid,{
-        //     headers: {
-        //         token: token
-        //     }
-        // })
-        //     .then(
-        //         response => {
-        //             const notes = response.data.notes.map(n => ({
-        //                 nuid: n.neuId,
-        //                 adminId: n.administratorNeuId,
-        //                 noteId: n.administratorNoteId,
-        //                 title: n.title,
-        //                 desc: n.desc
-        //             }));
-        //             dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
-        //         },
-        //         error => {
-        //             console.log(error);
-        //             dispatch(studentProfileRetrievalFailure());
-        //         }
-        //     );
-        dispatch(studentProfileRetrievalFailure());
+        axios.get(BASE_URL + '/students/' + nuid,{
+            headers: {
+                token: token
+            }
+        })
+            .then(
+                response => {
+                    const notes = response.data.notes.map(n => ({
+                        nuid: n.neuId,
+                        adminId: n.administratorNeuId,
+                        noteId: n.administratorNoteId,
+                        title: n.title,
+                        desc: n.desc
+                    }));
+                    dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(studentProfileRetrievalFailure());
+                }
+            );
     };
 };
 

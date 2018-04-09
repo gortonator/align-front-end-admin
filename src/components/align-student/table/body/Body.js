@@ -11,6 +11,13 @@ export default props => {
                 <OperationOngoingMessage message={'Retrieving Students...'} className={'student-retrieval-message'}/>
             );
         case ASYNC_ACTION_STATUSES.SUCCESS:
+            if (props.resultNumber === 0){
+                return (
+                    <div className={'no-result-message'}>
+                        No Results.
+                    </div>
+                );
+            }
             return (
                 props.students.map((student, i) => <Row openProfileModal={props.openProfileModal}
                                                         student={student}

@@ -124,7 +124,8 @@ class ProfileModal extends React.Component{
                     this.props.createNote,
                     this.props.updateNote,
                     this.props.deleteNote,
-                    this.props.retrieveStudentProfile)}
+                    this.props.retrieveProfile,
+                    this.props.acceptRetrievalFailure)}
             </div>
         );
     }
@@ -157,7 +158,7 @@ function  confineVerticalPosition(y) {
     }
 }
 
-function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote,onRetry){
+function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNote,onRetry,onCancel){
     if (profile === undefined){
         return null;
     } else {
@@ -168,7 +169,8 @@ function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNot
             case ASYNC_ACTION_STATUSES.FAILURE:
                 return <RetriableFailureMessage message={'Profile retrieval failed.'}
                                                 className={'student-profile-retrieval-message'}
-                                                onRetry={onRetry}/>
+                                                onRetry={onRetry}
+                                                onCancel={onCancel}/>
             case ASYNC_ACTION_STATUSES.SUCCESS:
             {
                 if (profile.personalInformation === null) return null;

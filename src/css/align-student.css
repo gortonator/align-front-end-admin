@@ -147,6 +147,12 @@ a.add-filter-button{
     The table
 */
 
+.no-result-message{
+    padding: 150px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
 .student-table-head{
     padding: 0 40px 5px;
     border-bottom: solid #FBFBFB 4px;
@@ -327,7 +333,7 @@ a.applied-filter {
 .student-filter-modal-enter-active{
     opacity: 1;
     right: 0;
-    transition: opacity 500ms, right 500ms;
+    transition: all 300ms ease-out;
 }
 
 .student-filter-modal-exit{
@@ -338,7 +344,7 @@ a.applied-filter {
 .student-filter-modal-exit-active{
     opacity: 0;
     right: -25%;
-    transition: opacity 500ms, right 500ms;
+    transition: all 300ms ease-out;
 }
 
 
@@ -534,6 +540,13 @@ a.nu-undergrad-option{
     text-align: center;
     font-size: 18px;
 }
+
+.student-profile-retrieval-message a{
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
 /*
     The Notes
 */

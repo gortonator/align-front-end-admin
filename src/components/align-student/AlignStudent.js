@@ -81,7 +81,7 @@ class AlignStudent extends React.Component{
                                  {/*modalStatus={this.state.filterModalStatus}/>*/}
                 {/*}*/}
 
-                <CSSTransition timeout={500}
+                <CSSTransition timeout={300}
                                unmountOnExit
                                in={this.state.filterModalStatus === FILTER_MODAL_STATUSES.OPENED}
                                classNames={'student-filter-modal'}>

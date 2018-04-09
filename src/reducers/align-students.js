@@ -81,7 +81,7 @@ const initalStudentsState = {
     },
     failedStudentRetrieval: null,
     pagination:{
-        total: 20,
+        total: 1,
         current: 1
     }
 };

@@ -9,6 +9,7 @@ class PaginationInput extends React.Component{
         };
 
         this.handleClickOutside = this.handleClickOutside.bind(this);
+        this.handleGoToPageClick = this.handleGoToPageClick.bind(this);
     }
 
     componentDidMount() {
@@ -27,23 +28,28 @@ class PaginationInput extends React.Component{
         }
     }
 
+    handleGoToPageClick(e){
+        e.preventDefault();
+        if (this.props.page !== ''){
+            this.props.goToPage(Number(this.props.page));
+        }
+    }
+
     render(){
         return (
             <div className={'student-pagination-text'}>
-                <div className={'student-pagination-input-container'}>
+                <div className={'student-pagination-input-container'}
+                     ref={el => {this.elem = el;}}>
                     <input className={'form-control'}
                            value={this.props.page}
                            onChange={this.props.handleInputChange}
-                           ref={el => {this.elem = el;}}
                            onFocus={e =>{
                                this.setState({
                                    showingGoButton: true
                                });
                            }}/>
                     <a className={'student-pagination-go-to-page-button' + ' ' +(this.state.showingGoButton ? '' : 'hide')}
-                       onClick={e => {
-                           e.preventDefault();
-                           this.props.goToPage(Number(this.props.page));}}
+                       onClick={this.handleGoToPageClick}
                        href={''}>
                         Go
                     </a>
