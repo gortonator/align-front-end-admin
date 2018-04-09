@@ -19,6 +19,7 @@ import LoginForm from './components/login_form';
 import Header from './components/header';
 import Navbar from './components/left_navbar';
 import Analytics from './components/analytics';
+import MyProfile from './components/MyProfile/MyProfile'
 
 import AlignStudent from './components/align-students/AlignStudent';
 
@@ -34,12 +35,23 @@ const RouteWithLayout = ({ component, ...rest }) => {
       );
     };
 
+const Profile = ({component, ...rest}) => {
+  return (
+    <div>
+      <div id="main-nav">
+          <Route {...rest} render={ () => React.createElement(component) }/>
+      </div>
+    </div>
+  );
+};
+
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter>
             <div className="col-xs-12">
                 <Switch>
                     <RouteWithLayout path='/analytics' component={Analytics} />
+                    <Route exact path="/myProfile" component={MyProfile}/>
                     {/*<Route path='/profile/:id' component={StudentProfile} />*/}
                     <RouteWithLayout path='/search' component={AlignStudent} />
                     <Route path='/' component={LoginForm} />
