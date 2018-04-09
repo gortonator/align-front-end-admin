@@ -6,7 +6,7 @@ export default props => (
         {props.openedProfiles.map(nuid =>
             <ProfileModal key={nuid}
                           notes={props.notes.filter(n => n.nuid === nuid)}
-                          profile={props.studentProfiles.find(p => p.nuid === nuid)}
+                          profiles={props.studentProfiles}
                           retrieveProfile={() => {props.retrieveStudentProfile(nuid,props.token)}}
                           nuid={nuid}
                           isActive={props.activeProfile === nuid}

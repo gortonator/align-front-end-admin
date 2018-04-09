@@ -4,6 +4,8 @@ import DescField from './parts/DescField';
 import Controls from './parts/Controls';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faArrowAltCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowAltCircleLeft';
+import { CSSTransition } from 'react-transition-group';
+import {ASYNC_ACTION_STATUSES, NOTE_CREATION_PLACE_HOLDER} from "../../../../../../constants";
 
 
 class NoteEditor extends React.Component{
@@ -13,18 +15,28 @@ class NoteEditor extends React.Component{
             this.state = {
                 title: '',
                 desc: '',
-                creating: true
+                creating: true,
+                shading: false
             }
         }else{
             this.state = {
                 title: this.props.note.title,
                 desc: this.props.note.desc,
-                creating: false
+                creating: false,
+                shading: false
             };
-
         }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
+    }
+
+    componentDidUpdate(){
+        console.log(this.props.note);
+        if (this.props.note !== undefined && this.props.note.operationStatus === ASYNC_ACTION_STATUSES.ONGOING && !this.state.shading){
+            this.setState({
+                shading: true
+            });
+        }
     }
 
     handleTitleChange(e){
@@ -60,17 +72,27 @@ class NoteEditor extends React.Component{
                 <Controls isPublishable={this.state.title !== '' && this.state.desc !== ''}
                           backToDisplay={this.props.backToDisplay}
                           creating={this.state.creating}
-                          create={() => {this.props.create({
-                              title: this.state.title,
-                              desc: this.state.desc
-                          })}}
-                          update={() => this.props.update(
-                              {
-                                  title: this.state.title,
-                                  desc: this.state.desc,
-                                  noteId: this.props.note.noteId
+                          publishButtonClick={() => {
+                              if (this.state.creating){
+                                  this.props.create({
+                                      title: this.state.title,
+                                      desc: this.state.desc
+                                  });
+                              } else{
+                                  this.props.update({
+                                      title: this.state.title,
+                                      desc: this.state.desc,
+                                      noteId: this.props.note.noteId
+                                  })
                               }
-                          )}/>
+                          }}/>
+
+                <CSSTransition in={this.state.shading}
+                               timeout={300}
+                               unmountOnExit
+                               className={'note-operation-message'}>
+                    <a>123</a>
+                </CSSTransition>
 
             </div>
         )

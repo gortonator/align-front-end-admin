@@ -263,13 +263,44 @@ export function retrieveStudentProfile(nuid,token){
                     console.log(error);
                     dispatch(studentProfileRetrievalFailure());
                 }
-            )
+            );
     };
-}
+};
+
+const noteForTest = {
+    "administratorNeuId": "8123094",
+    "administratorNoteId": 5,
+    "desc": "abc",
+    "neuId": "1",
+    "title": "abc"
+};
 
 export function createNote(noteContent,nuid,token,adminId){
     return dispatch => {
         dispatch(noteCreationRequest(nuid));
+
+        // axios.post(BASE_URL+'/' + adminId + '/notes',
+        //     {
+        //         neuId: nuid,
+        //         Title: noteContent.title,
+        //         Desc: noteContent.desc
+        //     },
+        //     {
+        //         headers:{
+        //             token:token
+        //         }
+        //     })
+        //     .then(
+        //         response => {
+        //             dispatch(noteCreationSuccess(response.data));
+        //         },
+        //         error => {
+        //             console.log(error);
+        //             dispatch(noteCreationFailure());
+        //         }
+        //     );
+
+        // dispatch(noteCreationSuccess(noteForTest));
     };
 }
 

@@ -176,18 +176,19 @@ function notes(state=initialNotes,action){
         case actions.NOTE_CREATION_REQUEST:
             state.push({
                 noteId: NOTE_CREATION_PLACE_HOLDER,
-                nuid: action.nuid
+                nuid: action.nuid,
+                operationStatus: ASYNC_ACTION_STATUSES.ONGOING
             });
             return state.slice();
         case actions.NOTE_CREATION_SUCCESS:
             state.splice(
-                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === "NOTE_CREATION_PLACE_HOLDER"),
+                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === NOTE_CREATION_PLACE_HOLDER),
                 1,
                 action.note);
             return state.slice();
         case actions.NOTE_CREATION_FAILURE:
             state.splice(
-                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === "NOTE_CREATION_PLACE_HOLDER"), 1);
+                state.findIndex(n => n.nuid === action.note.nuid && n.noteId === NOTE_CREATION_PLACE_HOLDER), 1);
             return state.slice();
         default:
             return state;

@@ -2,6 +2,7 @@ import React from 'react';
 import Note from './note/Note';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlusCircle from '@fortawesome/fontawesome-free-solid/faPlusCircle';
+import {NOTE_CREATION_PLACE_HOLDER} from "../../../../../../constants";
 
 export default props => (
     <div>
@@ -9,7 +10,7 @@ export default props => (
            href={''}
            onClick={e => {
                e.preventDefault();
-               props.startEditing('');
+               props.startEditing(NOTE_CREATION_PLACE_HOLDER);
            }}>
             <FontAwesomeIcon icon={faPlusCircle}/>
         </a>

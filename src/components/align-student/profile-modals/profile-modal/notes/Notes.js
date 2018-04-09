@@ -42,7 +42,6 @@ class Notes extends React.Component{
             case NOTES_MODES.EDIT:
                 children = <NoteEditor backToDisplay={this.backToDisplay}
                                        note={this.props.notes.find(n => n.noteId === this.state.noteEditing)}
-                                       notes={this.props.notes}
                                        create={this.props.create}
                                        update={this.props.update}/>;
                 break;
@@ -56,7 +55,7 @@ class Notes extends React.Component{
                 break;
         }
         return (
-            <div className={'notes'}>
+            <div>
                 {children}
             </div>
         );

@@ -488,13 +488,14 @@ a.nu-undergrad-option{
     font-size: 18px;
 }
 
+.student-profile-retrieval-message{
+    padding-top: 70px;
+    text-align: center;
+    font-size: 18px;
+}
 /*
     The Notes
 */
-
-.notes{
-    padding: 0 40px;
-}
 
 .note-editor-field{
     overflow: auto;

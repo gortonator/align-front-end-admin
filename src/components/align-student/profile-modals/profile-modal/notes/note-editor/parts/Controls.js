@@ -17,11 +17,7 @@ class Controls extends React.Component{
                 error: true
             });
         } else {
-            if (this.props.creating){
-                this.props.create();
-            } else {
-                this.props.update();
-            }
+            this.props.publishButtonClick();
         }
     }
 
@@ -32,7 +28,7 @@ class Controls extends React.Component{
                     <a className={'note-editor-control'}
                        href={''}
                        onClick={this.handlePublishClick}>
-                        Publish
+                        {this.props.creating ? 'Create' : "Update"}
                     </a>
                 </div>
                 <div className={'note-editor-control-container'}
