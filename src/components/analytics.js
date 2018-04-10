@@ -7,10 +7,13 @@ import AnalyticsTable from './analytics_table';
 import AnalyticsCharts from './analytics_charts';
 
 class AdminAnalytics extends Component {
-
     constructor(props) {
         super(props);
-
+        // this.props.checkLogin();
+        // if(!(this.props.login && this.props.login.id && this.props.login.token)){
+        //   window.location="/";
+        // }
+        // console.log("id:",this.props.id,"token",this.props.login.token);
         //Gender Ratio
         this.toggleGenderRatio = this.toggleGenderRatio.bind(this);
         this.getGenderRatioChart = this.getGenderRatioChart.bind(this);
@@ -47,7 +50,7 @@ class AdminAnalytics extends Component {
         //Common
         this.createSortFunction = this.createSortFunction.bind(this);
         this.createTableContent = this.createTableContent.bind(this);
-        this.getAnalyticsCallback = this.getAnalyticsCallback.bind(this);
+        // this.getAnalyticsCallback = this.getAnalyticsCallback.bind(this);
         this.onCompanyChange = this.onCompanyChange.bind(this);
         this.getYears = this.getYears.bind(this);
         this.getCampusOptions = this.getCampusOptions.bind(this);
@@ -82,21 +85,21 @@ class AdminAnalytics extends Component {
         if (this.props.analytics) {
             if (this.state.chartSelected == "gender-ratio") {
                 var list = {};
-                list.yearlyratio = this.props.analytics.yearlyratio.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-employers") {
                 var list = {};
-                list.employers = this.props.analytics.employers.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "coop-students") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -104,7 +107,7 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "company") {
                 var list = {};
-                list.students = this.props.analytics.students.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -112,7 +115,7 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "working") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -120,21 +123,21 @@ class AdminAnalytics extends Component {
 
             if (this.state.chartSelected == "top-electives") {
                 var list = {};
-                list.electives = this.props.analytics.electives.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "undergrad-institutions") {
                 var list = {};
-                list.institutionlist = this.props.analytics.institutionlist.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-bachelor-degrees") {
                 var list = {};
-                list.degrees = this.props.analytics.degrees.sort(this.compareValues(this.state.orderBy, header));
+                list = this.props.analytics.sort(this.compareValues(this.state.orderBy, header));
                 this.setState({isApiCalled: true, sortBy: header}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -146,56 +149,56 @@ class AdminAnalytics extends Component {
         if (this.props.analytics) {
             if (this.state.chartSelected == "gender-ratio") {
                 var list = {};
-                list.yearlyratio = this.props.analytics.yearlyratio.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-employers") {
                 var list = {};
-                list.employers = this.props.analytics.employers.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "coop-students") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "company") {
                 var list = {};
-                list.students = this.props.analytics.students.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "working") {
                 var list = {};
-                list.studentList = this.props.analytics.studentList.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-electives") {
                 var list = {};
-                list.electives = this.props.analytics.electives.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "undergrad-institutions") {
                 var list = {};
-                list.institutionlist = this.props.analytics.institutionlist.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
             }
             if (this.state.chartSelected == "top-bachelor-degrees") {
                 var list = {};
-                list.degrees = this.props.analytics.degrees.sort(this.compareValues(order, this.state.sortBy));
+                list = this.props.analytics.sort(this.compareValues(order, this.state.sortBy));
                 this.setState({isApiCalled: true, orderBy: order}, () => {
                     this.props.sortAnalytics(list);
                 });
@@ -258,6 +261,8 @@ class AdminAnalytics extends Component {
 
     createTableContent(headerOptions) {
         if (this.props.analytics && this.state.chartSelected) {
+            // alert("Calling tableonow");
+            // console.log(this.props.analytics);
             return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected}
                                    chartHeaders={headerOptions[this.state.chartSelected]}/>;
         }
@@ -345,13 +350,14 @@ class AdminAnalytics extends Component {
 
         if (this.state.campus == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select a campus');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio"}, function () {
-                const chartRequest = {url: "gender-ratio", body: this.state.campus};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio",initialLoadChart: "",initialLoadTable: ""}, function () {
+                const chartRequest = {url: "gender-ratio", body: {campus:this.state.campus}};
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -360,16 +366,17 @@ class AdminAnalytics extends Component {
     getCompanyChart() {
         if (this.state.campus == "" || this.state.company == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "company"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "company",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {
                     url: "company",
                     body: {campus: this.state.campus, year: this.state.year, company: this.state.company}
                 };
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -378,16 +385,17 @@ class AdminAnalytics extends Component {
     getWorkingChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "working"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "working",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {
                     url: "working",
                     body: {campus: this.state.campus, year: this.state.year}
                 };
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -396,13 +404,14 @@ class AdminAnalytics extends Component {
     getCoopStudentChart() {
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "coop-students", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -411,13 +420,14 @@ class AdminAnalytics extends Component {
     getTop10EmployersChart() {
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-employers", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -426,13 +436,14 @@ class AdminAnalytics extends Component {
     getTop10BachelorsDegreeChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-bachelor-degrees", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -441,13 +452,14 @@ class AdminAnalytics extends Component {
     getUndergradInstitutionsChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "undergrad-institutions", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -456,13 +468,14 @@ class AdminAnalytics extends Component {
     getTop10ElectivesChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
-            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives"}, function () {
+            this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-electives", body: {campus: this.state.campus, year: this.state.year}};
-                this.props.getAnalytics(chartRequest, this.getAnalyticsCallback);
+                this.props.sortAnalytics([]);
+                this.props.getAnalytics(chartRequest,this.props.login.token);
             });
 
         }
@@ -470,40 +483,6 @@ class AdminAnalytics extends Component {
 
     onCampusChange(campus) {
         this.setState({campus: campus, isApiCalled: false});
-    }
-
-    getAnalyticsCallback(chartType) {
-        if (chartType == "gender-ratio") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""});
-        }
-        if (chartType == "company") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "top-employers") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "coop-students") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "working") {
-            this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-            });
-        }
-        if(chartType=="top-electives"){
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if(chartType=="undergrad-institutions"){
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
-        if (chartType == "top-bachelor-degrees") {
-            this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-            });
-        }
     }
 
     getYears(years) {
@@ -533,7 +512,7 @@ class AdminAnalytics extends Component {
 
     showChart(data) {
         if (data) {
-
+          if(data.length!=0){
             if (this.state.chartSelected) {
                 var ctxContainer = document.getElementById("myChartContainer");
                 AnalyticsCharts({
@@ -544,6 +523,11 @@ class AdminAnalytics extends Component {
                 });
             }
         }
+        else{
+          var ctxContainer = document.getElementById("myChartContainer");
+          ctxContainer.innerHTML='<h3> No data to visualize! </h3>';
+        }
+      }
     }
 
     render() {
@@ -553,7 +537,7 @@ class AdminAnalytics extends Component {
             {label: "2016", value: "2016"},
             {label: "2015", value: "2015"},
             {label: "2014", value: "2014"}];
-        const campusOptions = [{label: "All Campus", value: "all_campus"},
+        const campusOptions = [
             {label: "Boston", value: "boston"},
             {label: "Charlotte", value: "charlotte"},
             {label: "Silicon Valley", value: "silicon_valley"},
@@ -601,13 +585,12 @@ class AdminAnalytics extends Component {
                 {label: "Students Count", value: "students"}]
         };
 
-
         if (this.props.analytics && this.state.isApiCalled) {
-            // console.log(this.state.chartSelected);
             this.showChart(this.props.analytics);
         }
+        console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
         return (
-            <div>
+            <div style={{'padding': '120px 0'}}>
                 <div className="analytics-body col-sm-12">
                     <AnalyticsFilter
                         toggleGenderRatio={this.toggleGenderRatio}
@@ -679,7 +662,7 @@ class AdminAnalytics extends Component {
 }
 
 function mapStateToProps(state) {
-    return {analytics: state.analytics};
+    return {analytics: state.analytics,login:state.login};
 }
 
 

@@ -11,7 +11,7 @@ export default function (props) {
       var dataLabels = [];
       var dataMale = [];
       var dataFemale = [];
-      var yearlyratioList = props.data.yearlyratio;
+      var yearlyratioList = props.data;
       for (var i = 0; i < yearlyratioList.length; i++) {
           var r=randomColorGenerator();
           var g=randomColorGenerator();
@@ -61,7 +61,7 @@ export default function (props) {
       }
   }
   if (props.chartSelected == "top-employers") {
-      var listOfCompanies = props.data.employers;
+      var listOfCompanies = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -102,7 +102,7 @@ export default function (props) {
   }
 
   if (props.chartSelected == "top-bachelor-degrees") {
-      var listOfDegrees = props.data.degrees;
+      var listOfDegrees = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -143,7 +143,7 @@ export default function (props) {
   }
 
   if (props.chartSelected == "undergrad-institutions") {
-      var listOfInstitutions = props.data.institutionlist;
+      var listOfInstitutions = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -183,7 +183,7 @@ export default function (props) {
       }
   }
   if (props.chartSelected == "top-electives") {
-      var listOfElectives = props.data.electives;
+      var listOfElectives = props.data;
       var labelsList = [];
       var backgroundColorList = [];
       var dataList = [];
@@ -221,6 +221,16 @@ export default function (props) {
           });
 
       }
+  }
+
+  if (props.chartSelected == "working") {
+      props.ctxContainer.innerHTML = '<div></div>';
+  }
+  if (props.chartSelected == "coop-students") {
+      props.ctxContainer.innerHTML = '<div></div>';
+  }
+  if (props.chartSelected == "company") {
+      props.ctxContainer.innerHTML = '<div></div>';
   }
 
   // console.log(props)

@@ -1,62 +1,173 @@
 /*
+    The Container of everything
+*/
+
+.align-student{
+    padding: 120px 70px;
+    background-color: white;
+}
+
+/*
     The Heading
 */
 
 .student-heading{
-    font-size: 32px;
-    margin-right: 18px;
+    font-size: 36px;
+    margin-right: 10px;
     float: left;
 }
 
 .student-search{
     display: inline-block;
+    margin-top: 12px;
     float: left;
-    padding: 4px 0;
+}
+
+.student-search-input-container{
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+}
+
+.student-search-input-container.opened{
+    width: 219px;
+    transition: width .3s;
+}
+
+.student-search-input-container.closed{
+    width: 0;
+    transition: width .3s;
 }
 
 .student-search-input{
-    font-size: 14px;
-    padding: 5px;
+    font-size: 15px;
+    padding: 5px 10px 5px 15px;
     width: 100%;
     /*border: solid rgba(255,0,0,.7) 2px;*/
     border: solid #BBBBBB 2px;
     border-right: none;
+    border-radius: 15px 0 0 15px;
 }
 
-/*input.student-search-input::placeholder{*/
-    /*color: rgba(255,0,0,.7);*/
-/*}*/
-
-input.student-search-input:focus, button.student-search-button{
+input.student-search-input:focus{
     outline: none;
 }
 
-.student-auto-suggest-container{
-    width: 180px;
-    float: left;
+/*.student-auto-suggest-container{*/
+    /*width: 180px;*/
+    /*float: left;*/
+/*}*/
+
+.student-search-button.input-closed{
+    border-color: transparent;
+    transition: border-color .3s;
+}
+
+.student-search-button.input-closed path{
+    fill: rgba(255,0,0,.7);
+    transition: fill .3s;
+}
+
+.student-search-button.input-opened{
+    border-color: #BBBBBB;
+    transition: border-color .3s;
+}
+
+a.student-search-button.input-opened:hover path{
+    fill: rgba(255,0,0,.7);
 }
 
 .student-search-button{
     /*border: solid rgba(255,0,0,.7) 2px;*/
     border: solid #BBBBBB 2px;
     border-left: none;
-    height: 34px;
-    width: 30px;
-    padding: 2px 0;
+    height: 36px;
+    width: 33px;
+    padding: 2px 2px 2px;
     background-color: #FFFFFF;
+    float: left;
+    border-radius: 0 15px 15px 0;
+}
+
+.student-search-input-close-button{
+    color: #BBBBBB;
+    float: left;
+    margin-left: 5px;
+    margin-top: 8px;
+}
+
+a.student-search-input-close-button:hover{
+    color: rgba(255,0,0,.7);
+}
+
+.applied-name-filter{
+    border: 2px solid #BBBBBB;
+    border-radius: 10px;
+    display: inline-block;
+    min-width: 300px;
+    text-align: center;
+    color: #BBBBBB;
+    font-size: 16px;
+    padding: 4px 0;
+    margin-left: 30px;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.applied-name-filter a{
+    text-decoration: none;
+    color: #BBBBBB;
+    position: absolute;
+    display: inline-block;
+    right: -50px;
+    transition: right .3s;
+    padding-right: 10px;
+}
+
+.applied-name-filter a:hover{
+    color: rgba(277,0,0,.7);
+}
+
+.applied-name-filter:hover a{
+    right: 0;
+    transition: right .3s;
+}
+
+a.add-filter-button{
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    padding: 4px 30px;
+    border-radius: 30px;
+    margin-top: 10px;
 }
 
 /*
     The table
 */
 
+.start-message{
+    font-family: 'Forum', cursive;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 75px;
+}
+
+.no-result-message{
+    padding: 150px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
 .student-table-head{
-    padding: 0 40px 10px;
+    padding: 0 40px 5px;
     border-bottom: solid #FBFBFB 4px;
 }
 
 .student-table-row{
-    padding: 10px 40px;
+    padding: 5px 40px;
     border-bottom: solid #FBFBFB 2px;
 }
 
@@ -65,34 +176,155 @@ input.student-search-input:focus, button.student-search-button{
     font-size: 16px;
 }
 
-.id-cell{
+.id-cell,.enrollment-status-cell{
     width: 20%;
 }
 
-.race-cell, .gender-cell{
-    width: 15%;
+.degree-year-cell{
+    width: 10%;
 }
 
-.name-cell, .major-cell{
+.name-cell, .email-cell{
     width: 25%;
+    position: relative;
+}
+
+.student-note-indicator{
+    color: #212529;
+    position: absolute;
+    right: 30%;
+    top: 4px;
+}
+
+.student-pagination-container{
+    text-align: center;
+    margin: auto;
+    padding-top: 15px;
+}
+
+.student-pagination-input-container{
+    display: inline-block;
+    width: 45px;
+    position: relative;
+}
+
+a.student-pagination-button{
+    display: inline-block;
+    text-decoration: none;
+    border: 2px solid rgba(255,0,0,.7);
+    padding: 2px 8px;
+    color: rgba(255,0,0,.7);
+    border-radius: 5px;
+}
+
+a.student-pagination-button:hover{
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    transition: background-color .3s;
+}
+
+a.student-pagination-button.hide{
+    visibility: hidden;
+}
+
+.student-pagination-text{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+a.student-pagination-error{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    border-radius: 20px;
+}
+
+a.student-pagination-error.hide {
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+a.student-pagination-go-to-page-button{
+    display: inline-block;
+    text-decoration: none;
+    position: absolute;
+    padding: 5px 25px;
+    color: white;
+    background-color: rgba(255,0,0,.8);
+    border-radius: 10px;
+    right: -180px;
+    top: 0;
+    opacity: 1;
+    transition: opacity .3s;
+    z-index: 1;
+}
+
+a.student-pagination-go-to-page-button.hide{
+    opacity: 0;
+    z-index: -1;
+}
+
+.student-retrieval-message{
+    text-align: center;
+    padding-top: 50px;
+    font-size: 18px;
+}
+
+.student-retrieval-message a{
+    display: inline-block;
+    padding-top: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.student-retrieval-message a:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
+}
+
+.student-retrieval-message-appear{
+    opacity: 0;
+}
+
+.student-retrieval-message-appear-active{
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.student-retrieval-message-exit{
+    opacity: 1;
+}
+
+.student-retrieval-message-exit-active{
+    opacity: 0;
+    transition: .3s;
 }
 
 /*
-    The Filter Bar
+    The Applied Filters
 */
 
-.filter-bar{
-    padding-top: 10px;
+.applied-filters{
+    padding-top: 20px;
 }
 
-.filter-bar a{
-    text-decoration: none;
+a.applied-filter {
     display: inline-block;
-    background-color: rgba(255,0,0,.7);
-    color: white;
-    padding: 4px 30px;
-    border-radius: 30px;
+    text-decoration: none;
+    color: #B10F1F;
+    border: solid #B10F1F 2px;
+    padding: 4px 20px;
+    min-width: 200px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+
 }
+
 
 /*
     The Edit Filter Modal
@@ -104,12 +336,35 @@ input.student-search-input:focus, button.student-search-button{
     top: 0;
     z-index: 2;
     background-color: white;
-    /*display: none;*/
-    padding: 70px 30px 0;
+    padding: 40px 30px 0;
     border-left: 2px groove #FBFBFB;
+    overflow: scroll;
 }
 
-.edit-student-filter-modal h3{
+.student-filter-modal-enter{
+    opacity: 0;
+    right: -25%;
+}
+
+.student-filter-modal-enter-active{
+    opacity: 1;
+    right: 0;
+    transition: all 300ms ease-out;
+}
+
+.student-filter-modal-exit{
+    opacity: 1;
+    right: 0;
+}
+
+.student-filter-modal-exit-active{
+    opacity: 0;
+    right: -25%;
+    transition: all 300ms ease-out;
+}
+
+
+.edit-student-filter-heading{
     display: inline-block;
     margin-right: 15px;
 }
@@ -126,7 +381,7 @@ a.edit-student-filter-modal-button{
     color: rgba(255,0,0,.7);
     border: 2px solid rgba(255,0,0,.7);
     padding: 4px;
-    min-width: 180px;
+    min-width: 200px;
     border-radius: 30px;
     text-decoration: none;
 }
@@ -139,36 +394,461 @@ a.edit-student-filter-modal-button:hover{
 
 .edit-student-filter-modal-button-container{
     text-align: center;
-    padding: 7px 0;
+    padding: 15px 0;
 }
 
-.campus-filter-container{
+a.edit-student-filter-modal-close-button{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+}
+
+.edit-student-filter-modal-close-button path{
+    fill: transparent;
+    stroke: rgba(255,0,0,.7);
+    stroke-width: 10px;
+}
+
+a.edit-student-filter-modal-close-button:hover path{
+    fill: rgba(255,0,0,.7);
+    stroke: rgba(255,0,0,.7);
+    stroke-width: 10px;
+    transition: ease .3s;
+}
+
+.campus-option-container{
     display: inline-block;
     width: 50%;
     text-align: center;
 }
 
-a.campus-filter{
+a.campus-option,
+a.enrollment-status-option,
+a.nu-undergrad-option{
     display: inline-block;
     min-width: 130px;
-    padding: 4px 10px;
+    padding: 0 10px;
     border: 2px solid rgba(255,0,0,.7);
     border-radius: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-decoration: none;
+    color: rgba(255,0,0,.7);
+    background-color: white;
 }
 
-a.campus-filter-selected, a.campus-filter-selected:visited, a.campus-filter-selected:hover{
+a.campus-option.selected,
+a.enrollment-status-option.selected,
+a.nu-undergrad-option.selected{
     color: white;
     background-color: rgba(255,0,0,.7);
 }
 
-
-
-a.campus-filter-unselected,a.campus-filter-unselected:visited,a.campus-filter-unselected:hover{
-    color: rgba(255,0,0,.7);
-    background-color: #FFFFFF;
+.enrollment-status-option-container,
+.nu-undergrad-option-container{
+    display: inline;
+    margin: 0 5px;
 }
+
+a.enrollment-status-option,
+a.nu-undergrad-option{
+    min-width: auto;
+    padding: 0 20px;
+}
+
+.student-filter{
+    margin-bottom: 5px;
+}
+
+/*
+    The Student Profile Modal
+*/
+
+.student-profile-modal{
+    position: fixed;
+    border: 2px solid #BBBBBB;
+    background-color: white;
+    /*padding-top: 48px;*/
+    overflow-y: scroll;
+    padding-top: 48px;
+}
+
+.student-profile-modal-nav-bar{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: white;
+    border-bottom: 2px groove #BBBBBB;
+    overflow: auto;
+}
+
+.student-profile-modal-nav-bar a{
+    display: inline-block;
+    text-decoration: none;
+    color: #022A52;
+    font-size: 18px;
+}
+
+.student-profile-modal-drag{
+    padding: 10px 20px;
+}
+
+.student-profile-modal-close-button{
+    float: right;
+    padding: 10px 20px;
+    margin-right: 0;
+}
+
+.student-profile-modal-nav-bar a:hover,.student-profile-modal-nav-bar a.active{
+    color: rgba(255,0,0,.7);
+    background-color: white;
+    transition: color .3s, background-color .3s;
+}
+
+.student-profile-modal-nav-links{
+    display: inline-block;
+}
+
+.student-profile-modal-nav-links a{
+    padding: 10px 15px;
+    margin: 0 1px;
+}
+
+.student-profile-modal-nav-links a.with-badge{
+    padding: 10px 15px;
+}
+
+.student-profile-modal-nav-links a.with-badge span{
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: white;
+    background-color: #70777D;
+}
+
+.student-profile-modal-nav-links a.with-badge.active span{
+    color: white;
+    background-color: rgba(255,0,0,.7);
+}
+
+.student-profile-modal-nav-links a.with-badge:hover span{
+    background-color: rgba(255,0,0,.7);
+    transition: background-color .3s;
+}
+
+.student-profile-modal-title{
+    float: right;
+    display: inline-block;
+    padding: 10px 10px 0;
+    font-style: italic;
+    font-weight: 600;
+    margin-right: 40px;
+    color: #022A52;
+    font-size: 18px;
+}
+
+.student-profile-retrieval-message{
+    padding-top: 70px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.student-profile-retrieval-message a{
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+/*
+    The Notes
+*/
+
+.notes{
+    position: relative;
+    height: 100%;
+}
+
+.note-editor{
+    padding: 0 100px;
+}
+
+.note-editor-field{
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.note-editor-field-name{
+    display: inline-block;
+    width: 40%;
+    float: left;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 25px;
+}
+
+.note-editor-field-input{
+    display: inline-block;
+    width: 60%;
+    float: left;
+}
+
+.note-editor-control-container{
+    padding-top: 15px;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.note-editor-control-container a{
+    display: inline-block;
+    min-width: 180px;
+    padding: 5px 30px;
+    border-radius: 20px;
+    color: rgba(255,0,0,.7);
+    border: 2px rgba(255,0,0,.7) solid;
+    text-decoration: none;
+}
+
+.note-editor-control-container a:hover{
+    background-color: rgba(255,0,0,.7);
+    color: white;
+    transition: background-color .3s;
+}
+
+.note-editor-back-button,.add-note-button{
+    color: #BBBBBB;
+    font-size: 40px;
+    margin-left: 30px;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+a.note-editor-back-button:hover,a.add-note-button:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
+}
+
+.note-editor-message{
+    padding-top: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255,0,0,.7);
+}
+
+.note-editor-failure-message,.note-gallery-failure-message{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    text-align: center;
+    color: white;
+    padding-top: 80px;
+    font-size: 20px;
+}
+
+.note-editor-failure-message a,.note-gallery-failure-message a{
+    display: inline-block;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 30px;
+    margin-top: 20px;
+    font-size: 15px;
+    color: rgba(0,0,0,.5);
+    text-decoration: none;
+}
+
+.note-editor-failure-message-enter,.note-gallery-failure-message-enter{
+    opacity: 0;
+
+}
+
+.note-editor-failure-message-enter-active,.note-gallery-failure-message-enter-active{
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.note-editor-failure-message-exit,.note-gallery-failure-message-exit{
+    opacity: 1;
+
+}
+
+.note-editor-failure-message-exit-active,.note-gallery-failure-message-exit-active{
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+
+.note-container{
+    display: inline-block;
+    width: 50%;
+    padding: 0 15px;
+}
+
+.note{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: inline-block;
+}
+
+.note-exit{
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+}
+
+.note-exit-active{
+    opacity: .01;
+    transform: scale(0.9) translateY(-30%);
+    transition: all 300ms ease-out;
+}
+
+
+
+.note-title{
+    background-color: rgba(187,187,187,.3);
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 700;
+    padding: 5px 15px;
+}
+
+.note-desc{
+    padding: 10px 15px 0;
+    min-height: 200px;
+    background: linear-gradient(rgba(187,187,187,.2),white);
+}
+
+.note:hover .note-control-panel{
+    right: 10px;
+    transition: right .3s;
+}
+
+.note-control-panel{
+    position: absolute;
+    width: 80px;
+    top: 0;
+    right: -80px;
+    padding-top: 7px;
+    transition: right .3s;
+}
+
+.note-control-container{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.note-control-container a:hover{
+    color: rgba(255,0,0,.7);
+    transition: color .3s;
+}
+
+.ccis{
+    font-weight: 700;
+    width: 100px;
+    display: inline-block;
+    padding: 10px 10px 5px;
+}
+
+.ccis div{
+    display: inline-block;
+    width: 35px;
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    background-color: rgba(97,84,69,.5);
+    margin: 2px;
+    padding: 0 8px;
+}
+
+.align-community{
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.align{
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255,0,0,.7);
+}
+
+.community{
+    font-size: 20px;
+    color: #FEC92B;
+    font-weight: bold;
+}
+
+.al-navbar{
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+}
+
+.al-navbar-brand{
+    display: inline-block;
+    width: 25%;
+    float: left;
+}
+
+.navbar-links{
+    display: inline-block;
+    width: 75%;
+    overflow: auto;
+    float: left;
+    position: relative;
+    clear: right;
+    padding-top: 40px;
+}
+
+.navbar-links a{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0 5px;
+    color: black;
+    border-bottom: 3px solid transparent;
+    padding: 0 20px 20px;
+}
+
+.navbar-links a:hover{
+    color: rgba(255,0,0,.7);
+    border-bottom: 3px solid rgba(255,0,0,.7);
+    transition: all .5s;
+}
+
+a.logout-link:hover{
+    border-bottom-color: transparent;
+}
+
+.logout-link{
+    position: absolute;
+    right: 30px;
+}
+
+.navbar-border{
+    width: 100%;
+    float: left;
+    height: 10px;
+    background: linear-gradient(#BBBBBB,white);
+}
+
+
+
+
+
+
 
 
 
