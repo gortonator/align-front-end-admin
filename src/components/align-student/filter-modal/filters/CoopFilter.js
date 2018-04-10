@@ -2,9 +2,9 @@ import React from 'react';
 
 export default props => (
     <div className={'student-filter'}>
-        <div>Coop Company</div>
+        <label htmlFor={'student-filter-coop'}>Coop Company</label>
         <input className={'form-control'}
                value={props.value}
-               onChange={props.onChange}/>
+               onChange={props.onChange} id={'student-filter-coop'}/>
     </div>
 );
