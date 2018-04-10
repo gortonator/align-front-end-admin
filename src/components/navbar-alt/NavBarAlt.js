@@ -1,16 +1,12 @@
 import React from 'react';
+import NavBarBrand from './NavBarBrand';
 import {Link} from 'react-router-dom';
 
 export default props => (
     <div className={'al-navbar'}>
-        <div className={'al-navbar-brand'}>
-            <div className={'ccis'}>
-                CCIS
-            </div>
-            <div className={'align-community'}>
-                Align Community
-            </div>
-        </div>
+
+        <NavBarBrand />
+
         <div className={'navbar-links'}>
 
             <Link to={'/students'} className={'navbar-link'}>

@@ -4,6 +4,7 @@
 
 .align-student{
     padding: 120px 70px;
+    background-color: white;
 }
 
 /*
@@ -745,18 +746,37 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 .ccis{
     font-weight: 700;
-    color: #FEC92B;
-    width: 30%;
+    width: 100px;
     display: inline-block;
+    padding: 10px 10px 5px;
+}
+
+.ccis div{
+    display: inline-block;
+    width: 35px;
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    background-color: rgba(97,84,69,.5);
+    margin: 2px;
+    padding: 0 8px;
 }
 
 .align-community{
-    color: #615445;
-    font-size: 35px;
-    font-weight: bolder;
+    font-size: 16px;
     margin-bottom: 5px;
-    width: 50%;
     display: inline-block;
+}
+
+.align{
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255,0,0,.7);
+}
+
+.community{
+    font-size: 20px;
+    color: rgba(97,84,69);
 }
 
 .al-navbar{
@@ -771,7 +791,6 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     display: inline-block;
     width: 25%;
     float: left;
-    padding: 0 30px;
 }
 
 .navbar-links{

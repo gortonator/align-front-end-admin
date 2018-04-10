@@ -23,7 +23,7 @@ import Navbar from './react-redux-mixed/left_navbar';
 import Analytics from './react-redux-mixed/analytics';
 
 import AlignStudent from './components/align-student/AlignStudent';
-import NavBarAlt from './components/NavBarAlt';
+import NavBarAlt from './components/navbar-alt/NavBarAlt';
 
 const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(createStore);
 
@@ -50,7 +50,7 @@ const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(creat
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter>
-            <div>
+            <div style={{'background-color' : 'rgba(243,242,239,.2)'}}>
                 <NavBarAlt/>
                 <Switch>
                     <Route path='/analytics' component={Analytics} />
