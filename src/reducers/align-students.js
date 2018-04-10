@@ -68,7 +68,7 @@ const initialNotes = [
 
 const initalStudentsState = {
     retrievalStatus: ASYNC_ACTION_STATUSES.SUCCESS,
-    items: initialStudents,
+    items: [],
     studentFilters: {
         nameOrId: '',
         campus: [],
@@ -81,17 +81,10 @@ const initalStudentsState = {
     },
     failedStudentRetrieval: null,
     pagination:{
-        total: 1,
+        total: -1,
         current: 1
     }
 };
-function token(state=TOKEN,action){
-    return state;
-}
-
-function adminId(state=ADMIN_ID,action){
-    return state;
-}
 
 function students(state=initalStudentsState,action){
     switch (action.type){
@@ -125,7 +118,7 @@ function students(state=initalStudentsState,action){
     }
 }
 
-function studentProfiles(state=initialStudentProfiles,action){
+function studentProfiles(state=[],action){
     switch(action.type){
         case actions.STUDENT_PROFILE_RETRIEVAL_REQUEST:
             if (state.find(p => p.nuid === action.nuid) === undefined){
@@ -170,7 +163,7 @@ function studentProfiles(state=initialStudentProfiles,action){
     }
 }
 
-function notes(state=initialNotes,action){
+function notes(state=[],action){
     switch(action.type){
         case actions.STUDENT_PROFILE_RETRIEVAL_SUCCESS:
             return state.concat(action.notes);
@@ -205,11 +198,9 @@ function notes(state=initialNotes,action){
 }
 
 export default combineReducers({
-    token,
     students,
     studentProfiles,
-    notes,
-    adminId
+    notes
 });
 
 

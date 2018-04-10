@@ -8,17 +8,11 @@ import promise from  'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 
-import './css/bootstrap.min.css';
-
 // import 'react-select/dist/react-select.css'
 // import 'react-virtualized/styles.css'
 // import 'react-virtualized-select/styles.css'
 
-import './css/align-student.css';
-import './css/overview.css';
-import './css/style.css';
-import './css/login.css';
-
+import './css/set-up.css';
 
 import LoginForm from './components/login_form';
 import Header from './components/header';
@@ -27,6 +21,12 @@ import Analytics from './components/analytics';
 
 import AlignStudent from './components/align-student/AlignStudent';
 import NavBarAlt from './components/navbar-alt/NavBarAlt';
+import './css/login.css';
+import './css/style.css';
+import './css/bootstrap.min.css';
+import './css/overview.css';
+
+import './css/align-student.css';
 
 const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(createStore);
 
