@@ -3,11 +3,14 @@ import React from 'react';
 export default function (props) {
 
     if (props.analytics && props.chartSelected == "gender-ratio") {
-        var i = 0;
-        const chartHeaders = props.chartHeaders.map((head) => {
-            return <th key={head.value} className="text-align-center">{head.label}</th>;
-        });
         // console.log(props.analytics);
+        if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+        else{
+          var i = 0;
+          const chartHeaders = props.chartHeaders.map((head) => {
+              return <th key={head.value} className="text-align-center">{head.label}</th>;
+          });
         const listOfYears = props.analytics.map((year) => {
             i = i + 1;
             return <tr key={year.year}>
@@ -30,11 +33,16 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
     if (props.analytics && props.chartSelected == "company") {
+          if(props.analytics.length==0)
+  return (<h4> No Data found ! </h4>);
+  else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
+
         const listOfStudents = props.analytics.map((student) => {
             i = i + 1;
             return <tr key={student.nuid}>
@@ -55,7 +63,11 @@ export default function (props) {
             </tbody>
         </table>);
     }
+  }
     if (props.analytics && props.chartSelected == "top-employers") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
 
         const chartHeaders = props.chartHeaders.map((head) => {
@@ -82,8 +94,12 @@ export default function (props) {
             </tbody>
         </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "coop-students") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
@@ -117,8 +133,12 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "working") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
@@ -146,8 +166,12 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "top-electives") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
@@ -174,8 +198,12 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "undergrad-institutions") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
@@ -202,8 +230,12 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "top-bachelor-degrees") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
@@ -230,4 +262,5 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 }

@@ -350,7 +350,7 @@ class AdminAnalytics extends Component {
 
         if (this.state.campus == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select a campus');
             });
         }
         else {
@@ -366,7 +366,7 @@ class AdminAnalytics extends Component {
     getCompanyChart() {
         if (this.state.campus == "" || this.state.company == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -385,7 +385,7 @@ class AdminAnalytics extends Component {
     getWorkingChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -404,7 +404,7 @@ class AdminAnalytics extends Component {
     getCoopStudentChart() {
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -420,7 +420,7 @@ class AdminAnalytics extends Component {
     getTop10EmployersChart() {
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -436,7 +436,7 @@ class AdminAnalytics extends Component {
     getTop10BachelorsDegreeChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -452,7 +452,7 @@ class AdminAnalytics extends Component {
     getUndergradInstitutionsChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -468,7 +468,7 @@ class AdminAnalytics extends Component {
     getTop10ElectivesChart(){
         if (this.state.campus == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
-
+              alert('Please select all the options');
             });
         }
         else {
@@ -484,40 +484,6 @@ class AdminAnalytics extends Component {
     onCampusChange(campus) {
         this.setState({campus: campus, isApiCalled: false});
     }
-
-    // getAnalyticsCallback(chartType) {
-    //     if (chartType.indexOf("gender-ratio")) {
-    //         this.setState({initialLoadChart: "", initialLoadTable: ""});
-    //     }
-    //     if (chartType.indexOf("company")) {
-    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if (chartType.indexOf("top-employers")) {
-    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if (chartType.indexOf("coop-students")) {
-    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if (chartType.indexOf("working")) {
-    //         this.setState({initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if(chartType.indexOf("top-electives")){
-    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if(chartType.indexOf("undergrad-institutions")){
-    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    //     if (chartType.indexOf("top-bachelor-degrees")) {
-    //         this.setState({initialLoadChart: "", initialLoadTable: ""}, function () {
-    //         });
-    //     }
-    // }
 
     getYears(years) {
         const list = years.map((year) => {
@@ -546,7 +512,7 @@ class AdminAnalytics extends Component {
 
     showChart(data) {
         if (data) {
-
+          if(data.length!=0){
             if (this.state.chartSelected) {
                 var ctxContainer = document.getElementById("myChartContainer");
                 AnalyticsCharts({
@@ -557,6 +523,11 @@ class AdminAnalytics extends Component {
                 });
             }
         }
+        else{
+          var ctxContainer = document.getElementById("myChartContainer");
+          ctxContainer.innerHTML='<h3> No data to visualize! </h3>';
+        }
+      }
     }
 
     render() {
@@ -566,7 +537,7 @@ class AdminAnalytics extends Component {
             {label: "2016", value: "2016"},
             {label: "2015", value: "2015"},
             {label: "2014", value: "2014"}];
-        const campusOptions = [{label: "All Campus", value: "all_campus"},
+        const campusOptions = [
             {label: "Boston", value: "boston"},
             {label: "Charlotte", value: "charlotte"},
             {label: "Silicon Valley", value: "silicon_valley"},
@@ -614,13 +585,7 @@ class AdminAnalytics extends Component {
                 {label: "Students Count", value: "students"}]
         };
 
-        // if (this.props.analytics){
-        //   console.log("callvack",this.props.analytics.request.responseURL)
-        //     this.getAnalyticsCallback(this.props.analytics.request.responseURL);
-        // }
-
         if (this.props.analytics && this.state.isApiCalled) {
-            // console.log(this.state.chartSelected);
             this.showChart(this.props.analytics);
         }
         console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)

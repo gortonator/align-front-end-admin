@@ -5,6 +5,9 @@ import Experience from './ExtraExperience/ExtraExperiences';
 import Project from './Project/Projects';
 import Skill from './Skill/Skill';
 import { Tab, Tabs } from 'react-bootstrap';
+import 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 
 class TabBar extends Component {
 
@@ -30,22 +33,42 @@ class TabBar extends Component {
         // )
         return (
           <div>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
+            <ul id="tab" className="nav nav-tabs" role="tablist">
+              <li className="nav-item">
+                <a className="nav-link active" data-toggle="tab" href="#about">About</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#academic">Academic</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#experience">Experience</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#project">Project</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#skill">Skill</a>
+              </li>
+            </ul>
+
+
+            <div className="tab-content">
+              <div id="about" className="container tab-pane active"><br />
+                <About/>
+              </div>
+              <div id="academic" className="container tab-pane fade"><br />
+                <Academic/>
+              </div>
+              <div id="experience" className="container tab-pane fade"><br />
+                <Experience/>
+              </div>
+              <div id="project" className="container tab-pane fade"><br />
+                <Project/>
+              </div>
+              <div id="skill" className="container tab-pane fade"><br />
+                <Skill/>
+              </div>
+            </div>
           </div>
         )
     }
