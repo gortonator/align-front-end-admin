@@ -22,7 +22,7 @@ export default props => (
 
         <CloseButton closeModal={props.closeModal}/>
         <span className={'student-profile-modal-title'}>
-            {props.name}'s Profile
+            {props.name}
         </span>
     </div>
 );

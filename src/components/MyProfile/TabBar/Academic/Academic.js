@@ -6,6 +6,9 @@ import {bindActionCreators} from 'redux';
 
 class Academic extends Component {
 
+  constructor(props){
+    super(props);
+  }
 
     render() {
 
@@ -28,7 +31,7 @@ class Academic extends Component {
 
 const mapStateToProps = state => {
     return {
-        courses: state.profile.Courses
+        // courses: state.profile.Courses
     };
 };
 

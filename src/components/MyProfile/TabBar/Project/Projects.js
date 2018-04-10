@@ -23,13 +23,8 @@ class Projects extends Component {
                 <table width="100%">
                     <tbody>
                     <tr>
-                        <td width="90%">
+                        <td width="100%">
                             <p className="tab-content-subtitle">MY PROJECTS</p>
-                        </td>
-                        <td width="10%">
-                            <Button onClick={this.clickOnAdd}>
-                                Add
-                            </Button>
                         </td>
                     </tr>
                     </tbody>
@@ -62,7 +57,7 @@ const TextArea = styled.p`
 
 const mapStateToProps = state => {
     return {
-        projects: state.profile.Projects
+        // projects: state.profile.Projects
     };
 };
 

@@ -11,6 +11,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 
 class TabBar extends Component {
 
+  constructor(props){
+    super(props);
+  }
+
     render() {
         // return (
         //     <Tabs id="tab" className="tab nav-tabs" defaultActiveKey={1}>
@@ -54,19 +58,19 @@ class TabBar extends Component {
 
             <div className="tab-content">
               <div id="about" className="container tab-pane active"><br />
-                <About/>
+                <About about={this.props.about}/>
               </div>
               <div id="academic" className="container tab-pane fade"><br />
-                <Academic/>
+                <Academic courses={this.props.courses}/>
               </div>
               <div id="experience" className="container tab-pane fade"><br />
-                <Experience/>
+                <Experience extraExperiences={this.props.extraExperiences}/>
               </div>
               <div id="project" className="container tab-pane fade"><br />
-                <Project/>
+                <Project projects={this.props.projects}/>
               </div>
               <div id="skill" className="container tab-pane fade"><br />
-                <Skill/>
+                <Skill skills={this.props.skills}/>
               </div>
             </div>
           </div>

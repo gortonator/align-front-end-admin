@@ -36,7 +36,7 @@ const AboutTable = styled.table`
     `
 const mapStateToProps = state => {
     return {
-        about: state.profile.studentRecord
+        // about: state.profile.studentRecord
     };
 };
 

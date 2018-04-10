@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 
 class Coop extends Component {
 
+  constructor(props){
+    super(props);
+  }
+
     renderCoop() {
         return this.props.workExperiences.map(coop => {
             return (
@@ -30,7 +34,7 @@ class Coop extends Component {
 
 const mapStateToProps = state => {
     return {
-        workExperiences: state.profile.WorkExperiences,
+        // workExperiences: state.profile.WorkExperiences,
     };
 };
 

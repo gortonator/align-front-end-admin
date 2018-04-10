@@ -8,23 +8,17 @@ class Skill extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: 'haha',
-            editable: false
+            content: this.props.skills
         };
     }
 
     getContentComponent() {
-        if(this.state.editable) {
-            return <TextArea defaultValue={this.state.content} onBlur={this.handleChange} autoFocus/>;
-
-        }else {
-            return <Show>{ this.state.content}</Show>;
-        }
+      return <Show>{ this.state.content}</Show>;
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({content: nextProps.skills})
-    }
+    // componentWillReceiveProps(nextProps){
+    //     this.setState({content: nextProps.skills})
+    // }
 
     render() {
         return (
@@ -52,7 +46,7 @@ const Show = styled.p`
 
 const mapStateToProps = state => {
     return {
-        skills: state.profile.studentRecord.skill
+        // skills: state.profile.studentRecord.skill
     };
 };
 
