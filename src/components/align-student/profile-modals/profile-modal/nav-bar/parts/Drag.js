@@ -1,6 +1,6 @@
 import React from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faEllipsisV from "@fortawesome/fontawesome-free-solid/faEllipsisV";
+import faArrowsAlt from "@fortawesome/fontawesome-free-solid/faArrowsAlt";
 
 export default props => (
     <a className={'student-profile-modal-drag'}
@@ -29,7 +29,7 @@ export default props => (
             e.stopPropagation();
             e.preventDefault();
         }}>
-        <FontAwesomeIcon icon={faEllipsisV}/>
+        <FontAwesomeIcon icon={faArrowsAlt}/>
     </a>
 );
 

@@ -31,28 +31,33 @@ class Intro extends Component {
 
     render() {
         return (
-            <Grid>
-                <Row className="show-grid">
-                    <Col md={12}><p id="intro-name">{this.props.intro.firstName}, {this.props.intro.lastName}
+            <Grid style={{'padding' : '0'}}>
+                <Row className="show-grid" style={{'margin' : '0'}}>
+                    <Col md={12}>
+                        <p id="intro-name">{this.props.intro.firstName}, {this.props.intro.lastName}
                         &nbsp;&nbsp;&nbsp;
-                        <img id="locationImage" src={location} alt="pic"/>&nbsp;
-                        <span id="location"
-                              className="grayContent">{this.props.intro.city}, {this.props.intro.state}</span></p></Col>
+                            <div>
+                                <img id="locationImage" src={location} alt="pic"/>&nbsp;
+                                <span id="location"
+                                      className="grayContent">{this.props.intro.city}, {this.props.intro.state}</span>
+                            </div>
+                        </p>
+                    </Col>
                 </Row>
 
                 <br/>
-                <Row className="show-grid">
-                    <Col md={3}><p>Gender:</p></Col>
-                    <Col md={3}><p className="grayContent">{this.props.intro.gender}</p></Col>
-                    <Col md={3}><p>Start Term:</p></Col>
-                    <Col md={3}><p className="grayContent">{this.props.intro.entryTerm + ' ' + this.props.intro.entryYear}</p></Col>
+                <Row className="show-grid" style={{'margin-right' : '0'}}>
+                    <Col md={3} style={{'padding-right' : '0'}}><p>Gender:</p></Col>
+                    <Col md={3} style={{'padding' : '0'}}><p className="grayContent">{this.props.intro.gender}</p></Col>
+                    <Col md={3} style={{'padding-right' : '0'}}><p>Start Term:</p></Col>
+                    <Col md={3} style={{'padding' : '0'}}><p className="grayContent">{this.props.intro.entryTerm + ' ' + this.props.intro.entryYear}</p></Col>
                 </Row>
 
-                <Row className="show-grid">
-                    <Col md={3}><p>Campus:</p></Col>
-                    <Col md={3}><p className="grayContent">{this.props.intro.campus}</p></Col>
-                    <Col md={3}><p>End Term:</p></Col>
-                    <Col md={3}><p className="grayContent">{this.props.intro.expectedLastTerm + ' ' + this.props.intro.expectedLastYear}</p></Col>
+                <Row className="show-grid" style={{'margin-right' : '0'}}>
+                    <Col md={3} style={{'padding-right' : '0'}}><p>Campus:</p></Col>
+                    <Col md={3} style={{'padding' : '0'}}><p className="grayContent">{this.props.intro.campus}</p></Col>
+                    <Col md={3} style={{'padding-right' : '0'}}><p>End Term:</p></Col>
+                    <Col md={3} style={{'padding' : '0'}}><p className="grayContent">{this.props.intro.expectedLastTerm + ' ' + this.props.intro.expectedLastYear}</p></Col>
 
                 </Row>
 

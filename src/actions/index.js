@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-
 const ROOT_TEST = 'http://reduxblog.herokuapp.com/api';
 const ROOT_URL = 'http://asd2.ccs.neu.edu:8081';
 const ROOT_URL_ANALYTICS = ROOT_URL + '/analytics';
 const API_KEY = '?key=STUDENT12345';
-// const token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..RhkeytG5GSaoAcn7l-vjKw.cwBol4yJoF8IhzNSw5n7oKnqx38dDtt54sIKZGRBWrd5a6cDy4avH6IzGG1XfkDvDsAxnqA3wFiO83MgUfLQA25EQQazkRQr_sRFWiRxRQY.it38_7BlRQ-F4I-nBgOeMg";
 
 export const SEARCH_STUDENT="search_student";
 export const FETCH_STUDENT="fetch_student";

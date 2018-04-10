@@ -135,16 +135,16 @@ class MyProfile extends Component {
                         <Col md={4}>
                             <Picture />
                         </Col>
-                        <Col md={8}>
+                        <Col md={8} style={{'padding-right': '0'}}>
                             {/*<Intro summary={this.state.about.summary} handler={this.handleSummaryChange}/>*/}
                             <Intro intro={this.state.intro}/>
                         </Col>
                     </div>
-                    <div className="row show-grid">
+                    <div className="row show-grid" style={{'margin' : '0'}}>
                         <Col md={4}>
                             <Coop workExperiences={this.state.workExperiences}/>
                         </Col>
-                        <Col md={8}>
+                        <Col md={8} style={{'padding' : '0'}}>
                             <TabBar courses={this.state.courses}
                             extraExperiences={this.state.extraExperiences}
                             projects={this.state.projects}
@@ -160,7 +160,7 @@ class MyProfile extends Component {
 
 const divStyle = {
     margin: "0",
-    maxWidth: 700,
+    maxWidth: 800,
 };
 const Wrapper = styled.div`
     font-family: 'Oxygen', sans-serif;
