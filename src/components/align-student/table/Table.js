@@ -10,6 +10,7 @@ export default props => (
               students={props.students}
               acceptRetrievalFailure={props.acceptRetrievalFailure}
               resultNumber={props.pagination.total}
+              showStartMessage={props.pagination.total === -1}
               retryRetrieval={() => {
                   props.applyFilters(
                       props.failedStudentRetrieval.studentFilters,

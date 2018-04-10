@@ -4,6 +4,7 @@ import Notes from './notes/Notes';
 import {ASYNC_ACTION_STATUSES, NOTE_CREATION_PLACE_HOLDER} from "../../../../constants";
 import OperationOngoingMessage from "../../../common/OperationOngoingMessage";
 import RetriableFailureMessage from '../../../common/RetriableFailureMessage';
+import MyProfile from '../../../MyProfile/MyProfile';
 
 export const PROFILE_MODAL_DISPLAY_CONTENT = {
     PROFILE: 'PROFILE',
@@ -16,8 +17,8 @@ const PROFILE_MODAL_INITIAL_POSITION = {
 };
 
 const PROFILE_MODAL_DIMENSIONS = {
-    width: 900,
-    height: 550
+    width: 800,
+    height: 500
 };
 
 class ProfileModal extends React.Component{
@@ -177,7 +178,7 @@ function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNot
                 var children;
                 switch(display){
                     case PROFILE_MODAL_DISPLAY_CONTENT.PROFILE:
-                        return JSON.stringify(profile.personalInformation);
+                        return <MyProfile profile={profile.personalInformation}/>;
                     case PROFILE_MODAL_DISPLAY_CONTENT.NOTES:
                         return <Notes notes={notes}
                                       create={createNote}
