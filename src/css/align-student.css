@@ -776,7 +776,8 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 .community{
     font-size: 20px;
-    color: rgba(97,84,69);
+    color: #FEC92B;
+    font-weight: bold;
 }
 
 .al-navbar{
