@@ -194,6 +194,7 @@ export function applyStudentFilters(studentFilters,token,page){
                         studentFilters));
                 },
                 error => {
+                    console.error(error);
                     dispatch(studentRetrievalFailure(studentFilters,page));
                 });
 
@@ -284,8 +285,8 @@ export function retrieveStudentProfile(nuid,token){
                     dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
                 },
                 error => {
-                    console.log(error);
-                    dispatch(studentProfileRetrievalFailure());
+                    console.error(error);
+                    dispatch(studentProfileRetrievalFailure(nuid));
                 }
             );
     };
@@ -318,7 +319,7 @@ export function createNote(noteContent,nuid,token,adminId,successCallback,failur
                     dispatch(noteCreationSuccess(note,successCallback));
                 },
                 error => {
-                    console.log(error);
+                    console.error(error);
                     dispatch(noteCreationFailure(failureCallback));
                 }
             );
@@ -347,7 +348,7 @@ export function updateNote(note,token,adminId,successCallback,failureCallback){
                     dispatch(noteUpdateSuccess(note,successCallback));
                 },
                 error => {
-                    console.log(error);
+                    console.error(error);
                     dispatch(noteUpdateFailure(failureCallback));
                 }
             )
@@ -370,7 +371,7 @@ export function deleteNote(noteId,token,successCallback,failureCallback){
                     dispatch(noteDeletionSuccess(noteId,successCallback));
                 },
                 error => {
-                    console.log(error);
+                    console.error(error);
                     dispatch(noteDeletionFailure(failureCallback));
                 }
             );

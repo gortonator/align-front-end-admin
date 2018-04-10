@@ -9,7 +9,6 @@ import Heading from './Heading';
 import EnrollmentStatusFilter from './filters/EnrollmentStatusFilter';
 import GenderFilter from './filters/GenderFilter';
 import MiscellaneousFilters from './filters/miscellaneous-filters/MiscellaneousFilters';
-import RaceFilter from './filters/RaceFilter';
 import UndergradMajorFilter from './filters/UndergradMajorFilter';
 import CloseButton from './controls/CloseButton';
 import {CAMPUSES, ENROLLMENT_STATUSES, GENDER_OPTIONS} from "../../../constants";
@@ -20,7 +19,6 @@ const defaultStudentFilter = {
     enrollmentStatus: [],
     coop: '',
     gender: GENDER_OPTIONS.ANY.value,
-    race: '',
     undergradMajor: '',
     nuUndergrad: false
 };
@@ -35,7 +33,6 @@ class EditStudentFilterModal extends React.Component {
 
         this.handleCoopFilterChange = this.handleCoopFilterChange.bind(this);
         this.handleGenderFilterChange = this.handleGenderFilterChange.bind(this);
-        this.handleRaceFilterChange = this.handleRaceFilterChange.bind(this);
         this.handleUndergradMajorFilterChange = this.handleUndergradMajorFilterChange.bind(this);
         this.toggleNuUndergrad = this.toggleNuUndergrad.bind(this);
 
@@ -96,14 +93,6 @@ class EditStudentFilterModal extends React.Component {
         );
     }
 
-    handleRaceFilterChange(e){
-        this.setState(
-            {
-                race: e.target.value
-            }
-        );
-    }
-
     handleUndergradMajorFilterChange(e){
         this.setState(
             {
@@ -138,7 +127,7 @@ class EditStudentFilterModal extends React.Component {
 
     render(){
         return (
-            <div className={"edit-student-filter-modal"} style={{"width": "28%", height: window.innerHeight}}>
+            <div className={"edit-student-filter-modal"} style={{"maxWidth": "372px", height: window.innerHeight}}>
 
                 <CloseButton closeModal={this.closeModal}/>
 
@@ -157,9 +146,6 @@ class EditStudentFilterModal extends React.Component {
 
                 <GenderFilter onChange={this.handleGenderFilterChange}
                               value={this.state.gender}/>
-
-                <RaceFilter onChange={this.handleRaceFilterChange}
-                            value={this.state.race}/>
 
                 <UndergradMajorFilter onChange={this.handleUndergradMajorFilterChange}
                                       value={this.state.undergradMajor}/>
