@@ -6,9 +6,9 @@ function mapStateToProps(state){
     return {
         studentProfiles: state.alignStudent.studentProfiles,
         students: state.alignStudent.students.items,
-        token: state.alignStudent.token,
+        token: state.login.token,
         notes: state.alignStudent.notes,
-        adminId: state.alignStudent.adminId
+        adminId: state.login.id
     };
 }
 

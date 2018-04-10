@@ -10,17 +10,20 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './css/bootstrap.min.css';
 
-import 'react-select/dist/react-select.css'
-import 'react-virtualized/styles.css'
-import 'react-virtualized-select/styles.css'
+// import 'react-select/dist/react-select.css'
+// import 'react-virtualized/styles.css'
+// import 'react-virtualized-select/styles.css'
 
 import './css/align-student.css';
 import './css/overview.css';
 import './css/style.css';
+import './css/login.css';
 
+
+import LoginForm from './components/login_form';
 import Header from './components/header';
-import Navbar from './react-redux-mixed/left_navbar';
-import Analytics from './react-redux-mixed/analytics';
+import Navbar from './components/NavBar';
+import Analytics from './components/analytics';
 
 import AlignStudent from './components/align-student/AlignStudent';
 import NavBarAlt from './components/navbar-alt/NavBarAlt';
@@ -47,21 +50,39 @@ const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(creat
 //     </Provider>
 //     , document.getElementById('root'));
 
+const RouteWithLayout = ({ component, ...rest }) => {
+    return (
+        <div>
+            <Route path='/' component={Navbar} />
+            <Route {...rest} render={ () => React.createElement(component) } />
+        </div>
+    );
+};
+
+const Profile = ({component, ...rest}) => {
+    return (
+        <div>
+            <div id="main-nav">
+                <Route {...rest} render={ () => React.createElement(component) }/>
+            </div>
+        </div>
+    );
+};
+
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter>
-            <div style={{'background-color' : 'rgba(243,242,239,.2)'}}>
-                <NavBarAlt/>
+            <div>
                 <Switch>
-                    <Route path='/analytics' component={Analytics} />
+                    <RouteWithLayout path='/analytics' component={Analytics} />
+                    {/*<Route exact path="/myProfile" component={MyProfile}/>*/}
                     {/*<Route path='/profile/:id' component={StudentProfile} />*/}
-                    <Route path='/students' component={AlignStudent} />
+                    <RouteWithLayout path='/students' component={AlignStudent} />
+                    <Route path='/' component={LoginForm} />
                 </Switch>
-
             </div>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
-
 
 registerServiceWorker();

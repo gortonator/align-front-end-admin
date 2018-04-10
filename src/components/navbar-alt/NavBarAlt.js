@@ -9,13 +9,13 @@ export default props => (
 
         <div className={'navbar-links'}>
 
-            <Link to={'/students'} className={'navbar-link'}>
+            <a to={'/students'} className={'navbar-link'}>
                 Align Students
-            </Link>
+            </a>
 
-            <Link to={'/analytics'} className={'navbar-link'}>
+            <a to={'/analytics'} className={'navbar-link'}>
                 Analytics
-            </Link>
+            </a>
 
             <a className={'logout-link'}>
                 Log Out

@@ -5,7 +5,7 @@ import {applyStudentFilters} from '../../actions/align-students-actions';
 function mapStateToProps(state){
     return {
         studentFilters: state.alignStudent.students.studentFilters,
-        token: state.alignStudent.token
+        token: state.login.token
     };
 }
 

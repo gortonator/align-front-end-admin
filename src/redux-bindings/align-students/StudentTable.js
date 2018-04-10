@@ -9,7 +9,7 @@ function mapStateToProps(state){
         failedStudentRetrieval: state.alignStudent.students.failedStudentRetrieval,
         pagination: state.alignStudent.students.pagination,
         studentFilters: state.alignStudent.students.studentFilters,
-        token: state.alignStudent.token
+        token: state.login.token
     };
 }
 

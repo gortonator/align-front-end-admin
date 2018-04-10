@@ -3,11 +3,15 @@ import React from 'react';
 export default function (props) {
 
     if (props.analytics && props.chartSelected == "gender-ratio") {
-        var i = 0;
-        const chartHeaders = props.chartHeaders.map((head) => {
-            return <th key={head.value} className="text-align-center">{head.label}</th>;
-        });
-        const listOfYears = props.analytics.yearlyratio.map((year) => {
+        // console.log(props.analytics);
+        if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+        else{
+          var i = 0;
+          const chartHeaders = props.chartHeaders.map((head) => {
+              return <th key={head.value} className="text-align-center">{head.label}</th>;
+          });
+        const listOfYears = props.analytics.map((year) => {
             i = i + 1;
             return <tr key={year.year}>
                 <td>{i}</td>
@@ -29,12 +33,17 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
     if (props.analytics && props.chartSelected == "company") {
+          if(props.analytics.length==0)
+  return (<h4> No Data found ! </h4>);
+  else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const listOfStudents = props.analytics.students.map((student) => {
+
+        const listOfStudents = props.analytics.map((student) => {
             i = i + 1;
             return <tr key={student.nuid}>
                 <td>{i}</td>
@@ -54,14 +63,18 @@ export default function (props) {
             </tbody>
         </table>);
     }
+  }
     if (props.analytics && props.chartSelected == "top-employers") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
 
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
 
-        const listOfCompanies = props.analytics.employers.map((company) => {
+        const listOfCompanies = props.analytics.map((company) => {
             i = i + 1;
             return <tr key={company.name}>
                 <td>{i}</td>
@@ -81,27 +94,29 @@ export default function (props) {
             </tbody>
         </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "coop-students") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const studentsList = props.analytics.studentList.map((student) => {
+        const studentsList = props.analytics.map((student) => {
             i = i + 1;
             var x = 0;
             return <tr key={student.nuid}>
                 <td>{i}</td>
                 <td>{student.nuid}</td>
                 <td>{student.name}</td>
-                <td>{student.companies
-                    .map((company) => {
+                <td>{student.companies ? student.companies.map((company) => {
                         if (x > 0)
                             return "," + company;
                         x = x + 1;
                         return company;
-                    })}
-
+                    }):null}
                 </td>
             </tr>
         });
@@ -118,16 +133,20 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "working") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const studentsList = props.analytics.studentList.map((student) => {
+        const studentsList = props.analytics.map((student) => {
             i = i + 1;
             var x = 0;
-            return <tr key={student.nuid}>
+            return <tr key={i}>
                 <td>{i}</td>
                 <td>{student.nuid}</td>
                 <td>{student.name}</td>
@@ -147,13 +166,17 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "top-electives") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const electivesList = props.analytics.electives.map((elective) => {
+        const electivesList = props.analytics.map((elective) => {
             i = i + 1;
             var x = 0;
             return <tr key={elective.elective}>
@@ -175,13 +198,17 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "undergrad-institutions") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const institutionList = props.analytics.institutionlist.map((institution) => {
+        const institutionList = props.analytics.map((institution) => {
             i = i + 1;
             var x = 0;
             return <tr key={institution.name}>
@@ -203,13 +230,17 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 
     if (props.analytics && props.chartSelected == "top-bachelor-degrees") {
+      if(props.analytics.length==0)
+return (<h4> No Data found ! </h4>);
+else{
         var i = 0;
         const chartHeaders = props.chartHeaders.map((head) => {
             return <th key={head.value} className="text-align-center">{head.label}</th>;
         });
-        const DegreeList = props.analytics.degrees.map((degree) => {
+        const DegreeList = props.analytics.map((degree) => {
             i = i + 1;
             var x = 0;
             return <tr key={degree.degree}>
@@ -231,4 +262,5 @@ export default function (props) {
                 </tbody>
             </table>);
     }
+  }
 }
