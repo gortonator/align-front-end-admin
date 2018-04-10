@@ -3,7 +3,7 @@
 */
 
 .align-student{
-    padding: 70px 70px;
+    padding: 120px 70px;
 }
 
 /*
@@ -178,6 +178,14 @@ a.add-filter-button{
 
 .name-cell, .email-cell{
     width: 25%;
+    position: relative;
+}
+
+.student-note-indicator{
+    color: #212529;
+    position: absolute;
+    right: 30%;
+    top: 4px;
 }
 
 .student-pagination-container{
@@ -237,7 +245,7 @@ a.student-pagination-go-to-page-button{
     position: absolute;
     padding: 5px 25px;
     color: white;
-    background-color: rgba(255,0,0);
+    background-color: rgba(255,0,0,.8);
     border-radius: 10px;
     right: -180px;
     top: 0;
@@ -734,6 +742,80 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     color: rgba(255,0,0,.7);
     transition: color .3s;
 }
+
+.ccis{
+    font-weight: 700;
+    color: #FEC92B;
+    width: 30%;
+    display: inline-block;
+}
+
+.align-community{
+    color: #615445;
+    font-size: 35px;
+    font-weight: bolder;
+    margin-bottom: 5px;
+    width: 50%;
+    display: inline-block;
+}
+
+.al-navbar{
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+}
+
+.al-navbar-brand{
+    display: inline-block;
+    width: 25%;
+    float: left;
+    padding: 0 30px;
+}
+
+.navbar-links{
+    display: inline-block;
+    width: 75%;
+    overflow: auto;
+    float: left;
+    position: relative;
+    clear: right;
+    padding-top: 40px;
+}
+
+.navbar-links a{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0 5px;
+    color: black;
+    border-bottom: 3px solid transparent;
+    padding: 0 20px 20px;
+}
+
+.navbar-links a:hover{
+    color: rgba(255,0,0,.7);
+    border-bottom: 3px solid rgba(255,0,0,.7);
+    transition: all .5s;
+}
+
+a.logout-link:hover{
+    border-bottom-color: transparent;
+}
+
+.logout-link{
+    position: absolute;
+    right: 30px;
+}
+
+.navbar-border{
+    width: 100%;
+    float: left;
+    height: 10px;
+    background: linear-gradient(#BBBBBB,white);
+}
+
 
 
 

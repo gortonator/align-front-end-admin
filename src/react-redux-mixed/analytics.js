@@ -607,7 +607,7 @@ class AdminAnalytics extends Component {
             this.showChart(this.props.analytics);
         }
         return (
-            <div>
+            <div style={{'padding' : '120px 30px'}}>
                 <div className="analytics-body col-sm-12">
                     <AnalyticsFilter
                         toggleGenderRatio={this.toggleGenderRatio}

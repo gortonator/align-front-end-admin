@@ -1,4 +1,6 @@
 import React from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faFileAlt from '@fortawesome/fontawesome-free-regular/faFileAlt';
 
 export default props => (
     <div className={"student-table-row"}>
@@ -14,6 +16,9 @@ export default props => (
                href={''}>
                 {props.student.name}
             </a>
+            {
+                props.student.hasNote && <FontAwesomeIcon icon={faFileAlt} className={'student-note-indicator'}/>
+            }
         </div>
         <div className={"email-cell student-table-cell"}>
             {props.student.email}

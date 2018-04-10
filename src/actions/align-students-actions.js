@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GENDER_OPTIONS, NUMBER_OF_STUDENTS_PER_PAGE, BASE_URL} from "../constants";
+import {GENDER_OPTIONS, NUMBER_OF_STUDENTS_PER_PAGE, BASE_URL, ENROLLMENT_STATUSES} from "../constants";
 
 // Action Types
 
@@ -184,7 +184,7 @@ export function applyStudentFilters(studentFilters,token,page){
                             email: s.email,
                             hasNote: s.notes.length > 0,
                             name: [s.firstname,s.middlename,s.lastname].join(' '),
-                            enrollmentStatus: s.enrollmentstatus
+                            enrollmentStatus: getEnrollmentStatusDisplayNameByValue(s.enrollmentstatus)
                         };
                     });
                     dispatch(studentRetrievalSuccess(
@@ -256,6 +256,11 @@ function setRequestBodySingleValuedField(filter,body,fieldName){
     if (filter !== ''){
         body[fieldName] = filter;
     }
+}
+
+function getEnrollmentStatusDisplayNameByValue(value){
+    const key = Object.keys(ENROLLMENT_STATUSES).filter(k => ENROLLMENT_STATUSES[k].value === value)[0];
+    return ENROLLMENT_STATUSES[key].displayName;
 }
 
 export function retrieveStudentProfile(nuid,token){

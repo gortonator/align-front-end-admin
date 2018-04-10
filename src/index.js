@@ -23,27 +23,45 @@ import Navbar from './react-redux-mixed/left_navbar';
 import Analytics from './react-redux-mixed/analytics';
 
 import AlignStudent from './components/align-student/AlignStudent';
+import NavBarAlt from './components/NavBarAlt';
 
 const createStoreWithMiddleware = applyMiddleware(promise,thunkMiddleware)(createStore);
 
 // We use switch to handle the route problem of '/' as both index page
 // and /posts/new page showed up
 
+// ReactDOM.render(
+//     <Provider store={createStoreWithMiddleware(rootReducer)}>
+//         <BrowserRouter>
+//             <div className="col-xs-12">
+//                 <Header />
+//                 <Route path='/' component={Navbar} />
+//                 <Switch>
+//                     <Route path='/analytics' component={Analytics} />
+//                     {/*<Route path='/profile/:id' component={StudentProfile} />*/}
+//                     <Route path='/' component={AlignStudent} />
+//                 </Switch>
+//
+//             </div>
+//         </BrowserRouter>
+//     </Provider>
+//     , document.getElementById('root'));
+
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter>
-            <div className="col-xs-12">
-                <Header />
-                <Route path='/' component={Navbar} />
+            <div>
+                <NavBarAlt/>
                 <Switch>
                     <Route path='/analytics' component={Analytics} />
                     {/*<Route path='/profile/:id' component={StudentProfile} />*/}
-                    <Route path='/' component={AlignStudent} />
+                    <Route path='/students' component={AlignStudent} />
                 </Switch>
 
             </div>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
+
 
 registerServiceWorker();
