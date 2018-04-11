@@ -698,6 +698,8 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     overflow: hidden;
     width: 100%;
     display: inline-block;
+    border: 2px solid rgba(255,0,0,.3);
+    border-radius: 10px;
 }
 
 .note-exit{
@@ -714,17 +716,17 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 
 .note-title{
-    background-color: rgba(187,187,187,.3);
     font-size: 23px;
+    margin: 0 5px;
     font-style: italic;
     font-weight: 700;
     padding: 5px 15px;
+    border-bottom: 2px solid #F0F0F0;
 }
 
 .note-desc{
     padding: 10px 15px 0;
-    min-height: 200px;
-    background: linear-gradient(rgba(187,187,187,.2),white);
+    min-height: 150px;
 }
 
 .note:hover .note-control-panel{
