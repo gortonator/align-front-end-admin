@@ -145,11 +145,12 @@ class MyProfile extends Component {
                             <Coop workExperiences={this.state.workExperiences}/>
                         </Col>
                         <Col md={8} style={{'padding' : '0'}}>
-                            <TabBar courses={this.state.courses}
-                            extraExperiences={this.state.extraExperiences}
-                            projects={this.state.projects}
-                            skills={this.state.skills}
-                            about={this.state.about}/>
+                            <TabBar nuid={this.props.profile.neuId}
+                                    courses={this.state.courses}
+                                    extraExperiences={this.state.extraExperiences}
+                                    projects={this.state.projects}
+                                    skills={this.state.skills}
+                                    about={this.state.about}/>
                         </Col>
                     </div>
                 </div>

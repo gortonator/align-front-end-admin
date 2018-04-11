@@ -63,7 +63,7 @@ class Pagination extends React.Component {
                 </div>
                 <a className={'student-pagination-error' + ' ' + (
                     this.isInputValid() ? 'hide' : ''
-                )}>
+                )} style={{'color' : 'white'}}>
                     You should input a number between 1 and {this.props.pagination.total}
                 </a>
             </div>
