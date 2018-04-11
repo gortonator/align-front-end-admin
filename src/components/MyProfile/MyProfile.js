@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Picture from './Picture/Picture'
 import Intro from './Intro/Intro'
 import Coop from './Coop/Coop'
-import TabBar from './TabBar/TabBar'
+import TabView from './TabBar/TabView'
 import styled from "styled-components";
 import {Grid, Row, Col, css} from 'react-bootstrap';
 import {connect} from 'react-redux';
@@ -145,11 +145,11 @@ class MyProfile extends Component {
                             <Coop workExperiences={this.state.workExperiences}/>
                         </Col>
                         <Col md={8} style={{'padding' : '0'}}>
-                            <TabBar courses={this.state.courses}
-                            extraExperiences={this.state.extraExperiences}
-                            projects={this.state.projects}
-                            skills={this.state.skills}
-                            about={this.state.about}/>
+                            <TabView courses={this.state.courses}
+                                     extraExperiences={this.state.extraExperiences}
+                                     projects={this.state.projects}
+                                     skills={this.state.skills}
+                                     about={this.state.about}/>
                         </Col>
                     </div>
                 </div>
