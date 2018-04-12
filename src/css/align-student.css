@@ -471,7 +471,7 @@ a.nu-undergrad-option{
 .student-profile-modal{
     position: fixed;
     border: 2px solid #BBBBBB;
-    background-color: white;
+    background-color: #FAFAFA;
     /*padding-top: 48px;*/
     overflow-y: scroll;
     padding-top: 48px;
@@ -691,7 +691,8 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 .note-container{
     display: inline-block;
     width: 50%;
-    padding: 0 15px;
+    padding: 0 20px;
+    margin-bottom: 20px;
 }
 
 .note{
@@ -699,7 +700,6 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     overflow: hidden;
     width: 100%;
     display: inline-block;
-    border: 2px solid rgba(255,0,0,.3);
     border-radius: 10px;
 }
 
@@ -717,17 +717,21 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 
 .note-title{
-    font-size: 23px;
-    margin: 0 5px;
+    font-size: 22px;
     font-style: italic;
     font-weight: 700;
     padding: 5px 15px;
     border-bottom: 2px solid #F0F0F0;
+    background-color: rgba(83,60,51,.9);
+    color: white;
 }
 
 .note-desc{
     padding: 10px 15px 0;
     min-height: 150px;
+    background-color: #FBFB95;
+    overflow: auto;
+    word-wrap: break-spaces;
 }
 
 .note:hover .note-control-panel{
@@ -740,7 +744,7 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     width: 80px;
     top: 0;
     right: -80px;
-    padding-top: 7px;
+    padding-top: 10px;
     transition: right .3s;
 }
 
@@ -751,8 +755,11 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 }
 
 .note-control-container a:hover{
-    color: rgba(255,0,0,.7);
-    transition: color .3s;
+    background-color: #533C33;
+}
+
+.note-control-container a{
+    color: white;
 }
 
 .ccis{
@@ -781,9 +788,9 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 .align{
     font-size: 26px;
-    font-weight: 700;
+    font-weight: 500;
+    font-family: 'Russo One',cursive;
     color: rgba(255,0,0,.7);
-    letter-spacing: 5px;
 }
 
 
