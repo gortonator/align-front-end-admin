@@ -768,7 +768,7 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     font-size: 25px;
     text-align: center;
     color: white;
-    background-color: rgba(97,84,69,.5);
+    background-color: #FEC92B;
     margin: 2px;
     padding: 0 8px;
 }
@@ -780,15 +780,17 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 }
 
 .align{
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
     color: rgba(255,0,0,.7);
+    letter-spacing: 5px;
 }
 
+
 .community{
-    font-size: 20px;
-    color: #FEC92B;
-    font-weight: bold;
+    font-size: 23px;
+    color: rgba(255,0,0,.7);
+
 }
 
 .al-navbar{
