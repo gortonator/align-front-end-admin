@@ -132,7 +132,7 @@ class MyProfile extends Component {
             <Wrapper>
                 <div style={{margin: "0"}}>
                     <div className="row show-grid row-eq-height">
-                        <Col md={4}>
+                        <Col md={4} style={{'padding-top' : '40px'}}>
                             <Picture />
                         </Col>
                         <Col md={8} style={{'padding-right': '0'}}>

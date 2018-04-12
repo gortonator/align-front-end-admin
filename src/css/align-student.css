@@ -190,10 +190,9 @@ a.add-filter-button{
 }
 
 .student-note-indicator{
-    color: #212529;
     position: absolute;
     right: 30%;
-    top: 4px;
+    font-size: 20px;
 }
 
 .student-pagination-container{
@@ -828,20 +827,31 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
-    margin: 0 5px;
     color: black;
-    border-bottom: 3px solid transparent;
+    border: none;
     padding: 0 20px 20px;
 }
 
 .navbar-links a:hover{
     color: rgba(255,0,0,.7);
-    border-bottom: 3px solid rgba(255,0,0,.7);
     transition: all .5s;
 }
 
-a.logout-link:hover{
-    border-bottom-color: transparent;
+.nav-bar-link{
+    display: inline-block;
+}
+
+.nav-bar-link-underline{
+    height: 3px;
+    width: 0;
+    background-color: rgba(255,0,0,.7);
+    margin: auto;
+    transition: width .35s;
+}
+
+.nav-bar-link a:hover + .nav-bar-link-underline{
+    width: 100%;
+    transition: width .4s;
 }
 
 .logout-link{
