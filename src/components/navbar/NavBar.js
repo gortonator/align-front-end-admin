@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { selectPage, checkLogin, doLogout } from '../actions';
+import { selectPage, checkLogin, doLogout } from '../../actions/index';
 import { connect } from 'react-redux';
-import NavBarBrand from './navbar-alt/NavBarBrand';
-import { Link } from 'react-router-dom';
+import NavBarBrand from './NavBarBrand';
 
 class Navbar extends Component{
 
