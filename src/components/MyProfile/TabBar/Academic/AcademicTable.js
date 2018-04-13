@@ -8,7 +8,7 @@ export default props => (
     <div className={'academic-table'}>
         <div className={'table-head'}>
             <div className={'name-cell table-cell'}>
-                Course name
+                Course
             </div>
             <div className={'grade-cell table-cell'}>
                 Grade
@@ -24,7 +24,7 @@ export default props => (
         {props.courses.map(c => (
             <div className={'table-row'}>
                 <div className={'name-cell table-cell'}>
-                    {c.courseName}
+                    {c.courseId} - {c.courseName}
                 </div>
                 <div className={'grade-cell table-cell'}>
                     {c.gpa}
