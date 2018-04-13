@@ -53,7 +53,6 @@ class ProfileModal extends React.Component{
             document.removeEventListener('mousemove', this.dragging);
             document.removeEventListener('mouseup', this.endDragging);
         }
-        console.log(this.props.profile);
     }
 
     changeDisplay(d){

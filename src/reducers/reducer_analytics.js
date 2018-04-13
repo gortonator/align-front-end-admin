@@ -152,7 +152,7 @@ export default function (state=null,action ){
         // }]};
 
 
-        console.log(action);
+        // console.log(action);
         return action.payload.data;
         case SORT_ANALYTICS:{
           // console.log(action);

@@ -64,7 +64,6 @@ class AlignStudent extends React.Component{
             this.setState(prevState => {
                 const openedProfiles = JSON.parse(JSON.stringify(prevState.openedProfiles));
                 openedProfiles.splice(profileIndex,1);
-                console.log(openedProfiles,profileIndex);
                 return {
                     openedProfiles: openedProfiles
                 };
