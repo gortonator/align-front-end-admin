@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import { selectPage, checkLogin, doLogout } from '../actions';
+import { selectPage, checkLogin, doLogout } from '../../actions/index';
 import { connect } from 'react-redux';
-import NavBarBrand from './navbar-alt/NavBarBrand';
-import { Link } from 'react-router-dom';
+import NavBarBrand from './NavBarBrand';
+import NavBarLink from './NavBarLink';
 
 class Navbar extends Component{
 
   constructor(props) {
     super(props);
+    this.getSelectedPage = this.getSelectedPage.bind(this);
   }
 
   getSelectedPage(selectedPage){
@@ -44,25 +45,17 @@ class Navbar extends Component{
 
               <div className={'navbar-links'}>
 
-                  <a onClick={e => {
-                    e.preventDefault();
-                    this.getSelectedPage.bind(this,'/students')();
-                  }} className={'navbar-link'}
-                     href={''}>
-                      Align Students
-                  </a>
+                  <NavBarLink getSelectedPage={this.getSelectedPage}
+                              name={'Align Students'}
+                              link={'/students'}/>
+
+                  <NavBarLink getSelectedPage={this.getSelectedPage}
+                              name={'Analytics'}
+                              link={'/analytics'}/>
 
                   <a onClick={e => {
                     e.preventDefault();
-                      this.getSelectedPage.bind(this,'/analytics')();
-                  }} className={'navbar-link'}
-                     href={''}>
-                      Analytics
-                  </a>
-
-                  <a onClick={e => {
-                    e.preventDefault();
-                    this.getSelectedPage.bind(this,'/')();
+                    this.getSelectedPage('/');
                   }}
                      className={'logout-link'}
                      href={''}>

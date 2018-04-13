@@ -12,7 +12,6 @@ export default props => (
                           nuid={nuid}
                           isActive={props.activeProfile === nuid}
                           closeModal={() => {props.closeProfileModal(nuid)}}
-                          name={getNameByNuid(nuid,props.students)}
                           activateThisModal={() => {props.openProfileModal(nuid)}}
                           createNote={(noteContent,successCallback,failureCallback) =>
                               props.createNote(noteContent,nuid,props.token,props.adminId,successCallback,failureCallback)}
@@ -23,12 +22,6 @@ export default props => (
     </React.Fragment>
 );
 
-function getNameByNuid(nuid,students){
-    return students.find(s => s.nuid === nuid).name;
-}
 
-function getProfile(studentProfiles,nuid){
-    const profileFound = studentProfiles.find(p => p.nuid === nuid);
-    return profileFound === undefined ? undefined : Object.assign({},profileFound);
-}
+
 

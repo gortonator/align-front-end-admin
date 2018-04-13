@@ -161,39 +161,42 @@ a.add-filter-button{
     text-align: center;
 }
 
-.student-table-head{
+.student-table .table-head{
     padding: 0 40px 5px;
     border-bottom: solid #FBFBFB 4px;
 }
 
-.student-table-row{
+.student-table .table-row{
     padding: 5px 40px;
     border-bottom: solid #FBFBFB 2px;
 }
 
-.student-table-cell{
+/*
+    Applies to Any Table Cell
+*/
+
+.table-cell{
     display: inline-block;
     font-size: 16px;
 }
 
-.id-cell,.enrollment-status-cell{
+.student-table .id-cell, .student-table .enrollment-status-cell{
     width: 20%;
 }
 
-.degree-year-cell{
+.student-table .degree-year-cell{
     width: 10%;
 }
 
-.name-cell, .email-cell{
+.student-table .name-cell, .student-table .email-cell{
     width: 25%;
     position: relative;
 }
 
 .student-note-indicator{
-    color: #212529;
     position: absolute;
     right: 30%;
-    top: 4px;
+    font-size: 20px;
 }
 
 .student-pagination-container{
@@ -471,7 +474,7 @@ a.nu-undergrad-option{
 .student-profile-modal{
     position: fixed;
     border: 2px solid #BBBBBB;
-    background-color: white;
+    background-color: #FAFAFA;
     /*padding-top: 48px;*/
     overflow-y: scroll;
     padding-top: 48px;
@@ -691,7 +694,8 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 .note-container{
     display: inline-block;
     width: 50%;
-    padding: 0 15px;
+    padding: 0 20px;
+    margin-bottom: 20px;
 }
 
 .note{
@@ -699,7 +703,6 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     overflow: hidden;
     width: 100%;
     display: inline-block;
-    border: 2px solid rgba(255,0,0,.3);
     border-radius: 10px;
 }
 
@@ -717,17 +720,21 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 
 
 .note-title{
-    font-size: 23px;
-    margin: 0 5px;
+    font-size: 22px;
     font-style: italic;
     font-weight: 700;
     padding: 5px 15px;
     border-bottom: 2px solid #F0F0F0;
+    background-color: rgba(83,60,51,.9);
+    color: white;
 }
 
 .note-desc{
     padding: 10px 15px 0;
     min-height: 150px;
+    background-color: #FBFB95;
+    overflow: auto;
+    word-wrap: break-spaces;
 }
 
 .note:hover .note-control-panel{
@@ -740,7 +747,7 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     width: 80px;
     top: 0;
     right: -80px;
-    padding-top: 7px;
+    padding-top: 10px;
     transition: right .3s;
 }
 
@@ -751,8 +758,11 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 }
 
 .note-control-container a:hover{
-    color: rgba(255,0,0,.7);
-    transition: color .3s;
+    background-color: #533C33;
+}
+
+.note-control-container a{
+    color: white;
 }
 
 .ccis{
@@ -768,7 +778,7 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     font-size: 25px;
     text-align: center;
     color: white;
-    background-color: rgba(97,84,69,.5);
+    background-color: #FEC92B;
     margin: 2px;
     padding: 0 8px;
 }
@@ -780,15 +790,17 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
 }
 
 .align{
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 500;
+    font-family: 'Russo One',cursive;
     color: rgba(255,0,0,.7);
 }
 
+
 .community{
-    font-size: 20px;
-    color: #FEC92B;
-    font-weight: bold;
+    font-size: 23px;
+    color: rgba(255,0,0,.7);
+
 }
 
 .al-navbar{
@@ -819,20 +831,31 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
-    margin: 0 5px;
     color: black;
-    border-bottom: 3px solid transparent;
+    border: none;
     padding: 0 20px 20px;
 }
 
 .navbar-links a:hover{
     color: rgba(255,0,0,.7);
-    border-bottom: 3px solid rgba(255,0,0,.7);
     transition: all .5s;
 }
 
-a.logout-link:hover{
-    border-bottom-color: transparent;
+.nav-bar-link{
+    display: inline-block;
+}
+
+.nav-bar-link-underline{
+    height: 3px;
+    width: 0;
+    background-color: rgba(255,0,0,.7);
+    margin: auto;
+    transition: width .35s;
+}
+
+.nav-bar-link a:hover + .nav-bar-link-underline{
+    width: 100%;
+    transition: width .4s;
 }
 
 .logout-link{
@@ -847,6 +870,47 @@ a.logout-link:hover{
     background: linear-gradient(#BBBBBB,white);
 }
 
+.academic-table{
+    min-height: 200px;
+    margin-bottom: 50px;
+}
+
+.academic-table .table-head{
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 5px 0;
+    border-top: 2px solid #BBBBBB;
+    border-bottom: 2px solid #BBBBBB;
+}
+
+.academic-table .table-row{
+    margin-right: 10px;
+    padding: 3px 0;
+}
+
+.academic-table .table-cell{
+    font-size: 15px;
+}
+
+.academic-table .name-cell{
+    width: 50%;
+    padding-left: 5px;
+}
+
+.academic-table .grade-cell{
+    width: 15%;
+    padding-left: 10px;
+}
+
+.academic-table .retaken-cell{
+    width: 17%;
+    text-align: center;
+}
+
+.academic-table .plagiarism-cell{
+    width: 18%;
+    text-align: center;
+}
 
 
 

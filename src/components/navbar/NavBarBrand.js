@@ -18,7 +18,7 @@ export default props => (
         </div>
         <div className={'align-community'}>
             <div className={'align'}>
-                Align
+                ALIGN
             </div>
             <div className={'community'}>
                 Community

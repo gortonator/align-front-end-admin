@@ -116,7 +116,7 @@ class ProfileModal extends React.Component{
                         dragging={this.dragging}
                         endDragging={this.endDragging}
                         isDragging={this.state.dragging}
-                        name={this.props.name}
+                        name={getNameFromProfile(this.props.profile)}
                         profile={this.props.profile}/>
                 {getDisplayContent(
                     this.props.profile,
@@ -191,4 +191,11 @@ function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNot
 
         }
     }
+}
+
+function getNameFromProfile(profile){
+    if (profile && profile.personalInformation){
+        return [profile.personalInformation.firstName,profile.personalInformation.middleName,profile.personalInformation.lastName].join(' ');
+    }
+    return '';
 }

@@ -5,7 +5,7 @@ import Controls from './parts/Controls';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faArrowAltCircleLeft from '@fortawesome/fontawesome-free-solid/faArrowAltCircleLeft';
 import { CSSTransition } from 'react-transition-group';
-import {ASYNC_ACTION_STATUSES, NOTE_CREATION_PLACE_HOLDER} from "../../../../../../constants";
+import {ASYNC_ACTION_STATUSES} from "../../../../../../constants";
 
 
 class NoteEditor extends React.Component{

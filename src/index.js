@@ -15,12 +15,10 @@ import registerServiceWorker from './registerServiceWorker';
 import './css/set-up.css';
 
 import LoginForm from './components/login_form';
-import Header from './components/header';
-import Navbar from './components/NavBar';
+import Navbar from './components/navbar/NavBar';
 import Analytics from './components/analytics';
-
 import AlignStudent from './components/align-student/AlignStudent';
-import NavBarAlt from './components/navbar-alt/NavBarAlt';
+
 import './css/login.css';
 import './css/style.css';
 import './css/bootstrap.min.css';

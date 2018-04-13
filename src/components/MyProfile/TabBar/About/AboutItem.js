@@ -63,36 +63,23 @@ class AboutItem extends Component {
     }
 
     getContentComponent() {
-        if (this.state.editable) {
-            return <form onSubmit={e => { e.preventDefault(); }} >
-                <FormGroup
-                    controlId={this.state.content}
-                    validationState={this.getValidationState()} >
-                    <FormControl
-                        defaultValue={this.state.content}
-                        onChange={this.handleChange}
-                        onBlur={this.confirmChange}
-                        onKeyDown={this.handleEnter}
-                        autoFocus />
-                </FormGroup>
-            </form>;
-
-        } else if (this.props.isLink) {
-            return <LinkText onClick={this.openNewPage}>{this.state.content}</LinkText>;
-        } else {
-            return <p className="grayContent">{this.state.content}</p>;
+        if (this.props.isLink) {
+            return <a onClick={this.openNewPage}>{this.state.content}</a>;
         }
+        return <div>{this.state.content}</div>;
     }
 
     render() {
 
         return (
-            <tbody>
-                <tr>
-                    <td width="30%" height="50px">{this.props.labelText}:</td>
-                    <td width="70%">{this.getContentComponent()}</td>
-                </tr>
-            </tbody>
+            <div className={'about-item'}>
+                <div className={'field-name'}>
+                    {this.props.labelText}
+                </div>
+                <div className={'content'}>
+                    {this.getContentComponent()}
+                </div>
+            </div>
         )
     }
 }
