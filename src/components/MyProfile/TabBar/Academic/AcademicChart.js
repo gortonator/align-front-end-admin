@@ -1,5 +1,5 @@
 import React from 'react';
-import {Radar} from 'react-chartjs-2';
+import {Radar,defaults} from 'react-chartjs-2';
 import {REQUIRED_COURSE_WORK} from "../../../../constants";
 
 class AcademicChart extends React.Component{
@@ -69,8 +69,6 @@ function getGPAByCategory(courses,category){
             totalGrade += convertLetterGradeToNumericalGrade(c.gpa);
         }
     });
-
-    console.log(count,totalGrade);
 
     return count === 0 ? 0 : totalGrade/count;
 }

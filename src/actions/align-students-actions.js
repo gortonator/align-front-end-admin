@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {GENDER_OPTIONS, NUMBER_OF_STUDENTS_PER_PAGE, BASE_URL, ENROLLMENT_STATUSES} from "../constants";
+import {doLogout} from "./index";
 
 // Action Types
 
@@ -195,7 +196,12 @@ export function applyStudentFilters(studentFilters,token,page){
                 },
                 error => {
                     console.error(error);
-                    dispatch(studentRetrievalFailure(studentFilters,page));
+                    if (error.response.status == 406){
+                        alert('Session Expired. Please login again');
+                        dispatch(doLogout());
+                    } else{
+                        dispatch(studentRetrievalFailure(studentFilters,page));
+                    }
                 });
 
     };
@@ -286,7 +292,13 @@ export function retrieveStudentProfile(nuid,token){
                 },
                 error => {
                     console.error(error);
-                    dispatch(studentProfileRetrievalFailure(nuid));
+                    if (error.response.status == 406){
+                        alert('Session Expired. Please login again');
+                        dispatch(doLogout());
+                    } else {
+                        dispatch(studentProfileRetrievalFailure(nuid));
+                    }
+
                 }
             );
     };
@@ -320,7 +332,12 @@ export function createNote(noteContent,nuid,token,adminId,successCallback,failur
                 },
                 error => {
                     console.error(error);
-                    dispatch(noteCreationFailure(failureCallback));
+                    if (error.response.status == 406){
+                        alert('Session Expired. Please login again');
+                        dispatch(doLogout());
+                    } else {
+                        dispatch(noteCreationFailure(failureCallback));
+                    }
                 }
             );
     };
@@ -349,7 +366,12 @@ export function updateNote(note,token,adminId,successCallback,failureCallback){
                 },
                 error => {
                     console.error(error);
-                    dispatch(noteUpdateFailure(failureCallback));
+                    if (error.response.status == 406){
+                        alert('Session Expired. Please login again');
+                        dispatch(doLogout());
+                    } else{
+                        dispatch(noteUpdateFailure(failureCallback));
+                    }
                 }
             )
     };
@@ -372,7 +394,12 @@ export function deleteNote(noteId,token,successCallback,failureCallback){
                 },
                 error => {
                     console.error(error);
-                    dispatch(noteDeletionFailure(failureCallback));
+                    if (error.response.status == 406){
+                        alert('Session Expired. Please login again');
+                        dispatch(doLogout());
+                    } else{
+                        dispatch(noteDeletionFailure(failureCallback));
+                    }
                 }
             );
     };

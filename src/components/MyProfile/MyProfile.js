@@ -18,7 +18,7 @@ class MyProfile extends Component {
 
     constructor(props) {
         super(props);
-        console.log("new props",props);
+        // console.log("new props",props);
         // this.handleSummaryChange = this.handleSummaryChange.bind(this);
         this.state={
           intro:props.profile,

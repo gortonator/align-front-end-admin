@@ -259,12 +259,12 @@ export const initialState = {
 
 export default function myProfileReducer(state = initialState,
     {type, payload}) {
-    console.log("reducer", type, payload);
+    // console.log("reducer", type, payload);
     switch (type) {
         case FETCH_MY_PROFILE:
             return payload;
         default:
-            console.log("not found any type match in reducer! you are given type " + type);
+            // console.log("not found any type match in reducer! you are given type " + type);
             return state;
     }
 }

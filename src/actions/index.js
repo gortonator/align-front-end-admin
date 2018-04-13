@@ -184,7 +184,7 @@ export function getAnalytics(chartRequest, token){
 }
 
 export function sortAnalytics(data){
-    console.log(data);
+    // console.log(data);
     return {
       type: SORT_ANALYTICS,
       payload: data

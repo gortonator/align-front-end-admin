@@ -588,7 +588,7 @@ class AdminAnalytics extends Component {
         if (this.props.analytics && this.state.isApiCalled) {
             this.showChart(this.props.analytics);
         }
-        console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
+        // console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
         return (
             <div style={{'padding': '120px 0'}}>
                 <div className="analytics-body col-sm-12">

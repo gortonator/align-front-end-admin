@@ -17,7 +17,7 @@ class About extends Component {
         return (
             <div className="wrapper">
                 <AboutTable>
-                    <AboutItem labelText="Phone" keyName="phone"  value={this.state.about.phone} modifiable/>
+                    <AboutItem labelText="Phone" keyName="phone"  value={this.state.about.phoneNum} modifiable/>
                     <AboutItem labelText="Email" type='email' keyName="email"  value={this.state.about.email} modifiable/>
                     <AboutItem labelText="Address" keyName="address"  value={this.state.about.address} modifiable/>
                     <AboutItem labelText="Linkedin" keyName="linkedin"  value={this.state.about.linkedin} modifiable isLink/>
