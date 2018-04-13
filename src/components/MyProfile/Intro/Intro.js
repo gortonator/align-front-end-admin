@@ -57,6 +57,11 @@ class Intro extends Component {
                 <div className={'subtitle'}>
                     Summary
                 </div>
+
+                <div className={'student-profile-summary'}>
+                    {this.props.intro.summary ? this.props.intro.summary : <div className={'no-summary'}>N/A</div>}
+                </div>
+
             </div>
 
         )

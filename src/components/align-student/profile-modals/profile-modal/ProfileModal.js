@@ -53,11 +53,7 @@ class ProfileModal extends React.Component{
             document.removeEventListener('mousemove', this.dragging);
             document.removeEventListener('mouseup', this.endDragging);
         }
-        if (this.props.profiles !== props.profiles ){
-            this.setState({
-                profile: this.props.profiles.find(p => p.nuid === this.props.nuid)
-            });
-        }
+        console.log(this.props.profile);
     }
 
     changeDisplay(d){
@@ -116,7 +112,6 @@ class ProfileModal extends React.Component{
                         dragging={this.dragging}
                         endDragging={this.endDragging}
                         isDragging={this.state.dragging}
-                        name={getNameFromProfile(this.props.profile)}
                         profile={this.props.profile}/>
                 {getDisplayContent(
                     this.props.profile,
@@ -192,11 +187,4 @@ function getDisplayContent(profile,display,notes,createNote,updateNote,deleteNot
 
         }
     }
-}
-
-function getNameFromProfile(profile){
-    if (profile && profile.personalInformation){
-        return [profile.personalInformation.firstName,profile.personalInformation.middleName,profile.personalInformation.lastName].join(' ');
-    }
-    return '';
 }

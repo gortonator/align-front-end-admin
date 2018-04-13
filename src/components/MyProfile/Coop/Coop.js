@@ -8,17 +8,21 @@ class Coop extends Component {
   }
 
     renderCoop() {
-        return this.props.workExperiences.map(coop => {
-            return (
-                <div key={coop.WorkExperienceId}>
-                    <h2 className="companyName"> {coop.companyName} </h2>
-                    <p className="grayContent"> {coop.title} </p>
-                    <p className="grayContent"> {coop.startDate} ~ {coop.endDate} </p>
-                    <p className="grayContent"> {coop.description} </p>
-                    <hr/>
-                </div>
-            );
-        });
+      if (this.props.workExperiences.length > 0){
+          return this.props.workExperiences.map(coop => {
+              return (
+                  <div key={coop.WorkExperienceId}>
+                      <h2 className="companyName"> {coop.companyName} </h2>
+                      <p className="grayContent"> {coop.title} </p>
+                      <p className="grayContent"> {coop.startDate} ~ {coop.endDate} </p>
+                      <p className="grayContent"> {coop.description} </p>
+                      <hr/>
+                  </div>
+              );
+          });
+      }
+
+      return <div className={'no-coop-exp'}>N/A</div>;
     }
 
     render() {

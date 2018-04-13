@@ -63,8 +63,12 @@ class AboutItem extends Component {
     }
 
     getContentComponent() {
+        if (this.state.content === undefined){
+            return <div>N/A</div>;
+        }
         if (this.props.isLink) {
-            return <a onClick={this.openNewPage}>{this.state.content}</a>;
+            return <a href={''}
+                      onClick={this.openNewPage}>{this.state.content}</a>;
         }
         return <div>{this.state.content}</div>;
     }

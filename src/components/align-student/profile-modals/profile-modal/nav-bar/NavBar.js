@@ -22,7 +22,14 @@ export default props => (
 
         <CloseButton closeModal={props.closeModal}/>
         <span className={'student-profile-modal-title'}>
-            {props.name}
+            {getNameFromProfile(props.profile)}
         </span>
     </div>
 );
+
+function getNameFromProfile(profile){
+    if (profile && profile.personalInformation){
+        return [profile.personalInformation.firstName,profile.personalInformation.middleName,profile.personalInformation.lastName].join(' ');
+    }
+    return '';
+}
