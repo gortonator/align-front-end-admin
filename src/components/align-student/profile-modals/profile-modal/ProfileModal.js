@@ -127,6 +127,7 @@ class ProfileModal extends React.Component{
                     this.props.deleteNote,
                     this.props.retrieveProfile,
                     this.props.acceptRetrievalFailure)}
+
             </div>
         );
     }
