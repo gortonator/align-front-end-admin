@@ -44,34 +44,34 @@ class TabBar extends Component {
               <li className="nav-item">
                 <a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "academic"}>Academic</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "experience"}>Experience</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "project"}>Project</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "skill"}>Skill</a>
-              </li>
+              {/*<li className="nav-item">*/}
+                {/*<a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "experience"}>Experience</a>*/}
+              {/*</li>*/}
+              {/*<li className="nav-item">*/}
+                {/*<a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "project"}>Project</a>*/}
+              {/*</li>*/}
+              {/*<li className="nav-item">*/}
+                {/*<a className="nav-link" data-toggle="tab" href={"#" + this.props.nuid + '-' + "skill"}>Skill</a>*/}
+              {/*</li>*/}
             </ul>
 
 
             <div className="tab-content">
-              <div id={this.props.nuid + '-' + "about"} className="container tab-pane active"><br />
+              <div id={this.props.nuid + '-' + "about"} className="tab-pane active"><br />
                 <About about={this.props.about}/>
               </div>
-              <div id={this.props.nuid + '-' + "academic"} className="container tab-pane fade"><br />
+              <div id={this.props.nuid + '-' + "academic"} className="tab-pane fade"><br />
                 <Academic courses={this.props.courses}/>
               </div>
-              <div id={this.props.nuid + '-' + "experience"} className="container tab-pane fade"><br />
-                <Experience extraExperiences={this.props.extraExperiences}/>
-              </div>
-              <div id={this.props.nuid + '-' + "project"} className="container tab-pane fade"><br />
-                <Project projects={this.props.projects}/>
-              </div>
-              <div id={this.props.nuid + '-' + "skill"} className="container tab-pane fade"><br />
-                <Skill skills={this.props.skills}/>
-              </div>
+              {/*<div id={this.props.nuid + '-' + "experience"} className="container tab-pane fade"><br />*/}
+                {/*<Experience extraExperiences={this.props.extraExperiences}/>*/}
+              {/*</div>*/}
+              {/*<div id={this.props.nuid + '-' + "project"} className="container tab-pane fade"><br />*/}
+                {/*<Project projects={this.props.projects}/>*/}
+              {/*</div>*/}
+              {/*<div id={this.props.nuid + '-' + "skill"} className="container tab-pane fade"><br />*/}
+                {/*<Skill skills={this.props.skills}/>*/}
+              {/*</div>*/}
             </div>
           </div>
         )

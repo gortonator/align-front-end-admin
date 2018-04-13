@@ -161,30 +161,34 @@ a.add-filter-button{
     text-align: center;
 }
 
-.student-table-head{
+.student-table .table-head{
     padding: 0 40px 5px;
     border-bottom: solid #FBFBFB 4px;
 }
 
-.student-table-row{
+.student-table .table-row{
     padding: 5px 40px;
     border-bottom: solid #FBFBFB 2px;
 }
 
-.student-table-cell{
+/*
+    Applies to Any Table Cell
+*/
+
+.table-cell{
     display: inline-block;
     font-size: 16px;
 }
 
-.id-cell,.enrollment-status-cell{
+.student-table .id-cell, .student-table .enrollment-status-cell{
     width: 20%;
 }
 
-.degree-year-cell{
+.student-table .degree-year-cell{
     width: 10%;
 }
 
-.name-cell, .email-cell{
+.student-table .name-cell, .student-table .email-cell{
     width: 25%;
     position: relative;
 }
@@ -866,6 +870,47 @@ a.note-editor-back-button:hover,a.add-note-button:hover{
     background: linear-gradient(#BBBBBB,white);
 }
 
+.academic-table{
+    min-height: 200px;
+    margin-bottom: 50px;
+}
+
+.academic-table .table-head{
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 5px 0;
+    border-top: 2px solid #BBBBBB;
+    border-bottom: 2px solid #BBBBBB;
+}
+
+.academic-table .table-row{
+    margin-right: 10px;
+    padding: 3px 0;
+}
+
+.academic-table .table-cell{
+    font-size: 15px;
+}
+
+.academic-table .name-cell{
+    width: 50%;
+    padding-left: 5px;
+}
+
+.academic-table .grade-cell{
+    width: 15%;
+    padding-left: 10px;
+}
+
+.academic-table .retaken-cell{
+    width: 17%;
+    text-align: center;
+}
+
+.academic-table .plagiarism-cell{
+    width: 18%;
+    text-align: center;
+}
 
 
 

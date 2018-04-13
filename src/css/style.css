@@ -389,6 +389,10 @@ a:hover,a:focus{
   padding-left: 10px;
 }
 
+.academic-chart-container{
+  position: relative;
+}
+
 .profile-card{
   padding-top: 30px;
   text-align: center;

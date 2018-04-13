@@ -67,7 +67,35 @@ export const NUMBER_OF_STUDENTS_PER_PAGE = 20;
 
 export const BASE_URL = 'http://asd2.ccs.neu.edu:8081';
 
-export const ADMIN_ID = '8123094';
-
-export const TOKEN =
-'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..NLnMQJYee7OaP_LFZ3cGzw.HdgCFk8MOicFc4AxSfXxWfPAFwW7JmQHZSKPVXmQJ9G8XjJIKQkk_8t_Q9inkcua6icyjETWZ7fEBjJcPVGpdH1MkNa_2LH84LDNiYPo7XQ.HvecPLZRSupLL1MKRPTY0Q';
+export const REQUIRED_COURSE_WORK = {
+    FUNDAMENTALS: {
+        displayName: 'Fundamentals',
+        courses: ['CS 5001'],
+        value: 'FUNDAMENTALS'
+    },
+    DISCRETESTRUCTURES: {
+        displayName: "Discrete Structures",
+        courses: ['CS 5002'],
+        value: 'DISCRETE_STRUCTURES'
+    },
+    OBJECTORIENTEDDESIGN: {
+        displayName: 'Object-Oriented Design',
+        courses: ['CS 5003', 'CS 5004'],
+        value: 'OBJECT-OREINTED_DESIGN'
+    },
+    OTHERFUNDATIONCOURSES: {
+        displayName: 'Other Foundation Courses',
+        courses: ['CS 5006', 'CS 5007'],
+        value: 'OTHER_FUNDATION_COURSES'
+    },
+    DEVELOPMENT: {
+        displayName: 'Development',
+        courses: ['CS 5500', 'CS 5600'],
+        value: 'DEVELOPMENT'
+    },
+    AlGORITHMS: {
+        displayName: 'Algorithms',
+        courses: ['CS 5800'],
+        value: 'ALGORITHMS'
+    }
+};

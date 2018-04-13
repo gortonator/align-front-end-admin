@@ -3,11 +3,11 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faFileAlt from '@fortawesome/fontawesome-free-regular/faFileAlt';
 
 export default props => (
-    <div className={"student-table-row"}>
-        <div className={"id-cell student-table-cell"}>
+    <div className={"table-row"}>
+        <div className={"id-cell table-cell"}>
             {props.student.nuid}
         </div>
-        <div className={"name-cell student-table-cell"}>
+        <div className={"name-cell table-cell"}>
             <a style={{'textDecoration' : 'none'}}
                onClick={e => {
                    e.preventDefault();
@@ -20,13 +20,13 @@ export default props => (
                 props.student.hasNote && <FontAwesomeIcon icon={faFileAlt} className={'student-note-indicator'}/>
             }
         </div>
-        <div className={"email-cell student-table-cell"}>
+        <div className={"email-cell table-cell"}>
             {props.student.email}
         </div>
-        <div className={"enrollment-status-cell student-table-cell"}>
+        <div className={"enrollment-status-cell table-cell"}>
             {props.student.enrollmentStatus}
         </div>
-        <div className={"degree-year-cell student-table-cell"}>
+        <div className={"degree-year-cell table-cell"}>
             {props.student.degreeYear}
         </div>
     </div>
