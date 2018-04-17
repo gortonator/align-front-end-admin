@@ -108,10 +108,10 @@ else{
             i = i + 1;
             var x = 0;
             return <tr key={student.nuid}>
-                <td>{i}</td>
-                <td>{student.nuid}</td>
-                <td>{student.name}</td>
-                <td>{student.companies ? student.companies.map((company) => {
+                <td >{i}</td>
+                <td >{student.nuid}</td>
+                <td >{student.name}</td>
+                <td key={i}>{student.companies ? student.companies.map((company) => {
                         if (x > 0)
                             return "," + company;
                         x = x + 1;

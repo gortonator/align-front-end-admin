@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function (props){
+    console.log("in analytics_filter");
   return (<div className="analytics-filter">
         <div className="analytics-query-header text-align-center large-font col-sm-12" >Queries</div>
         <div className="analytics-query col-sm-12" onClick={props.toggleGenderRatio}>Gender Ratio</div>
@@ -8,7 +9,7 @@ export default function (props){
                 <div>
                     <label>Choose Campus:</label>
                 </div>
-                {props.getCampusOptions(props.campusOptions)}
+            {props.getCampusOptions(props.campusOptions)}
             <button type="Submit" onClick={props.getGenderRatioChart}>Submit</button>
         </div>
         <div className="analytics-query col-sm-12" onClick={props.toggleCompany}>Filter students by company</div>
@@ -116,7 +117,7 @@ export default function (props){
           <div>
               <label>Choose Campus:</label>
           </div>
-          {props.getCampusOptions(props.campusOptions)}
+         {props.getCampusOptions(props.campusOptions)}
           <hr />
           <div className="form-group">
               <label>Select Year</label>

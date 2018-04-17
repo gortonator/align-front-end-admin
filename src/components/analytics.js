@@ -9,12 +9,6 @@ import AnalyticsCharts from './analytics_charts';
 class AdminAnalytics extends Component {
     constructor(props) {
         super(props);
-        // this.props.checkLogin();
-        // if(!(this.props.login && this.props.login.id && this.props.login.token)){
-        //   window.location="/";
-        // }
-        // console.log("id:",this.props.id,"token",this.props.login.token);
-        //Gender Ratio
         this.toggleGenderRatio = this.toggleGenderRatio.bind(this);
         this.getGenderRatioChart = this.getGenderRatioChart.bind(this);
 
@@ -67,7 +61,7 @@ class AdminAnalytics extends Component {
             coopStudentsFlag: "hidden-xs-up",
             genderRatioFlag: "hidden-xs-up",
             workingFlag:"hidden-xs-up",
-            campus: "",
+            campus: [],
             company: "",
             year: "",
             validationError: false,
@@ -278,7 +272,8 @@ class AdminAnalytics extends Component {
             genderRatioFlag: "hidden-xs-up",
             companyFlag: "hidden-xs-up",
             workingFlag: "hidden-xs-up",
-            isApiCalled: false
+            isApiCalled: false,
+            campus:[]
         });
     }
 
@@ -348,7 +343,7 @@ class AdminAnalytics extends Component {
 
     getGenderRatioChart() {
 
-        if (this.state.campus == "") {
+        if (this.state.campus.length == 0) {
             this.setState({validationError: true}, function () {
               alert('Please select a campus');
             });
@@ -356,6 +351,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio",initialLoadChart: "",initialLoadTable: ""}, function () {
                 const chartRequest = {url: "gender-ratio", body: {campus:this.state.campus}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -364,7 +361,7 @@ class AdminAnalytics extends Component {
     }
 
     getCompanyChart() {
-        if (this.state.campus == "" || this.state.company == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.company == "" || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -375,6 +372,8 @@ class AdminAnalytics extends Component {
                     url: "company",
                     body: {campus: this.state.campus, year: this.state.year, company: this.state.company}
                 };
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -383,7 +382,7 @@ class AdminAnalytics extends Component {
     }
 
     getWorkingChart(){
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -394,6 +393,8 @@ class AdminAnalytics extends Component {
                     url: "working",
                     body: {campus: this.state.campus, year: this.state.year}
                 };
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -402,7 +403,7 @@ class AdminAnalytics extends Component {
     }
 
     getCoopStudentChart() {
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -410,6 +411,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "coop-students", body: {campus: this.state.campus, year: this.state.year}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -418,7 +421,7 @@ class AdminAnalytics extends Component {
     }
 
     getTop10EmployersChart() {
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -426,6 +429,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-employers", body: {campus: this.state.campus, year: this.state.year}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -434,7 +439,7 @@ class AdminAnalytics extends Component {
     }
 
     getTop10BachelorsDegreeChart(){
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -442,6 +447,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-bachelor-degrees", body: {campus: this.state.campus, year: this.state.year}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -450,7 +457,7 @@ class AdminAnalytics extends Component {
     }
 
     getUndergradInstitutionsChart(){
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -458,6 +465,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "undergrad-institutions", body: {campus: this.state.campus, year: this.state.year}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -466,7 +475,7 @@ class AdminAnalytics extends Component {
     }
 
     getTop10ElectivesChart(){
-        if (this.state.campus == "" || this.state.year == "") {
+        if (this.state.campus.length == 0 || this.state.year == "") {
             this.setState({validationError: true}, function () {
               alert('Please select all the options');
             });
@@ -474,6 +483,8 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-electives", body: {campus: this.state.campus, year: this.state.year}};
+                console.log("request");
+                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -481,24 +492,35 @@ class AdminAnalytics extends Component {
         }
     }
 
-    onCampusChange(campus) {
-        this.setState({campus: campus, isApiCalled: false});
+    onCampusChange(e) {
+        const campus = this.state.campus;
+        let index;
+        if (e.target.checked) {
+            campus.push(e.target.value);
+        } else {
+            index = campus.indexOf(e.target.value);
+            campus.splice(index, 1);
+        }
+        console.log("campus in campus change",campus);
+        this.setState({ campus: campus, isApiCalled: false})
     }
 
     getYears(years) {
         const list = years.map((year) => {
             return <option key={year.label} value={year.value}>{year.label}</option>
-        })
+        });
         return list;
     }
 
+
     getCampusOptions(options) {
         const list = options.map((option) => {
-            return <div key={option.label} className="radio">
-                <label><input type="radio" name="optradio" value={option.value}
-                              onChange={e => this.onCampusChange(e.target.value)}/>{option.label}</label>
+            const isChecked=this.state.campus.includes(option.value);
+            return <div key={option.label}>
+                <input type="checkbox" checked={isChecked} value={option.value} onChange={(e) => this.onCampusChange(e)} /> &nbsp;
+                <label> {option.label}</label>
             </div>
-        })
+        });
         return list;
     }
 
@@ -589,6 +611,8 @@ class AdminAnalytics extends Component {
             this.showChart(this.props.analytics);
         }
         // console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
+        console.log("campus in render",this.state.campus);
+        console.log("year in render",this.state.year);
         return (
             <div style={{'padding': '120px 0'}}>
                 <div className="analytics-body col-sm-12">
