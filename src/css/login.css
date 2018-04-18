@@ -26,6 +26,7 @@
 .login-box {
 	display:inline-block;
 	background: white;
+    padding: 45px 45px 30px;
 	border-radius: 5px;
 	border-bottom: 12px solid #333333;
 	-webkit-box-shadow: 6px 6px 26px -5px rgba(255, 255, 255, 0.67);
@@ -37,17 +38,14 @@
 	display:flex;
 	flex-direction: column;
 	justify-content: space-around;
-  padding: 45px;
-  height: 330px;
   max-width: 400px;
-  min-height: 330px;
   text-align:left;
 }
 
-input[type=text], [type=password] {
+.credential-input {
 	width: 100%;
 	height: 50px;
-  margin: 8px 0;
+    margin-bottom: 15px;
   padding-left: 20px;
   font-size: 1.286em;
   display: inline-block;
@@ -56,8 +54,9 @@ input[type=text], [type=password] {
   box-sizing: border-box;
 }
 
-label{
+.inner-box label{
 	color: #333333;
+    margin-bottom: 5px;
 }
 
 input[type=submit] {
@@ -98,4 +97,10 @@ img {
 
 .register-text-container a:hover{
 	text-decoration: none;
+}
+
+.login-title{
+    text-align: center;
+    color: #CC0000;
+    margin-bottom: 35px;
 }
