@@ -62,19 +62,35 @@ class LoginForm extends React.Component {
       <div id="body-container">
         <div className="login-box">
           <div className="inner-box">
-            <img src={logo} alt="Northeastern Align">
-            </img>
+            {/*<img src={logo} alt="Northeastern Align">*/}
+            {/*</img>*/}
+
+			  <h3 className={'login-title'}>
+				  CCIS Align Community Admin
+			  </h3>
+
             <form onSubmit={this.handleSubmit}>
-              <label>
+              <label htmlFor={'login-email-input'}>
                 Email:
-                <input type="text" name="username" value={this.state.username}
-                 onChange={this.handleChange} autoComplete="off"/>
               </label>
-              <label>
+                <input type="text"
+					   className={'credential-input'}
+					   name="username"
+					   id={'login-email-input'}
+					   value={this.state.username}
+                       onChange={this.handleChange}
+					   autoComplete="off"/>
+              <label htmlFor={'login-password-input'}>
                 Password:
-                <input type="password" name="password" value={this.state.password}
-                 onChange={this.handleChange} autoComplete="off"/>
               </label>
+                <input type="password"
+					   name="password"
+                       className={'credential-input'}
+                       id={'login-password-input'}
+					   value={this.state.password}
+                       onChange={this.handleChange}
+					   autoComplete="off"/>
+
               <input type="submit" value="Login" />
             </form>
           </div>

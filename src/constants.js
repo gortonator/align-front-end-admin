@@ -94,7 +94,7 @@ export const REQUIRED_COURSE_WORK = {
         value: 'DEVELOPMENT'
     },
     AlGORITHMS: {
-        displayName: 'Algorithms',
+        displayName: 'Algorithms(CS5800)',
         courses: ['CS 5800'],
         value: 'ALGORITHMS'
     }

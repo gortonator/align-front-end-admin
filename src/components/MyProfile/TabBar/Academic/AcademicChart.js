@@ -19,16 +19,16 @@ class AcademicChart extends React.Component{
                         {
                             data: Object.keys(REQUIRED_COURSE_WORK).map(k => getGPAByCategory(this.props.courses,k)),
                             label: 'Actual Performance',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            fill: 'origin',
-                            borderColor: '#FF6384',
-                        },
-                        {
-                            data: (new Array(Object.keys(REQUIRED_COURSE_WORK).length)).fill(3.000),
-                            label: 'Desired Performance',
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             fill: 'origin',
-                            borderColor: '#36A2EB'
+                            borderColor: '#36A2EB',
+                        },
+                        {
+                            data: [1.0,1.0,3.0,1.0,3.0,3.0],
+                            label: 'Desired Performance',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: 'origin',
+                            borderColor: '#FF6384'
                         }]
             };
     }
