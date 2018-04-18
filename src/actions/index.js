@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ROOT_TEST = 'http://reduxblog.herokuapp.com/api';
-const ROOT_URL = 'http://asd2.ccs.neu.edu:8081';
+const ROOT_URL = 'http://asd2.ccs.neu.edu:8080';
 const ROOT_URL_ANALYTICS = ROOT_URL + '/analytics';
 const API_KEY = '?key=STUDENT12345';
 

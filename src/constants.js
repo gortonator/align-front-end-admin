@@ -65,7 +65,7 @@ export const NOTE_CREATION_PLACE_HOLDER = 'NOTE_CREATION_PLACE_HOLDER';
 
 export const NUMBER_OF_STUDENTS_PER_PAGE = 20;
 
-export const BASE_URL = 'http://asd2.ccs.neu.edu:8081';
+export const BASE_URL = 'http://asd2.ccs.neu.edu:8080';
 
 export const REQUIRED_COURSE_WORK = {
     FUNDAMENTALS: {
