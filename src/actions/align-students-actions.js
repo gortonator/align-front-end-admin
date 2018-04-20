@@ -27,16 +27,6 @@ export const NOTE_DELETION_FAILURE = 'NOTE_DELETION_FAILURE';
 export const ACCEPT_STUDENT_RETRIEVAL_FAILURE = 'ACCEPT_STUDENT_RETRIEVAL_FAILURE';
 export const ACCEPT_PROFILE_RETRIEVAL_FAILURE = 'ACCEPT_PROFILE_RETRIEVAL_FAILURE';
 
-// // Overview Deeper Report Modal Statuses
-// export const overviewDeepReportModalStatus = {
-//     SHOW_UNDERGRAD_PROPORTION: 'SHOW_UNDERGRAD_PROPORTION',
-//     SHOW_ALUMNI_JOBS: 'SHOW_ALUMNI_JOBS',
-//     SHOW_COOPS: 'SHOW_COOPS',
-//     CLOSED: 'CLOSED'
-// };
-
-// Action Creators
-
 export function studentRetrievalRequest(){
     return {
         type: STUDENT_RETRIEVAL_REQUEST
@@ -195,8 +185,7 @@ export function applyStudentFilters(studentFilters,token,page){
                         studentFilters));
                 },
                 error => {
-                    console.error(error);
-                    if (error.response.status == 406){
+                    if (error.response && error.response.status == 406){
                         alert('Session Expired. Please login again');
                         dispatch(doLogout());
                     } else{
@@ -291,8 +280,8 @@ export function retrieveStudentProfile(nuid,token){
                     dispatch(studentProfileRetrievalSuccess(response.data,nuid,notes));
                 },
                 error => {
-                    console.error(error);
-                    if (error.response.status == 406){
+                    // console.error(error);
+                    if (error.response && error.response.status == 406){
                         alert('Session Expired. Please login again');
                         dispatch(doLogout());
                     } else {
@@ -331,8 +320,8 @@ export function createNote(noteContent,nuid,token,adminId,successCallback,failur
                     dispatch(noteCreationSuccess(note,successCallback));
                 },
                 error => {
-                    console.error(error);
-                    if (error.response.status == 406){
+                    // console.error(error);
+                    if (error.response && error.response.status == 406){
                         alert('Session Expired. Please login again');
                         dispatch(doLogout());
                     } else {
@@ -365,8 +354,8 @@ export function updateNote(note,token,adminId,successCallback,failureCallback){
                     dispatch(noteUpdateSuccess(note,successCallback));
                 },
                 error => {
-                    console.error(error);
-                    if (error.response.status == 406){
+                    // console.error(error);
+                    if (error.response && error.response.status == 406){
                         alert('Session Expired. Please login again');
                         dispatch(doLogout());
                     } else{
@@ -393,8 +382,8 @@ export function deleteNote(noteId,token,successCallback,failureCallback){
                     dispatch(noteDeletionSuccess(noteId,successCallback));
                 },
                 error => {
-                    console.error(error);
-                    if (error.response.status == 406){
+                    // console.error(error);
+                    if (error.response && error.response.status == 406){
                         alert('Session Expired. Please login again');
                         dispatch(doLogout());
                     } else{
@@ -404,13 +393,3 @@ export function deleteNote(noteId,token,successCallback,failureCallback){
             );
     };
 }
-
-
-
-
-
-
-
-
-
-

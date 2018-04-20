@@ -3,7 +3,6 @@ import React from 'react';
 export default function (props) {
 
     if (props.analytics && props.chartSelected == "gender-ratio") {
-        // console.log(props.analytics);
         if(props.analytics.length==0)
 return (<h4> No Data found ! </h4>);
         else{

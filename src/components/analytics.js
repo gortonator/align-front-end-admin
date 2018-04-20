@@ -255,8 +255,6 @@ class AdminAnalytics extends Component {
 
     createTableContent(headerOptions) {
         if (this.props.analytics && this.state.chartSelected) {
-            // alert("Calling tableonow");
-            // console.log(this.props.analytics);
             return <AnalyticsTable analytics={this.props.analytics} chartSelected={this.state.chartSelected}
                                    chartHeaders={headerOptions[this.state.chartSelected]}/>;
         }
@@ -351,8 +349,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "gender-ratio",initialLoadChart: "",initialLoadTable: ""}, function () {
                 const chartRequest = {url: "gender-ratio", body: {campus:this.state.campus}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -372,8 +368,6 @@ class AdminAnalytics extends Component {
                     url: "company",
                     body: {campus: this.state.campus, year: this.state.year, company: this.state.company}
                 };
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -393,8 +387,6 @@ class AdminAnalytics extends Component {
                     url: "working",
                     body: {campus: this.state.campus, year: this.state.year}
                 };
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -411,8 +403,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "coop-students",initialLoadChart: "hidden-xs-up", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "coop-students", body: {campus: this.state.campus, year: this.state.year}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -429,8 +419,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-employers",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-employers", body: {campus: this.state.campus, year: this.state.year}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -447,8 +435,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-bachelor-degrees",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-bachelor-degrees", body: {campus: this.state.campus, year: this.state.year}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -465,8 +451,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "undergrad-institutions",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "undergrad-institutions", body: {campus: this.state.campus, year: this.state.year}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -483,8 +467,6 @@ class AdminAnalytics extends Component {
         else {
             this.setState({validationError: false, isApiCalled: true, chartSelected: "top-electives",initialLoadChart: "", initialLoadTable: ""}, function () {
                 const chartRequest = {url: "top-electives", body: {campus: this.state.campus, year: this.state.year}};
-                console.log("request");
-                console.log(chartRequest);
                 this.props.sortAnalytics([]);
                 this.props.getAnalytics(chartRequest,this.props.login.token);
             });
@@ -501,7 +483,6 @@ class AdminAnalytics extends Component {
             index = campus.indexOf(e.target.value);
             campus.splice(index, 1);
         }
-        console.log("campus in campus change",campus);
         this.setState({ campus: campus, isApiCalled: false})
     }
 
@@ -610,9 +591,6 @@ class AdminAnalytics extends Component {
         if (this.props.analytics && this.state.isApiCalled) {
             this.showChart(this.props.analytics);
         }
-        // console.log("initialLoadChart="+this.state.initialLoadChart, "initialLoadTable="+this.state.initialLoadTable)
-        console.log("campus in render",this.state.campus);
-        console.log("year in render",this.state.year);
         return (
             <div style={{'padding': '120px 0'}}>
                 <div className="analytics-body col-sm-12">

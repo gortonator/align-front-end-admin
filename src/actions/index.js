@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { BASE_URL} from "../constants";
 
 const ROOT_TEST = 'http://reduxblog.herokuapp.com/api';
-const ROOT_URL = 'http://asd2.ccs.neu.edu:8080';
+const ROOT_URL = BASE_URL;
 const ROOT_URL_ANALYTICS = ROOT_URL + '/analytics';
 const API_KEY = '?key=STUDENT12345';
 
@@ -170,12 +171,6 @@ export function selectPage(page){
 
 
 export function getAnalytics(chartRequest, token){
-    // console.log(chartRequest);
-    // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`).then(()=>{
-    // const request = axios.post(`${ROOT_URL_ANALYTICS}/${chartRequest.url}`,{"campus":"boston"},{headers:{"Content-Type":"application/json","token":token}}).then(()=>{
-    //     callback(chartRequest.url);
-    // });
-    // const request = axios.post(`http://asd2.ccs.neu.edu:8080/top-undergradschools`,{},{headers:{"Content-Type":"application/json","token":token}});
     const request = axios.post(`${ROOT_URL_ANALYTICS}/${chartRequest.url}`,chartRequest.body,{headers:{"Content-Type":"application/json","token":token}});
     return {
       type: GET_ANALYTICS,
@@ -184,7 +179,6 @@ export function getAnalytics(chartRequest, token){
 }
 
 export function sortAnalytics(data){
-    // console.log(data);
     return {
       type: SORT_ANALYTICS,
       payload: data
@@ -233,12 +227,4 @@ export function fetchMyProfile() {
     type: FETCH_MY_PROFILE,
     payload: {...initialState, skills:"Java\nPython\nC++\nRuby"}
   }
-    // return (dispatch) => {
-    //     console.log("yudong action");
-    //     axios.get("http://rest.learncode.academy/api/reacttest/tweets")
-    //         .then((response) => {
-    //             console.log("FETCH_MY_PROFILE_SUCCEED", response);
-    //             dispatch({type: FETCH_MY_PROFILE_DATA, payload: {...initialState, skills:"Java\nPython\nC++\nRuby"}});
-    //         })
-    // }
 }

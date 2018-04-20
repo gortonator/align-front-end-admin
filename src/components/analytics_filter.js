@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function (props){
-    console.log("in analytics_filter");
   return (<div className="analytics-filter">
         <div className="analytics-query-header text-align-center large-font col-sm-12" >Queries</div>
         <div className="analytics-query col-sm-12" onClick={props.toggleGenderRatio}>Gender Ratio</div>
