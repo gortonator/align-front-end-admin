@@ -232,7 +232,5 @@ export default function (props) {
   if (props.chartSelected == "company") {
       props.ctxContainer.innerHTML = '<div></div>';
   }
-
-  // console.log(props)
   return;
 }

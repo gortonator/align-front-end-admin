@@ -6,9 +6,12 @@ import { connect } from 'react-redux';
 class LoginForm extends React.Component {
 	constructor(props){
 		super(props);
-
 		this.state = {username:'',password:''};
-
+		var sessionID=sessionStorage.getItem("mscs_align_neu_id");
+	  var sessionToken=sessionStorage.getItem("mscs_align_neu_token");
+	  if(sessionID && sessionToken){
+			this.props.history.push("students");
+	  }
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -46,7 +49,6 @@ class LoginForm extends React.Component {
 	}
 
 	render(){
-		console.log(this.props.login);
     if(this.props.login){
       if(this.props.login.id && this.props.login.token){
         sessionStorage.setItem("mscs_align_neu_id",this.props.login.id);
@@ -62,13 +64,9 @@ class LoginForm extends React.Component {
       <div id="body-container">
         <div className="login-box">
           <div className="inner-box">
-            {/*<img src={logo} alt="Northeastern Align">*/}
-            {/*</img>*/}
-
-			  <h3 className={'login-title'}>
-				  CCIS Align Community Admin
-			  </h3>
-
+					  <h3 className={'login-title'}>
+						  CCIS Align Community Admin
+					  </h3>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor={'login-email-input'}>
                 Email:
@@ -84,13 +82,12 @@ class LoginForm extends React.Component {
                 Password:
               </label>
                 <input type="password"
-					   name="password"
-                       className={'credential-input'}
-                       id={'login-password-input'}
-					   value={this.state.password}
-                       onChange={this.handleChange}
-					   autoComplete="off"/>
-
+					   						name="password"
+                       	className={'credential-input'}
+                       	id={'login-password-input'}
+											  value={this.state.password}
+                       	onChange={this.handleChange}
+					   						autoComplete="off"/>
               <input type="submit" value="Login" />
             </form>
           </div>
