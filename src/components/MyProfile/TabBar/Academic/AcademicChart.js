@@ -12,19 +12,20 @@ class AcademicChart extends React.Component{
     }
 
     getChartData(){
+        var dataList=this.props.courses.map(k=>3.0);
         return {
-                labels: Object.keys(REQUIRED_COURSE_WORK).map(k => REQUIRED_COURSE_WORK[k].displayName),
+                labels: Object.keys(this.props.courses).map(k => this.props.courses[k].courseId),
                 datasets:
                     [
                         {
-                            data: Object.keys(REQUIRED_COURSE_WORK).map(k => getGPAByCategory(this.props.courses,k)),
+                            data: this.props.courses.map(k => convertLetterGradeToNumericalGrade(k.gpa)),
                             label: 'Actual Performance',
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             fill: 'origin',
                             borderColor: '#36A2EB',
                         },
                         {
-                            data: [1.0,1.0,3.0,1.0,3.0,3.0],
+                            data:dataList,
                             label: 'Desired Performance',
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             fill: 'origin',
@@ -64,10 +65,8 @@ function getGPAByCategory(courses,category){
     var count = 0;
     var totalGrade = 0;
     courses.forEach(c => {
-        if (REQUIRED_COURSE_WORK[category].courses.indexOf(c.courseId) !== -1){
             count += 1;
             totalGrade += convertLetterGradeToNumericalGrade(c.gpa);
-        }
     });
 
     return count === 0 ? 0 : totalGrade/count;
