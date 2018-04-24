@@ -5,7 +5,7 @@ import {getAnalytics, sortAnalytics} from '../actions/index';
 import AnalyticsFilter from './analytics_filter';
 import AnalyticsTable from './analytics_table';
 import AnalyticsCharts from './analytics_charts';
-
+import left_arrow from '../images/left_arrow.png';
 class AdminAnalytics extends Component {
     constructor(props) {
         super(props);
@@ -631,7 +631,7 @@ class AdminAnalytics extends Component {
                         <div>
                             <div
                                 className={this.state.initialLoadChart != "" && this.state.initialLoadTable != "" ? "initial-load text-align-center larger-font" : "hidden-xs-up"}>
-                                <img className="pull-left" height='50px' src="/res/images/left-arrow.PNG"/>
+                                <img className="pull-left" height='50px' src={left_arrow}/>
                                 Please select an option to begin
                             </div>
                             <div className={"analytics-body text-align-center col-sm-12 hidden-xs-down "}>
